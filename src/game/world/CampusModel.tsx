@@ -11,7 +11,7 @@ import { ClassroomDoors } from "@/game/classrooms/ClassroomDoors";
 import { CampusCollision } from "./CampusCollision";
 import { batchEmbeddedStudentDesks } from "./batchCampusInteriors";
 import v58CollisionDelta from "../../../assets/school/kien_an_campus_v58_collision_delta.json";
-import v71SceneConfig from "../../../assets/school/kien_an_campus_v71_scene_config.json";
+import v72SceneConfig from "../../../assets/school/kien_an_campus_v72_scene_config.json";
 
 const UP = new THREE.Vector3(0, 1, 0);
 const LED_TEXTURE_URL = "/assets/school/led.png";
@@ -30,12 +30,12 @@ type V58CollisionDelta = {
   v57RemoveColliderMeshNames: string[];
   v58RemoveColliderMeshNames: string[];
 };
-type V71SceneConfig = {
+type V72SceneConfig = {
   removedMeshes: string[];
   v67Changes?: { removedMeshNames: string[] };
   v71Changes?: { removedOutdatedVisualMeshes: string[] };
 };
-const sceneConfig = v71SceneConfig as V71SceneConfig;
+const sceneConfig = v72SceneConfig as V72SceneConfig;
 
 // The V58 export retains some legacy nodes in its hierarchy. They are not part
 // of the active campus layout and would otherwise overlap the corrected hall
@@ -69,7 +69,7 @@ function hideLegacyGeometry(scene: THREE.Group) {
 }
 
 /**
- * V71 keeps the original photographs as GLB textures. The campus is made
+ * V72 keeps the original photographs as GLB textures. The campus is made
  * unlit for performance, so give only these display surfaces dedicated,
  * untinted materials after that conversion. This preserves their embedded
  * maps while making their front/back faces reliable without touching boards,
@@ -106,7 +106,7 @@ function preparePhotoDisplayMaterials(scene: THREE.Group) {
     photoMeshNames.forEach((name) => {
       if (!reported.has(name)) diagnostics.push({ name, found: false, hasMap: false, hasImage: false });
     });
-    console.info("[Campus V71] photo display materials", diagnostics);
+    console.info("[Campus V72] photo display materials", diagnostics);
   }
   return () => {
     originals.forEach(({ mesh, material }) => { mesh.material = material; });
@@ -145,12 +145,12 @@ function addPlanarUv(geometry: THREE.BufferGeometry) {
 function prepareCenterStageLed(scene: THREE.Group, texture: THREE.Texture) {
   const mesh = scene.getObjectByName(CENTER_STAGE_LED_MESH);
   if (!(mesh instanceof THREE.Mesh)) {
-    if (process.env.NODE_ENV !== "production") console.warn(`[Campus V71] LED mesh not found: ${CENTER_STAGE_LED_MESH}`);
+    if (process.env.NODE_ENV !== "production") console.warn(`[Campus V72] LED mesh not found: ${CENTER_STAGE_LED_MESH}`);
     return () => undefined;
   }
   const original = mesh.material;
   const originalGeometry = mesh.geometry;
-  // GLB V71's display surface has vertex colours but no UV attribute.
+  // GLB V72's display surface has vertex colours but no UV attribute.
   // Clone before adding UVs because useGLTF caches the source geometry.
   const geometry = originalGeometry.clone();
   addPlanarUv(geometry);
@@ -190,7 +190,7 @@ function createGuardRoomBannerTexture() {
 function prepareGuardRoomBanner(scene: THREE.Group) {
   const mesh = scene.getObjectByName(GUARD_ROOM_BANNER_MESH);
   if (!(mesh instanceof THREE.Mesh)) {
-    if (process.env.NODE_ENV !== "production") console.warn(`[Campus V71] guard-room banner mesh not found: ${GUARD_ROOM_BANNER_MESH}`);
+    if (process.env.NODE_ENV !== "production") console.warn(`[Campus V72] guard-room banner mesh not found: ${GUARD_ROOM_BANNER_MESH}`);
     return () => undefined;
   }
   const texture = createGuardRoomBannerTexture();
@@ -236,7 +236,7 @@ function AnimatedGate({ spec, scene }: { spec: GateSpec; scene: THREE.Group }) {
   return <>{spec.pivots.map((_, index) => <RigidBody key={index} ref={(body) => { bodies.current[index] = body; }} type="kinematicPosition" colliders={false}><CuboidCollider args={spec.colliders[index]} /></RigidBody>)}</>;
 }
 
-/** Primary V71 visual scene. Embedded photo displays retain their original GLB textures. */
+/** Primary V72 visual scene. Embedded photo displays retain their original GLB textures. */
 export function CampusModel({ collisionsEnabled = true }: { collisionsEnabled?: boolean }) {
   const { scene, animations } = useGLTF(campusConfig.modelUrl);
   const ledTexture = useTexture(LED_TEXTURE_URL);

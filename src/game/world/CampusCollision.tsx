@@ -5,8 +5,8 @@ import { useMemo } from "react";
 import * as THREE from "three";
 import { useGameStore } from "@/game/store/useGameStore";
 import v58CollisionDelta from "../../../assets/school/kien_an_campus_v58_collision_delta.json";
-import v71CollisionDelta from "../../../assets/school/kien_an_campus_v71_collision_delta.json";
-import v71SceneConfig from "../../../assets/school/kien_an_campus_v71_scene_config.json";
+import v72CollisionDelta from "../../../assets/school/kien_an_campus_v72_collision_delta.json";
+import v72SceneConfig from "../../../assets/school/kien_an_campus_v72_scene_config.json";
 
 type ColliderKind = "blocking" | "walkable";
 type ColliderSpec = { id: string; position: [number, number, number]; rotation: [number, number, number]; halfExtents: [number, number, number]; kind: ColliderKind };
@@ -30,12 +30,18 @@ type V58CollisionDelta = {
   v57AddFixedCuboids: FixedCuboid[];
   v58AddFixedCuboids: FixedCuboid[];
 };
-type V71CollisionDelta = { removeLegacyVisualMeshColliderReferences: string[]; visualOnlyMeshes: string[] };
-type V71SceneConfig = { removedMeshes: string[] };
+type V72CollisionDelta = { removedColliders: string[] };
+type V72SceneConfig = { removedMeshes: string[]; v71Changes?: { redPavingMeshes: string[]; removedOutdatedVisualMeshes: string[] } };
 
 const collisionDelta = v58CollisionDelta as V58CollisionDelta;
-const v71Delta = v71CollisionDelta as V71CollisionDelta;
-const v71Scene = v71SceneConfig as V71SceneConfig;
+const v72Delta = v72CollisionDelta as V72CollisionDelta;
+const v72Scene = v72SceneConfig as V72SceneConfig;
+const v71VisualOnlyPrefixes = [
+  ...(v72Scene.v71Changes?.redPavingMeshes ?? []),
+  "V71_MAIN_GATE_CONCRETE_ONLY",
+  "V71_SIDEGATE_LEFT_",
+  "V71_SIDEGATE_RIGHT_",
+];
 // V58 is incremental from V51–V57. Filter every retired node before deriving
 // bounds: the V53 end seal and the two old office meshes would otherwise leave
 // an invisible wall across the teachers-to-covered-corridor passage.
@@ -50,18 +56,20 @@ const removedMeshPrefixes = [
   ...collisionDelta.v56RemoveColliderPrefixes,
   ...collisionDelta.v57RemoveColliderMeshNames,
   ...collisionDelta.v58RemoveColliderMeshNames,
-  ...v71Scene.removedMeshes,
-  ...v71Delta.removeLegacyVisualMeshColliderReferences,
-  ...v71Delta.visualOnlyMeshes,
+  ...v72Scene.removedMeshes,
+  ...(v72Scene.v71Changes?.removedOutdatedVisualMeshes ?? []),
+  ...v71VisualOnlyPrefixes,
+  ...v72Delta.removedColliders,
   "V48_ASSEMBLY_HALL_BACK",
 ];
 const walkableManifestNode = /(?:_FLOOR|_STAGE(?:$|_)|_THRESHOLD|STAGE_STEP)/;
 const retiredExplicitColliderNames = new Set([
   ...collisionDelta.v57RemoveColliderMeshNames,
   ...collisionDelta.v58RemoveColliderMeshNames,
-  ...v71Scene.removedMeshes,
-  ...v71Delta.removeLegacyVisualMeshColliderReferences,
-  ...v71Delta.visualOnlyMeshes,
+  ...v72Scene.removedMeshes,
+  ...(v72Scene.v71Changes?.removedOutdatedVisualMeshes ?? []),
+  ...v71VisualOnlyPrefixes,
+  ...v72Delta.removedColliders,
 ]);
 // Keep each accumulated manifest delta. The V58 additions deliberately use
 // split solids around the 2.8-unit opening; there is no whole-office or
@@ -176,14 +184,16 @@ function DebugCollider({ collider }: { collider: ColliderSpec }) {
 }
 
 /**
- * V71 is the authoritative visual geometry. Its embedded platforms and steps,
+ * V72 is the authoritative visual geometry. V72 changes only gate materials
+ * and UVs, so it intentionally reuses the validated V71 collision manifest.
+ * Its embedded platforms and steps,
  * desks, walls and rails derive their existing static collision directly; each
  * embedded desk set and teacher desk gets one simple
  * bounding-box collider. Dynamic gates and classroom doors stay kinematic.
  */
 export function CampusCollision({ scene }: { scene: THREE.Group }) {
   const colliders = useMemo(() => buildColliders(scene), [scene]);
-  return <RigidBody type="fixed" colliders={false} userData={{ colliderCount: colliders.length, campusVersion: "V71" }}>
+  return <RigidBody type="fixed" colliders={false} userData={{ colliderCount: colliders.length, campusVersion: "V72" }}>
     {colliders.map((collider) => <group key={collider.id}>
       <CuboidCollider position={collider.position} rotation={collider.rotation} args={collider.halfExtents} />
       <DebugCollider collider={collider} />

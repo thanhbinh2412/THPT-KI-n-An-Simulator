@@ -1,7 +1,7 @@
 {
-  "version": "V71",
-  "baseModel": "THPT_Kien_An_V70_Guardroom_Fence_Sign_Fixed.glb",
-  "campusModel": "THPT_Kien_An_V71_Red_Tiled_Sidewalk_Sidegate_Roofs.glb",
+  "version": "V72",
+  "baseModel": "KienAn_V71.glb",
+  "campusModel": "THPT_Kien_An_V72_Brick_Pillars_Green_Sidegates.glb",
   "guardRoom": {
     "footprint": {
       "xMin": -14.8,
@@ -225,5 +225,54 @@
       "V65_SIDEGATE_RIGHT_FLAT_CANOPY_RED_TOP"
     ],
     "note": "Old V66 pavement overlays were occluded by V25. New V71 surfaces raised to y~0.086; no new wall colliders."
+  },
+  "v72Changes": {
+    "brickPillarMeshes": [
+      "GATE_L_pillar_core",
+      "GATE_R_pillar_core",
+      "SIDEGATE_RIGHT_OUTER_POST"
+    ],
+    "greenSideGateMeshes": [
+      "SIDEGATE_LEFT_FRAME_END",
+      "SIDEGATE_LEFT_FRAME_HINGE",
+      "SIDEGATE_LEFT_HORIZONTAL_0.68",
+      "SIDEGATE_LEFT_HORIZONTAL_1.36",
+      "SIDEGATE_LEFT_HORIZONTAL_2.12",
+      "SIDEGATE_LEFT_IRON_BAR_0",
+      "SIDEGATE_LEFT_IRON_BAR_1",
+      "SIDEGATE_LEFT_IRON_BAR_10",
+      "SIDEGATE_LEFT_IRON_BAR_11",
+      "SIDEGATE_LEFT_IRON_BAR_2",
+      "SIDEGATE_LEFT_IRON_BAR_3",
+      "SIDEGATE_LEFT_IRON_BAR_4",
+      "SIDEGATE_LEFT_IRON_BAR_5",
+      "SIDEGATE_LEFT_IRON_BAR_6",
+      "SIDEGATE_LEFT_IRON_BAR_7",
+      "SIDEGATE_LEFT_IRON_BAR_8",
+      "SIDEGATE_LEFT_IRON_BAR_9",
+      "SIDEGATE_LEFT_LOWER_PANEL",
+      "SIDEGATE_RIGHT_FRAME_END",
+      "SIDEGATE_RIGHT_FRAME_HINGE",
+      "SIDEGATE_RIGHT_HORIZONTAL_0.68",
+      "SIDEGATE_RIGHT_HORIZONTAL_1.36",
+      "SIDEGATE_RIGHT_HORIZONTAL_2.12",
+      "SIDEGATE_RIGHT_IRON_BAR_0",
+      "SIDEGATE_RIGHT_IRON_BAR_1",
+      "SIDEGATE_RIGHT_IRON_BAR_10",
+      "SIDEGATE_RIGHT_IRON_BAR_11",
+      "SIDEGATE_RIGHT_IRON_BAR_2",
+      "SIDEGATE_RIGHT_IRON_BAR_3",
+      "SIDEGATE_RIGHT_IRON_BAR_4",
+      "SIDEGATE_RIGHT_IRON_BAR_5",
+      "SIDEGATE_RIGHT_IRON_BAR_6",
+      "SIDEGATE_RIGHT_IRON_BAR_7",
+      "SIDEGATE_RIGHT_IRON_BAR_8",
+      "SIDEGATE_RIGHT_IRON_BAR_9",
+      "SIDEGATE_RIGHT_LOWER_PANEL"
+    ],
+    "mainGateMetalReference": "GATE_right_gate_lower_solid",
+    "preserveStructuralGeometry": true,
+    "noAdditionalCollidersRequired": true,
+    "description": "Brick texture on 2 main gate core pillars and 1 right outer side gate post. Both side gate leaf bars/frames/solid lower panels recolored using main gate green metal."
   }
 }
