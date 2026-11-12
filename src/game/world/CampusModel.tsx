@@ -50,7 +50,7 @@ function hideLegacyV58Geometry(scene: THREE.Group) {
 }
 
 /**
- * V61 embeds both original photographs as GLB textures.  The campus is made
+ * V63 keeps the original photographs as GLB textures. The campus is made
  * unlit for performance, so give only these display surfaces dedicated,
  * untinted materials after that conversion. This preserves their embedded
  * maps while making their front/back faces reliable without touching boards,
@@ -87,7 +87,7 @@ function preparePhotoDisplayMaterials(scene: THREE.Group) {
     photoMeshNames.forEach((name) => {
       if (!reported.has(name)) diagnostics.push({ name, found: false, hasMap: false, hasImage: false });
     });
-    console.info("[Campus V61] photo display materials", diagnostics);
+    console.info("[Campus V63] photo display materials", diagnostics);
   }
   return () => {
     originals.forEach(({ mesh, material }) => { mesh.material = material; });
@@ -131,7 +131,7 @@ function AnimatedGate({ spec, scene }: { spec: GateSpec; scene: THREE.Group }) {
   return <>{spec.pivots.map((_, index) => <RigidBody key={index} ref={(body) => { bodies.current[index] = body; }} type="kinematicPosition" colliders={false}><CuboidCollider args={spec.colliders[index]} /></RigidBody>)}</>;
 }
 
-/** Primary V61 visual scene. The 12A3 class photo and school bulletin board are embedded in this single GLB. */
+/** Primary V63 visual scene. Embedded photo displays retain their original GLB textures. */
 export function CampusModel({ collisionsEnabled = true }: { collisionsEnabled?: boolean }) {
   const { scene, animations } = useGLTF(campusConfig.modelUrl);
   const trafficMixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
