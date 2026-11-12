@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "changed_objects": [
+    "V02_Teachers_Block_Masonry"
+  ],
+  "unrelated_geometry_materials_and_transforms_unchanged": true,
+  "rear_wall_and_stair_enclosure_checks": 412,
+  "front_doors_windows_unchanged": true,
+  "stair_geometry_and_floor_opening_unchanged": true,
+  "floors": 2,
+  "rear_wall_inner_y": 4.452500000000001,
+  "rear_wall_thickness_m": 0.22,
+  "roundtrip": "PASS",
+  "roundtrip_objects": 339
+}

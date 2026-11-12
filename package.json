@@ -8,7 +8,11 @@
     "build": "next build",
     "start": "tsx server.ts --production",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "campus:prepare": "node tools/prepare-campus-preview.mjs",
+    "campus:preview": "npm run dev",
+    "predev": "npm run campus:prepare",
+    "prebuild": "npm run campus:prepare"
   },
   "dependencies": {
     "@next/env": "^15.3.0",

@@ -11,6 +11,32 @@ pnpm dev
 
 Open `http://localhost:3000`. Use WASD/arrows to walk, Shift to run, Space to jump, V to switch camera and E to interact. On a touch device, use the virtual pad and action buttons.
 
+## Preview the rebuilt V2 campus
+
+From the repository root, run:
+
+```bash
+npm run campus:preview
+```
+
+Open `http://localhost:3000/campus-preview`. This copies the latest V2 GLB from
+`assets/school/Campus-Rebuild/v02/` into the public model directory and starts
+the development server. If the server is already running, use
+`npm run campus:prepare` and refresh the preview after each new Blender export.
+The first model download is about 76 MB. Drag to orbit, scroll to zoom, and
+right-drag to pan; the view buttons jump to each courtyard or the stage.
+
+Both `/game` and `/campus-preview` now display V2 with its PBR materials.
+`npm run dev` and `npm run build` prepare the public model automatically.
+The standalone preview has orbit controls; `/game` retains the existing
+characters, NPC coordinates and routes, player spawns, multiplayer, and
+V63 collision/interaction geometry. The V63 visual scene is hidden.
+This is a visual replacement: V2 walls, floors and doors can differ from the
+old invisible colliders and interaction locations. Gate and classroom-door
+animations still affect the hidden V63 navigation scene, not V2's static mesh.
+Blender's world and lights are not exported in the GLB; the browser uses its
+own daylight.
+
 ## Multiplayer
 
 The game runs Next.js and Socket.IO in the same Node.js process and on the

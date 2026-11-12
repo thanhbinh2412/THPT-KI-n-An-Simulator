@@ -3,3 +3,6 @@ node_modules/
 .pnpm-store/
 *.tsbuildinfo
 .env*.local
+
+# Generated from the editable campus asset by campus:prepare.
+/public/models/campus-v02/

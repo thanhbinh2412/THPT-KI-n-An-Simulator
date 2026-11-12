@@ -1,0 +1,509 @@
+{
+  "operation": "material colors only",
+  "geometry_and_transforms_unchanged": true,
+  "geometry_sha256_before": "0da99b1144277d1e7ce4094112eeb13cca4344d7396b988344b06ffad1a156ad",
+  "geometry_sha256_after": "0da99b1144277d1e7ce4094112eeb13cca4344d7396b988344b06ffad1a156ad",
+  "doors": "warm wood brown",
+  "window_frames_and_grilles": "aged ochre yellow",
+  "window_glass": "warm dark neutral",
+  "gate_and_chalkboards_untouched": true,
+  "objects_recolored": 124,
+  "objects": [
+    {
+      "object": "V02_Female_Restroom_Walls_Joinery",
+      "faces_recolored": 150
+    },
+    {
+      "object": "V02_Male_Restroom_Walls_Joinery",
+      "faces_recolored": 150
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F1_B1",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F1_B2",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F1_B3",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F1_B4",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F1_B5",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F1_B6",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F1_B7",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F1_B8",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F1_B9",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F1_B10",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F1_B11",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F2_B1",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F2_B2",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F2_B3",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F2_B4",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F2_B5",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F2_B6",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F2_B7",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F2_B8",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F2_B9",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F2_B10",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F2_B11",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F3_B1",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F3_B2",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F3_B3",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F3_B4",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F3_B5",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F3_B6",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F3_B7",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F3_B8",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F3_B9",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F3_B10",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Main_Classrooms_F3_B11",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_Main_Classrooms_V63_Window_Grilles_And_Door_Frames",
+      "faces_recolored": 6534
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F1_B1",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F1_B2",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F1_B3",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F1_B4",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F1_B5",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F1_B6",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F1_B7",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F1_B8",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F1_B9",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F1_B10",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F1_B11",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F1_B12",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F2_B1",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F2_B2",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F2_B3",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F2_B4",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F2_B5",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F2_B6",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F2_B7",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F2_B8",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F2_B9",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F2_B10",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F2_B11",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Teachers_Block_F2_B12",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_Teachers_Block_V63_Window_Grilles_And_Door_Frames",
+      "faces_recolored": 4752
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F1_B1",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F1_B2",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F1_B3",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F1_B4",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F1_B5",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F1_B6",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F1_B7",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F2_B1",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F2_B2",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F2_B3",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F2_B4",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F2_B5",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F2_B6",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F2_B7",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F3_B1",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F3_B2",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F3_B3",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F3_B4",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F3_B5",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F3_B6",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Front_Classrooms_F3_B7",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_Side_Front_Classrooms_V63_Window_Grilles_And_Door_Frames",
+      "faces_recolored": 4158
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F1_B1",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F1_B2",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F1_B3",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F1_B4",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F1_B5",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F1_B6",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F2_B1",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F2_B2",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F2_B3",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F2_B4",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F2_B5",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F2_B6",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F3_B1",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F3_B2",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F3_B3",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F3_B4",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F3_B5",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Side_Rear_Classrooms_F3_B6",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_Side_Rear_Classrooms_V63_Window_Grilles_And_Door_Frames",
+      "faces_recolored": 3564
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F1_B1",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F1_B2",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F1_B3",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F1_B4",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F1_B5",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F1_B6",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F1_B7",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F1_B8",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F1_B9",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F2_B1",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F2_B2",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F2_B3",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F2_B4",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F2_B5",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F2_B6",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F2_B7",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F2_B8",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_V63_Door_Rear_Auxiliary_Classrooms_F2_B9",
+      "faces_recolored": 12
+    },
+    {
+      "object": "V02_Rear_Auxiliary_Classrooms_V63_Window_Grilles_And_Door_Frames",
+      "faces_recolored": 3564
+    },
+    {
+      "object": "V02_Guard_House_Walls_And_Front_Windows",
+      "faces_recolored": 180
+    },
+    {
+      "object": "V02_Guard_Right_Door_Frame_Window_And_Step",
+      "faces_recolored": 90
+    },
+    {
+      "object": "V02_Guard_Right_Facing_Door_Leaf",
+      "faces_recolored": 12
+    }
+  ]
+}
