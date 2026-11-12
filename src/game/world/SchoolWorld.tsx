@@ -8,7 +8,7 @@ import { SittingStudentNpc } from "./SittingStudentNpc";
 import { TeacherNpc } from "./TeacherNpc";
 import { StoneBench } from "./StoneBench";
 
-/** The V29 GLB is the complete campus visual; its navigation layer is separate. */
+/** The V61 GLB is the complete campus visual; its navigation layer is separate. */
 export function SchoolWorld() {
   return <>
     <SkyEnvironment />

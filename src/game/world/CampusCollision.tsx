@@ -164,14 +164,14 @@ function DebugCollider({ collider }: { collider: ColliderSpec }) {
 }
 
 /**
- * V58 is the authoritative visual geometry. Its embedded platforms and steps,
+ * V61 is the authoritative visual geometry. Its embedded platforms and steps,
  * desks, walls and rails derive their existing static collision directly; each
  * embedded desk set and teacher desk gets one simple
  * bounding-box collider. Dynamic gates and classroom doors stay kinematic.
  */
 export function CampusCollision({ scene }: { scene: THREE.Group }) {
   const colliders = useMemo(() => buildColliders(scene), [scene]);
-  return <RigidBody type="fixed" colliders={false} userData={{ colliderCount: colliders.length, campusVersion: "V58" }}>
+  return <RigidBody type="fixed" colliders={false} userData={{ colliderCount: colliders.length, campusVersion: "V61" }}>
     {colliders.map((collider) => <group key={collider.id}>
       <CuboidCollider position={collider.position} rotation={collider.rotation} args={collider.halfExtents} />
       <DebugCollider collider={collider} />

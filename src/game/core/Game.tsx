@@ -14,6 +14,7 @@ import { RemotePlayers } from "@/game/multiplayer/RemotePlayers";
 import { MultiplayerUI } from "@/components/game-ui/MultiplayerUI";
 import { GameLoadingScreen } from "@/components/game-ui/GameLoadingScreen";
 import { useGameStore } from "@/game/store/useGameStore";
+import { BackgroundMusicProvider } from "@/game/audio/BackgroundMusicProvider";
 import type { Vec3 } from "@/game/types";
 
 function SceneReady({ onReady }: { onReady: () => void }) {
@@ -35,5 +36,5 @@ function Scene({ onReady }: { onReady: () => void }) {
 export default function Game() {
   const [sceneReady, setSceneReady] = useState(false);
   const markSceneReady = useCallback(() => setSceneReady(true), []);
-  return <MultiplayerProvider><main className="game-shell relative"><Canvas shadows={false} dpr={[1, 1.25]} camera={{ fov: 58, position: [0, 5, 27]}} gl={{ antialias: false, powerPreference: "high-performance", toneMapping: THREE.NoToneMapping, outputColorSpace: THREE.SRGBColorSpace }}><Suspense fallback={null}><Scene onReady={markSceneReady} /></Suspense></Canvas><GameLoadingScreen ready={sceneReady} /><GameHUD /><MobileControls /><MultiplayerUI /></main></MultiplayerProvider>;
+  return <BackgroundMusicProvider><MultiplayerProvider><main className="game-shell relative"><Canvas shadows={false} dpr={[1, 1.25]} camera={{ fov: 58, position: [0, 5, 27]}} gl={{ antialias: false, powerPreference: "high-performance", toneMapping: THREE.NoToneMapping, outputColorSpace: THREE.SRGBColorSpace }}><Suspense fallback={null}><Scene onReady={markSceneReady} /></Suspense></Canvas><GameLoadingScreen ready={sceneReady} /><GameHUD /><MobileControls /><MultiplayerUI /></main></MultiplayerProvider></BackgroundMusicProvider>;
 }

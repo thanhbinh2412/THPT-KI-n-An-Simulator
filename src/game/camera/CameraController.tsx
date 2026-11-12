@@ -15,6 +15,15 @@ const TPS_CLOSE_FOV = 66;
 let heading = 0;
 export const getCameraHeading = () => heading;
 
+// The desktop path updates these values through pointer lock.  Keeping the
+// mobile path here makes both input methods drive exactly the same camera.
+export const rotateCamera = (deltaX: number, deltaY: number) => {
+  heading -= deltaX * .004;
+  cameraPitch = THREE.MathUtils.clamp(cameraPitch - deltaY * .0032, -1.1, .65);
+};
+
+let cameraPitch = -.18;
+
 type MaterialSlot = THREE.Material | THREE.Material[];
 type FadedOccluder = { mesh: THREE.Mesh; original: MaterialSlot; replacements: THREE.Material[] };
 
@@ -37,7 +46,6 @@ export function CameraController({ player }: { player: React.RefObject<RapierRig
   const mode = useGameStore((s) => s.cameraMode);
   const paused = useGameStore((s) => s.paused);
   const sittingOnBench = useGameStore((s) => s.benchSeatIndex !== null);
-  const pitch = useRef(-.18);
   const target = useRef(new THREE.Vector3());
   const desired = useRef(new THREE.Vector3());
   const arm = useRef(new THREE.Vector3());
@@ -75,7 +83,7 @@ export function CameraController({ player }: { player: React.RefObject<RapierRig
     const move = (event: MouseEvent) => {
       if (document.pointerLockElement === canvas) {
         heading -= event.movementX * .0024;
-        pitch.current = THREE.MathUtils.clamp(pitch.current - event.movementY * .002, -1.1, .65);
+        cameraPitch = THREE.MathUtils.clamp(cameraPitch - event.movementY * .002, -1.1, .65);
       }
     };
     canvas.addEventListener("click", lock);
@@ -136,7 +144,7 @@ export function CameraController({ player }: { player: React.RefObject<RapierRig
     }
 
     const look = target.current.clone()
-      .add(new THREE.Vector3(0, Math.sin(pitch.current) * 4, 0))
+      .add(new THREE.Vector3(0, Math.sin(cameraPitch) * 4, 0))
       .addScaledVector(forward, -8);
     camera.lookAt(look);
   });

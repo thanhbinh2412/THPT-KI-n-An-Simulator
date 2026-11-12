@@ -13,6 +13,11 @@ import { batchEmbeddedStudentDesks } from "./batchCampusInteriors";
 import v58CollisionDelta from "../../../assets/school/kien_an_campus_v58_collision_delta.json";
 
 const UP = new THREE.Vector3(0, 1, 0);
+const photoMeshNames = new Set([
+  "SCHOOL_BULLETIN_BOARD_CONTENT",
+  "CLASS_12A3_PHOTO_FRONT",
+  "CLASS_12A3_PHOTO_BACK",
+]);
 type V58CollisionDelta = {
   removedGeometry: string[];
   v51RemoveColliderNodes: string[];
@@ -42,6 +47,53 @@ function hideLegacyV58Geometry(scene: THREE.Group) {
     object.visible = false;
   });
   return () => changed.forEach(({ object, visible }) => { object.visible = visible; });
+}
+
+/**
+ * V61 embeds both original photographs as GLB textures.  The campus is made
+ * unlit for performance, so give only these display surfaces dedicated,
+ * untinted materials after that conversion. This preserves their embedded
+ * maps while making their front/back faces reliable without touching boards,
+ * signs, or any other campus material.
+ */
+function preparePhotoDisplayMaterials(scene: THREE.Group) {
+  const originals: Array<{ mesh: THREE.Mesh; material: THREE.Material | THREE.Material[] }> = [];
+  const replacements: THREE.Material[] = [];
+  const diagnostics: Array<{ name: string; found: boolean; hasMap: boolean; hasImage: boolean }> = [];
+  scene.traverse((object) => {
+    if (!(object instanceof THREE.Mesh) || !photoMeshNames.has(object.name)) return;
+    const sourceMaterials = Array.isArray(object.material) ? object.material : [object.material];
+    const updatedMaterials = sourceMaterials.map((source) => {
+      const material = source.clone();
+      if (material instanceof THREE.MeshStandardMaterial || material instanceof THREE.MeshBasicMaterial) {
+        material.color.set(0xffffff);
+        material.side = THREE.DoubleSide;
+        material.opacity = 1;
+        material.transparent = false;
+        material.depthWrite = true;
+        material.depthTest = true;
+        material.needsUpdate = true;
+      }
+      replacements.push(material);
+      return material;
+    });
+    originals.push({ mesh: object, material: object.material });
+    object.material = Array.isArray(object.material) ? updatedMaterials : updatedMaterials[0];
+    const firstMaterial = updatedMaterials[0] as THREE.MeshBasicMaterial | THREE.MeshStandardMaterial;
+    diagnostics.push({ name: object.name, found: true, hasMap: Boolean(firstMaterial.map), hasImage: Boolean(firstMaterial.map?.image) });
+  });
+  if (process.env.NODE_ENV !== "production") {
+    const reported = new Set(diagnostics.map(({ name }) => name));
+    photoMeshNames.forEach((name) => {
+      if (!reported.has(name)) diagnostics.push({ name, found: false, hasMap: false, hasImage: false });
+    });
+    console.info("[Campus V61] photo display materials", diagnostics);
+  }
+  return () => {
+    originals.forEach(({ mesh, material }) => { mesh.material = material; });
+    // These targeted clones are not owned by the GLTF cache.
+    replacements.forEach((material) => material.dispose());
+  };
 }
 
 type GateSpec = {
@@ -79,7 +131,7 @@ function AnimatedGate({ spec, scene }: { spec: GateSpec; scene: THREE.Group }) {
   return <>{spec.pivots.map((_, index) => <RigidBody key={index} ref={(body) => { bodies.current[index] = body; }} type="kinematicPosition" colliders={false}><CuboidCollider args={spec.colliders[index]} /></RigidBody>)}</>;
 }
 
-/** Primary V58 visual scene. It includes the opened teachers-to-hall passage and covered corridor. */
+/** Primary V61 visual scene. The 12A3 class photo and school bulletin board are embedded in this single GLB. */
 export function CampusModel() {
   const { scene, animations } = useGLTF(campusConfig.modelUrl);
   const trafficMixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
@@ -87,11 +139,14 @@ export function CampusModel() {
     const restoreLegacyGeometry = hideLegacyV58Geometry(scene);
     const restoreDeskMeshes = batchEmbeddedStudentDesks(scene);
     const restoreMaterials = applyUnlitMaterials(scene);
-    return () => { restoreMaterials(); restoreDeskMeshes(); restoreLegacyGeometry(); };
+    const restorePhotoMaterials = preparePhotoDisplayMaterials(scene);
+    return () => { restorePhotoMaterials(); restoreMaterials(); restoreDeskMeshes(); restoreLegacyGeometry(); };
   }, [scene]);
   useEffect(() => {
     const traffic = animations.find((clip) => clip.name === "TrafficLoop_V23");
-    if (!traffic) { console.warn("Campus V58 traffic clip missing: TrafficLoop_V23"); return; }
+    // V60 has no campus animation clips; keep this optional so the loader does
+    // not report a false error while character/NPC animation remains unchanged.
+    if (!traffic) return;
     const action = trafficMixer.clipAction(traffic); action.setLoop(THREE.LoopRepeat, Infinity); action.play();
     return () => { action.stop(); trafficMixer.stopAllAction(); trafficMixer.uncacheRoot(scene); };
   }, [animations, scene, trafficMixer]);

@@ -1,7 +1,8 @@
 import type { Vec3 } from "@/game/types";
 
 export const campusConfig: { modelUrl: string; position: Vec3; rotation: Vec3; scale: number; spawn: Vec3 } = {
-  modelUrl: "/assets/school/THPT_Kien_An_V58_Teachers_Hall_Covered_Passage.glb",
+  // Versioned filename also prevents browsers/CDNs from reusing the V60 GLB.
+  modelUrl: "/assets/school/THPT_Kien_An_V61_Notice_Board_12A3_Photo_FIXED.glb",
   position: [0, 0, 0], rotation: [0, 0, 0], scale: 1,
   // Outside the main gate at Z=37.5, within the 2.5 m main-gate interaction zone.
   spawn: [0, .86, 39.8],
