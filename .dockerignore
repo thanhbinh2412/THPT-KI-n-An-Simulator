@@ -1,0 +1,13 @@
+.git
+.github
+.next
+node_modules
+.pnpm-store
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+README.md
+DEPLOYMENT.md
+**/.DS_Store
+**/Thumbs.db

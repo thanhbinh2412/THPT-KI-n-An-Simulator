@@ -1,0 +1,686 @@
+{
+  "version": "V47",
+  "baseModel": "THPT_Kien_An_V46_V43_Classrooms_Fixed.glb",
+  "campusModel": "THPT_Kien_An_V47_Pole_Photo.glb",
+  "upAxis": "Y",
+  "rightBuilding": {
+    "classroomSequenceLeftToRight": {
+      "floor1": [
+        "12A1",
+        "12A2",
+        "12A3",
+        "12A4"
+      ],
+      "floor2": [
+        "12A5",
+        "12A6",
+        "12A7",
+        "12A8"
+      ],
+      "floor3": [
+        "12A9",
+        "12A10",
+        "12A11",
+        "12A12"
+      ]
+    },
+    "classSigns": [
+      {
+        "label": "12A1",
+        "floor": 1,
+        "roomIndex": 4,
+        "mesh": "V39_RIGHT_CLASS_SIGN_12A1",
+        "worldPosition": [
+          31.840000381469725,
+          3.6299999952316284,
+          -13.849999904632568
+        ],
+        "doubleSidedReadable": true
+      },
+      {
+        "label": "12A2",
+        "floor": 1,
+        "roomIndex": 3,
+        "mesh": "V39_RIGHT_CLASS_SIGN_12A2",
+        "worldPosition": [
+          31.840000381469725,
+          3.6299999952316284,
+          -3.5499998331069946
+        ],
+        "doubleSidedReadable": true
+      },
+      {
+        "label": "12A3",
+        "floor": 1,
+        "roomIndex": 1,
+        "mesh": "V39_RIGHT_CLASS_SIGN_12A3",
+        "worldPosition": [
+          31.840000381469725,
+          3.6299999952316284,
+          14.249999523162842
+        ],
+        "doubleSidedReadable": true
+      },
+      {
+        "label": "12A4",
+        "floor": 1,
+        "roomIndex": 0,
+        "mesh": "V39_RIGHT_CLASS_SIGN_12A4",
+        "worldPosition": [
+          31.840000381469725,
+          3.6299999952316284,
+          24.550000190734863
+        ],
+        "doubleSidedReadable": true
+      },
+      {
+        "label": "12A5",
+        "floor": 2,
+        "roomIndex": 4,
+        "mesh": "V39_RIGHT_CLASS_SIGN_12A5",
+        "worldPosition": [
+          31.840000381469725,
+          7.870000123977661,
+          -13.849999904632568
+        ],
+        "doubleSidedReadable": true
+      },
+      {
+        "label": "12A6",
+        "floor": 2,
+        "roomIndex": 3,
+        "mesh": "V39_RIGHT_CLASS_SIGN_12A6",
+        "worldPosition": [
+          31.840000381469725,
+          7.870000123977661,
+          -3.5499998331069946
+        ],
+        "doubleSidedReadable": true
+      },
+      {
+        "label": "12A7",
+        "floor": 2,
+        "roomIndex": 1,
+        "mesh": "V39_RIGHT_CLASS_SIGN_12A7",
+        "worldPosition": [
+          31.840000381469725,
+          7.870000123977661,
+          14.249999523162842
+        ],
+        "doubleSidedReadable": true
+      },
+      {
+        "label": "12A8",
+        "floor": 2,
+        "roomIndex": 0,
+        "mesh": "V39_RIGHT_CLASS_SIGN_12A8",
+        "worldPosition": [
+          31.840000381469725,
+          7.870000123977661,
+          24.550000190734863
+        ],
+        "doubleSidedReadable": true
+      },
+      {
+        "label": "12A9",
+        "floor": 3,
+        "roomIndex": 4,
+        "mesh": "V39_RIGHT_CLASS_SIGN_12A9",
+        "worldPosition": [
+          31.840000381469725,
+          12.769999980926514,
+          -13.849999904632568
+        ],
+        "doubleSidedReadable": true
+      },
+      {
+        "label": "12A10",
+        "floor": 3,
+        "roomIndex": 3,
+        "mesh": "V39_RIGHT_CLASS_SIGN_12A10",
+        "worldPosition": [
+          31.840000381469725,
+          12.769999980926514,
+          -3.5499998331069946
+        ],
+        "doubleSidedReadable": true
+      },
+      {
+        "label": "12A11",
+        "floor": 3,
+        "roomIndex": 1,
+        "mesh": "V39_RIGHT_CLASS_SIGN_12A11",
+        "worldPosition": [
+          31.840000381469725,
+          12.769999980926514,
+          14.249999523162842
+        ],
+        "doubleSidedReadable": true
+      },
+      {
+        "label": "12A12",
+        "floor": 3,
+        "roomIndex": 0,
+        "mesh": "V39_RIGHT_CLASS_SIGN_12A12",
+        "worldPosition": [
+          31.840000381469725,
+          12.769999980926514,
+          24.550000190734863
+        ],
+        "doubleSidedReadable": true
+      }
+    ],
+    "rearWall": "Rebuilt with full-width see-through iron windows matching courtyard facing windows.",
+    "repairedSurfaces": [
+      "front sign UV/back face",
+      "rear classroom wall",
+      "rear window layout"
+    ],
+    "stairWallFix": {
+      "description": "Added missing enclosure wall on the +Z/right side of the internal staircase bay for floors 1-3.",
+      "addedMeshes": [
+        "V40_RIGHT_STAIR_SIDE_WALL_0",
+        "V40_RIGHT_STAIR_SIDE_WALL_1",
+        "V40_RIGHT_STAIR_SIDE_WALL_2"
+      ],
+      "wallPlane": "parallel to X-axis, on the +Z side of the stairwell"
+    }
+  },
+  "trafficClip": "TrafficLoop_V23",
+  "gatePivotNames": [
+    "GateLeaf_Left_Hinge",
+    "GateLeaf_Right_Hinge",
+    "SideGate_LEFT_Hinge",
+    "SideGate_RIGHT_Hinge"
+  ],
+  "classroomSigns": {
+    "description": "24 dark blue classroom signs; floor1=12A, floor2=11B, floor3=10C; corrected double-sided UV for signs viewed from corridors",
+    "floors": {
+      "1": {
+        "grade": 12,
+        "rightBuilding": [
+          "12A1",
+          "12A2",
+          "12A3",
+          "12A4"
+        ],
+        "centerBuilding": [
+          "12A5",
+          "12A6",
+          "12A7",
+          "12A8"
+        ]
+      },
+      "2": {
+        "grade": 11,
+        "rightBuilding": [
+          "11B1",
+          "11B2",
+          "11B3",
+          "11B4"
+        ],
+        "centerBuilding": [
+          "11B5",
+          "11B6",
+          "11B7",
+          "11B8"
+        ]
+      },
+      "3": {
+        "grade": 10,
+        "rightBuilding": [
+          "10C1",
+          "10C2",
+          "10C3",
+          "10C4"
+        ],
+        "centerBuilding": [
+          "10C5",
+          "10C6",
+          "10C7",
+          "10C8"
+        ]
+      }
+    },
+    "meshSigns": [
+      {
+        "building": "right",
+        "floor": 1,
+        "grade": 12,
+        "roomSequence": 1,
+        "label": "12A1",
+        "mesh": "V42_RIGHT_CLASS_SIGN_12A1",
+        "worldPosition": [
+          31.84,
+          3.63,
+          -13.85
+        ],
+        "orderDescription": "left-to-right when viewed from the courtyard",
+        "signFrontFacing": "-X (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "right",
+        "floor": 1,
+        "grade": 12,
+        "roomSequence": 2,
+        "label": "12A2",
+        "mesh": "V42_RIGHT_CLASS_SIGN_12A2",
+        "worldPosition": [
+          31.84,
+          3.63,
+          -3.55
+        ],
+        "orderDescription": "left-to-right when viewed from the courtyard",
+        "signFrontFacing": "-X (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "right",
+        "floor": 1,
+        "grade": 12,
+        "roomSequence": 3,
+        "label": "12A3",
+        "mesh": "V42_RIGHT_CLASS_SIGN_12A3",
+        "worldPosition": [
+          31.84,
+          3.63,
+          14.25
+        ],
+        "orderDescription": "left-to-right when viewed from the courtyard",
+        "signFrontFacing": "-X (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "right",
+        "floor": 1,
+        "grade": 12,
+        "roomSequence": 4,
+        "label": "12A4",
+        "mesh": "V42_RIGHT_CLASS_SIGN_12A4",
+        "worldPosition": [
+          31.84,
+          3.63,
+          24.55
+        ],
+        "orderDescription": "left-to-right when viewed from the courtyard",
+        "signFrontFacing": "-X (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "right",
+        "floor": 2,
+        "grade": 11,
+        "roomSequence": 1,
+        "label": "11B1",
+        "mesh": "V42_RIGHT_CLASS_SIGN_11B1",
+        "worldPosition": [
+          31.84,
+          7.87,
+          -13.85
+        ],
+        "orderDescription": "left-to-right when viewed from the courtyard",
+        "signFrontFacing": "-X (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "right",
+        "floor": 2,
+        "grade": 11,
+        "roomSequence": 2,
+        "label": "11B2",
+        "mesh": "V42_RIGHT_CLASS_SIGN_11B2",
+        "worldPosition": [
+          31.84,
+          7.87,
+          -3.55
+        ],
+        "orderDescription": "left-to-right when viewed from the courtyard",
+        "signFrontFacing": "-X (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "right",
+        "floor": 2,
+        "grade": 11,
+        "roomSequence": 3,
+        "label": "11B3",
+        "mesh": "V42_RIGHT_CLASS_SIGN_11B3",
+        "worldPosition": [
+          31.84,
+          7.87,
+          14.25
+        ],
+        "orderDescription": "left-to-right when viewed from the courtyard",
+        "signFrontFacing": "-X (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "right",
+        "floor": 2,
+        "grade": 11,
+        "roomSequence": 4,
+        "label": "11B4",
+        "mesh": "V42_RIGHT_CLASS_SIGN_11B4",
+        "worldPosition": [
+          31.84,
+          7.87,
+          24.55
+        ],
+        "orderDescription": "left-to-right when viewed from the courtyard",
+        "signFrontFacing": "-X (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "right",
+        "floor": 3,
+        "grade": 10,
+        "roomSequence": 1,
+        "label": "10C1",
+        "mesh": "V42_RIGHT_CLASS_SIGN_10C1",
+        "worldPosition": [
+          31.84,
+          12.77,
+          -13.85
+        ],
+        "orderDescription": "left-to-right when viewed from the courtyard",
+        "signFrontFacing": "-X (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "right",
+        "floor": 3,
+        "grade": 10,
+        "roomSequence": 2,
+        "label": "10C2",
+        "mesh": "V42_RIGHT_CLASS_SIGN_10C2",
+        "worldPosition": [
+          31.84,
+          12.77,
+          -3.55
+        ],
+        "orderDescription": "left-to-right when viewed from the courtyard",
+        "signFrontFacing": "-X (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "right",
+        "floor": 3,
+        "grade": 10,
+        "roomSequence": 3,
+        "label": "10C3",
+        "mesh": "V42_RIGHT_CLASS_SIGN_10C3",
+        "worldPosition": [
+          31.84,
+          12.77,
+          14.25
+        ],
+        "orderDescription": "left-to-right when viewed from the courtyard",
+        "signFrontFacing": "-X (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "right",
+        "floor": 3,
+        "grade": 10,
+        "roomSequence": 4,
+        "label": "10C4",
+        "mesh": "V42_RIGHT_CLASS_SIGN_10C4",
+        "worldPosition": [
+          31.84,
+          12.77,
+          24.55
+        ],
+        "orderDescription": "left-to-right when viewed from the courtyard",
+        "signFrontFacing": "-X (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "center",
+        "floor": 1,
+        "grade": 12,
+        "roomSequence": 5,
+        "label": "12A5",
+        "mesh": "V42_CENTER_CLASS_SIGN_12A5",
+        "worldPosition": [
+          19.5050001144,
+          3.64,
+          -23.53
+        ],
+        "orderDescription": "right-to-left when viewed from the courtyard",
+        "signFrontFacing": "+Z (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "center",
+        "floor": 1,
+        "grade": 12,
+        "roomSequence": 6,
+        "label": "12A6",
+        "mesh": "V42_CENTER_CLASS_SIGN_12A6",
+        "worldPosition": [
+          7.4049999714,
+          3.64,
+          -23.53
+        ],
+        "orderDescription": "right-to-left when viewed from the courtyard",
+        "signFrontFacing": "+Z (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "center",
+        "floor": 1,
+        "grade": 12,
+        "roomSequence": 7,
+        "label": "12A7",
+        "mesh": "V42_CENTER_CLASS_SIGN_12A7",
+        "worldPosition": [
+          -1.3950000405,
+          3.64,
+          -23.53
+        ],
+        "orderDescription": "right-to-left when viewed from the courtyard",
+        "signFrontFacing": "+Z (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "center",
+        "floor": 1,
+        "grade": 12,
+        "roomSequence": 8,
+        "label": "12A8",
+        "mesh": "V42_CENTER_CLASS_SIGN_12A8",
+        "worldPosition": [
+          -13.6949996948,
+          3.64,
+          -23.53
+        ],
+        "orderDescription": "right-to-left when viewed from the courtyard",
+        "signFrontFacing": "+Z (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "center",
+        "floor": 2,
+        "grade": 11,
+        "roomSequence": 5,
+        "label": "11B5",
+        "mesh": "V42_CENTER_CLASS_SIGN_11B5",
+        "worldPosition": [
+          19.5050001144,
+          8.54,
+          -23.53
+        ],
+        "orderDescription": "right-to-left when viewed from the courtyard",
+        "signFrontFacing": "+Z (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "center",
+        "floor": 2,
+        "grade": 11,
+        "roomSequence": 6,
+        "label": "11B6",
+        "mesh": "V42_CENTER_CLASS_SIGN_11B6",
+        "worldPosition": [
+          7.4049999714,
+          8.54,
+          -23.53
+        ],
+        "orderDescription": "right-to-left when viewed from the courtyard",
+        "signFrontFacing": "+Z (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "center",
+        "floor": 2,
+        "grade": 11,
+        "roomSequence": 7,
+        "label": "11B7",
+        "mesh": "V42_CENTER_CLASS_SIGN_11B7",
+        "worldPosition": [
+          -1.3950000405,
+          8.54,
+          -23.53
+        ],
+        "orderDescription": "right-to-left when viewed from the courtyard",
+        "signFrontFacing": "+Z (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "center",
+        "floor": 2,
+        "grade": 11,
+        "roomSequence": 8,
+        "label": "11B8",
+        "mesh": "V42_CENTER_CLASS_SIGN_11B8",
+        "worldPosition": [
+          -13.6949996948,
+          8.54,
+          -23.53
+        ],
+        "orderDescription": "right-to-left when viewed from the courtyard",
+        "signFrontFacing": "+Z (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "center",
+        "floor": 3,
+        "grade": 10,
+        "roomSequence": 5,
+        "label": "10C5",
+        "mesh": "V42_CENTER_CLASS_SIGN_10C5",
+        "worldPosition": [
+          19.5050001144,
+          13.44,
+          -23.53
+        ],
+        "orderDescription": "right-to-left when viewed from the courtyard",
+        "signFrontFacing": "+Z (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "center",
+        "floor": 3,
+        "grade": 10,
+        "roomSequence": 6,
+        "label": "10C6",
+        "mesh": "V42_CENTER_CLASS_SIGN_10C6",
+        "worldPosition": [
+          7.4049999714,
+          13.44,
+          -23.53
+        ],
+        "orderDescription": "right-to-left when viewed from the courtyard",
+        "signFrontFacing": "+Z (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "center",
+        "floor": 3,
+        "grade": 10,
+        "roomSequence": 7,
+        "label": "10C7",
+        "mesh": "V42_CENTER_CLASS_SIGN_10C7",
+        "worldPosition": [
+          -1.3950000405,
+          13.44,
+          -23.53
+        ],
+        "orderDescription": "right-to-left when viewed from the courtyard",
+        "signFrontFacing": "+Z (courtyard)",
+        "doubleSidedReadable": true
+      },
+      {
+        "building": "center",
+        "floor": 3,
+        "grade": 10,
+        "roomSequence": 8,
+        "label": "10C8",
+        "mesh": "V42_CENTER_CLASS_SIGN_10C8",
+        "worldPosition": [
+          -13.6949996948,
+          13.44,
+          -23.53
+        ],
+        "orderDescription": "right-to-left when viewed from the courtyard",
+        "signFrontFacing": "+Z (courtyard)",
+        "doubleSidedReadable": true
+      }
+    ]
+  },
+  "classroomInteriorsV43": {
+    "buildings": [
+      "RIGHT",
+      "CENTER"
+    ],
+    "classrooms": 24,
+    "deskFile": "kien_an_school_desk_bench(1).glb",
+    "desksPerClassroom": 8,
+    "rows": 4,
+    "columns": 2,
+    "frontWall": "keep current green-board wall, directly facing desks",
+    "preserved": "all exterior geometry, classroom doors, nameplates, windows, stairs and gate interactions",
+    "newElements": [
+      "raised teaching platform",
+      "teacher desk and chair",
+      "2 wall-mounted fans",
+      "Vietnamese flag above board",
+      "THI ĐUA DẠY TỐT - HỌC TỐT blue sign",
+      "3 rectangular ceiling lamps",
+      "8 original student desk-bench GLB instances"
+    ]
+  },
+  "classroomReference": "EXACT uploaded V43 classroom geometry/materials: not recolored or replaced",
+  "exteriorColorUpdate": {
+    "source": "V35 exterior color update – mapped by matching mesh names",
+    "recoloredMeshCount": 626,
+    "roofAndPorchMaterialCount": 27,
+    "V45VisualDetailMeshCount": 27,
+    "fence": "yellow columns, dark gray iron bars, red tile caps",
+    "gatePalms": "brown trunk, green leaves",
+    "oppositeHouses": "different muted facade colors, gray shutters and blue-gray glass",
+    "other": "red roof texture, red stage carpet, red-leaf trees by basketball posts and right building brick-clad wall"
+  },
+  "sunlight": "No sunlight baked; set no direct sun with neutral fill lights in renderer.",
+  "polePhotoV47": {
+    "photoMesh": "V47_ROAD_POLE_2_USER_PHOTO",
+    "poleMesh": "ROAD_pole_2",
+    "frontFacing": "toward school (-Z)",
+    "center": [
+      -2.0,
+      3.48,
+      61.205
+    ],
+    "size": [
+      0.98,
+      1.0070220588235295
+    ],
+    "collider": false,
+    "extraMeshes": [
+      "V47_POLE_PHOTO_BACKING",
+      "V47_POLE_PHOTO_CLAMP_TOP",
+      "V47_POLE_PHOTO_CLAMP_BOTTOM"
+    ]
+  }
+}

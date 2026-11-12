@@ -1,0 +1,2801 @@
+{
+  "version": "V50",
+  "model": "THPT_Kien_An_V50_Hall_Courtyard_Doors_Fixed.glb",
+  "removedGeometry": [
+    "LEFT_BACK_0",
+    "LEFT_BACK_1",
+    "LEFT_CLASS_LEFT_0_4",
+    "LEFT_CLASS_LEFT_1_4",
+    "LEFT_CLASS_RIGHT_0_4",
+    "LEFT_CLASS_RIGHT_1_4",
+    "LEFT_CLASS_TOP_0_4",
+    "LEFT_CLASS_TOP_1_4",
+    "LEFT_COLUMN_0_6",
+    "LEFT_COLUMN_0_7",
+    "LEFT_COLUMN_1_6",
+    "LEFT_COLUMN_1_7",
+    "LEFT_FLOOR_0",
+    "LEFT_FLOOR_1",
+    "LEFT_RAIL_1",
+    "LEFT_RAIL_TOP_1",
+    "LEFT_ROOF",
+    "LEFT_ROOF_ridge",
+    "LEFT_ROOM_PART_0_4",
+    "LEFT_ROOM_PART_1_4",
+    "LEFT_V26_ELEVATED_GROUND_FLOOR",
+    "LEFT_V26_OUTER_BAY_HIGH_WALL_F0",
+    "LEFT_V26_OUTER_BAY_HIGH_WALL_F1",
+    "LEFT_V26_OUTER_BAY_LOW_WALL_F0",
+    "LEFT_V26_OUTER_BAY_LOW_WALL_F1",
+    "LEFT_V26_PORCH_FRONT_EDGE",
+    "LEFT_V26_WAIST_WALL_1",
+    "LEFT_V26_WAIST_WALL_BASE_1",
+    "LEFT_V26_WAIST_WALL_CAP_1",
+    "V48_ASSEMBLY_HALL_BACK",
+    "V48_HALL_ENTRANCE_HEADER",
+    "V48_HALL_ENTRY_FRAME_-1",
+    "V48_HALL_ENTRY_FRAME_1",
+    "V48_HALL_FRONT_WALL_-1",
+    "V48_HALL_FRONT_WALL_1",
+    "V48_HALL_WINDOW_-1_FRAME_SIDE_-0.925",
+    "V48_HALL_WINDOW_-1_FRAME_SIDE_0.925",
+    "V48_HALL_WINDOW_-1_FRAME_TOP_-0.675",
+    "V48_HALL_WINDOW_-1_FRAME_TOP_0.675",
+    "V48_HALL_WINDOW_-1_GLASS",
+    "V48_HALL_WINDOW_-1_MULLION",
+    "V48_HALL_WINDOW_-1_TRANSOM",
+    "V48_HALL_WINDOW_1_FRAME_SIDE_-0.925",
+    "V48_HALL_WINDOW_1_FRAME_SIDE_0.925",
+    "V48_HALL_WINDOW_1_FRAME_TOP_-0.675",
+    "V48_HALL_WINDOW_1_FRAME_TOP_0.675",
+    "V48_HALL_WINDOW_1_GLASS",
+    "V48_HALL_WINDOW_1_MULLION",
+    "V48_HALL_WINDOW_1_TRANSOM",
+    "V49_HALL_DOUBLE_DOOR_LEFT_OPEN",
+    "V49_HALL_DOUBLE_DOOR_RIGHT_OPEN",
+    "V49_HALL_DOUBLE_FRAME_TOP",
+    "V49_HALL_DOUBLE_HEADER_ACCENT",
+    "V49_HALL_DOUBLE_JAMB_0",
+    "V49_HALL_DOUBLE_JAMB_1",
+    "V49_HALL_DOUBLE_LINTEL",
+    "V49_HALL_DOUBLE_THRESHOLD",
+    "V49_HALL_FRONT_SOLID_0",
+    "V49_HALL_FRONT_SOLID_1",
+    "V49_HALL_FRONT_SOLID_2",
+    "V49_HALL_SINGLE_DOOR_OPEN",
+    "V49_HALL_SINGLE_FRAME_TOP",
+    "V49_HALL_SINGLE_HEADER_ACCENT",
+    "V49_HALL_SINGLE_JAMB_0",
+    "V49_HALL_SINGLE_JAMB_1",
+    "V49_HALL_SINGLE_LINTEL",
+    "V49_HALL_SINGLE_THRESHOLD"
+  ],
+  "addedFixedCuboids": [
+    {
+      "node": "V48_LEFT_F0_CROPPED_FLOOR",
+      "center": [
+        -32.0,
+        0.16,
+        -7.0
+      ],
+      "size": [
+        12.0,
+        0.32,
+        40.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_LEFT_F0_CROPPED_BACK",
+      "center": [
+        -37.9,
+        2.5,
+        -7.0
+      ],
+      "size": [
+        0.2,
+        4.74,
+        40.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_LEFT_F0_NEW_END_WALL",
+      "center": [
+        -32.0,
+        2.5,
+        12.88
+      ],
+      "size": [
+        12.0,
+        4.74,
+        0.22
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_LEFT_F0_EAST_CORRIDOR",
+      "center": [
+        -26.55,
+        0.15,
+        -7.0
+      ],
+      "size": [
+        0.9,
+        0.3,
+        40.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_LEFT_F1_CROPPED_FLOOR",
+      "center": [
+        -32.0,
+        5.0600000000000005,
+        -7.0
+      ],
+      "size": [
+        12.0,
+        0.32,
+        40.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_LEFT_F1_CROPPED_BACK",
+      "center": [
+        -37.9,
+        7.4,
+        -7.0
+      ],
+      "size": [
+        0.2,
+        4.74,
+        40.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_LEFT_F1_NEW_END_WALL",
+      "center": [
+        -32.0,
+        7.4,
+        12.88
+      ],
+      "size": [
+        12.0,
+        4.74,
+        0.22
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_LEFT_F1_EAST_CORRIDOR",
+      "center": [
+        -26.55,
+        5.050000000000001,
+        -7.0
+      ],
+      "size": [
+        0.9,
+        0.3,
+        40.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_ASSEMBLY_HALL_FLOOR",
+      "center": [
+        -37.5,
+        0.12,
+        32.5
+      ],
+      "size": [
+        18.0,
+        0.24,
+        7.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_ASSEMBLY_HALL_LEFT",
+      "center": [
+        -46.38,
+        1.95,
+        32.5
+      ],
+      "size": [
+        0.24,
+        3.9,
+        7.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_ASSEMBLY_HALL_RIGHT",
+      "center": [
+        -28.62,
+        1.95,
+        32.5
+      ],
+      "size": [
+        0.24,
+        3.9,
+        7.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_ASSEMBLY_HALL_STAGE",
+      "center": [
+        -37.5,
+        0.45,
+        30.2
+      ],
+      "size": [
+        8.0,
+        0.65,
+        1.8
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_SLAB",
+      "center": [
+        -44.5,
+        0.11,
+        -56.5
+      ],
+      "size": [
+        7.5,
+        0.22,
+        33.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_BACK_WALL",
+      "center": [
+        -48.15,
+        2.12,
+        -56.5
+      ],
+      "size": [
+        0.2,
+        4.02,
+        33.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_END_WALL_0",
+      "center": [
+        -44.5,
+        2.12,
+        -72.9
+      ],
+      "size": [
+        7.5,
+        4.02,
+        0.2
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_END_WALL_1",
+      "center": [
+        -44.5,
+        2.12,
+        -40.1
+      ],
+      "size": [
+        7.5,
+        4.02,
+        0.2
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R0_PIER_0",
+      "center": [
+        -40.87,
+        2.05,
+        -72.76
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R0_PIER_1",
+      "center": [
+        -40.87,
+        2.05,
+        -62.24
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R0_SILL",
+      "center": [
+        -40.87,
+        0.64,
+        -68.05
+      ],
+      "size": [
+        0.24,
+        1.08,
+        9.55
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R0_LINTEL",
+      "center": [
+        -40.87,
+        3.43,
+        -67.5
+      ],
+      "size": [
+        0.24,
+        1.2,
+        10.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R0_TEACHER_PLATFORM",
+      "center": [
+        -45.5,
+        0.3,
+        -71.45
+      ],
+      "size": [
+        6.0,
+        0.25,
+        2.1
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R1_PIER_0",
+      "center": [
+        -40.87,
+        2.05,
+        -61.76
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R1_PIER_1",
+      "center": [
+        -40.87,
+        2.05,
+        -51.24
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R1_SILL",
+      "center": [
+        -40.87,
+        0.64,
+        -57.05
+      ],
+      "size": [
+        0.24,
+        1.08,
+        9.55
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R1_LINTEL",
+      "center": [
+        -40.87,
+        3.43,
+        -56.5
+      ],
+      "size": [
+        0.24,
+        1.2,
+        10.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R1_TEACHER_PLATFORM",
+      "center": [
+        -45.5,
+        0.3,
+        -60.45
+      ],
+      "size": [
+        6.0,
+        0.25,
+        2.1
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R2_PIER_0",
+      "center": [
+        -40.87,
+        2.05,
+        -50.76
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R2_PIER_1",
+      "center": [
+        -40.87,
+        2.05,
+        -40.24
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R2_SILL",
+      "center": [
+        -40.87,
+        0.64,
+        -46.05
+      ],
+      "size": [
+        0.24,
+        1.08,
+        9.55
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R2_LINTEL",
+      "center": [
+        -40.87,
+        3.43,
+        -45.5
+      ],
+      "size": [
+        0.24,
+        1.2,
+        10.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_R2_TEACHER_PLATFORM",
+      "center": [
+        -45.5,
+        0.3,
+        -49.45
+      ],
+      "size": [
+        6.0,
+        0.25,
+        2.1
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F0_CORRIDOR",
+      "center": [
+        -39.83,
+        0.16,
+        -56.5
+      ],
+      "size": [
+        1.9,
+        0.22,
+        33.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_SLAB",
+      "center": [
+        -44.5,
+        4.36,
+        -56.5
+      ],
+      "size": [
+        7.5,
+        0.22,
+        33.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_BACK_WALL",
+      "center": [
+        -48.15,
+        6.37,
+        -56.5
+      ],
+      "size": [
+        0.2,
+        4.02,
+        33.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_END_WALL_0",
+      "center": [
+        -44.5,
+        6.37,
+        -72.9
+      ],
+      "size": [
+        7.5,
+        4.02,
+        0.2
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_END_WALL_1",
+      "center": [
+        -44.5,
+        6.37,
+        -40.1
+      ],
+      "size": [
+        7.5,
+        4.02,
+        0.2
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R0_PIER_0",
+      "center": [
+        -40.87,
+        6.3,
+        -72.76
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R0_PIER_1",
+      "center": [
+        -40.87,
+        6.3,
+        -62.24
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R0_SILL",
+      "center": [
+        -40.87,
+        4.89,
+        -68.05
+      ],
+      "size": [
+        0.24,
+        1.08,
+        9.55
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R0_LINTEL",
+      "center": [
+        -40.87,
+        7.68,
+        -67.5
+      ],
+      "size": [
+        0.24,
+        1.2,
+        10.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R0_TEACHER_PLATFORM",
+      "center": [
+        -45.5,
+        4.55,
+        -71.45
+      ],
+      "size": [
+        6.0,
+        0.25,
+        2.1
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R1_PIER_0",
+      "center": [
+        -40.87,
+        6.3,
+        -61.76
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R1_PIER_1",
+      "center": [
+        -40.87,
+        6.3,
+        -51.24
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R1_SILL",
+      "center": [
+        -40.87,
+        4.89,
+        -57.05
+      ],
+      "size": [
+        0.24,
+        1.08,
+        9.55
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R1_LINTEL",
+      "center": [
+        -40.87,
+        7.68,
+        -56.5
+      ],
+      "size": [
+        0.24,
+        1.2,
+        10.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R1_TEACHER_PLATFORM",
+      "center": [
+        -45.5,
+        4.55,
+        -60.45
+      ],
+      "size": [
+        6.0,
+        0.25,
+        2.1
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R2_PIER_0",
+      "center": [
+        -40.87,
+        6.3,
+        -50.76
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R2_PIER_1",
+      "center": [
+        -40.87,
+        6.3,
+        -40.24
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R2_SILL",
+      "center": [
+        -40.87,
+        4.89,
+        -46.05
+      ],
+      "size": [
+        0.24,
+        1.08,
+        9.55
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R2_LINTEL",
+      "center": [
+        -40.87,
+        7.68,
+        -45.5
+      ],
+      "size": [
+        0.24,
+        1.2,
+        10.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_R2_TEACHER_PLATFORM",
+      "center": [
+        -45.5,
+        4.55,
+        -49.45
+      ],
+      "size": [
+        6.0,
+        0.25,
+        2.1
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_CORRIDOR",
+      "center": [
+        -39.83,
+        4.41,
+        -56.5
+      ],
+      "size": [
+        1.9,
+        0.22,
+        33.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_F1_RAIL",
+      "center": [
+        -38.9,
+        5.29,
+        -56.5
+      ],
+      "size": [
+        0.12,
+        1.7,
+        33.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_0",
+      "center": [
+        -39.7,
+        0.001842105263157895,
+        -41.3
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_1",
+      "center": [
+        -39.7,
+        0.22552631578947369,
+        -41.57
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_2",
+      "center": [
+        -39.7,
+        0.4492105263157895,
+        -41.839999999999996
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_3",
+      "center": [
+        -39.7,
+        0.6728947368421053,
+        -42.11
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_4",
+      "center": [
+        -39.7,
+        0.896578947368421,
+        -42.379999999999995
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_5",
+      "center": [
+        -39.7,
+        1.1202631578947368,
+        -42.65
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_6",
+      "center": [
+        -39.7,
+        1.3439473684210526,
+        -42.919999999999995
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_7",
+      "center": [
+        -39.7,
+        1.5676315789473683,
+        -43.19
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_8",
+      "center": [
+        -39.7,
+        1.7913157894736842,
+        -43.459999999999994
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_9",
+      "center": [
+        -39.7,
+        2.015,
+        -43.73
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_10",
+      "center": [
+        -39.7,
+        2.238684210526316,
+        -44.0
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_11",
+      "center": [
+        -39.7,
+        2.4623684210526315,
+        -44.269999999999996
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_12",
+      "center": [
+        -39.7,
+        2.6860526315789475,
+        -44.54
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_13",
+      "center": [
+        -39.7,
+        2.9097368421052634,
+        -44.809999999999995
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_14",
+      "center": [
+        -39.7,
+        3.133421052631579,
+        -45.08
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_15",
+      "center": [
+        -39.7,
+        3.357105263157895,
+        -45.349999999999994
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_16",
+      "center": [
+        -39.7,
+        3.5807894736842107,
+        -45.62
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_17",
+      "center": [
+        -39.7,
+        3.8044736842105262,
+        -45.89
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_WEST_STAIR_STEP_18",
+      "center": [
+        -39.7,
+        4.028157894736842,
+        -46.16
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_SLAB",
+      "center": [
+        -30.0,
+        0.11,
+        -73.8
+      ],
+      "size": [
+        16.0,
+        0.22,
+        7.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_BACK_WALL",
+      "center": [
+        -30.0,
+        2.12,
+        -77.2
+      ],
+      "size": [
+        16.0,
+        4.02,
+        0.2
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_SIDE_WALL_0",
+      "center": [
+        -37.9,
+        2.12,
+        -73.8
+      ],
+      "size": [
+        0.2,
+        4.02,
+        7.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_SIDE_WALL_1",
+      "center": [
+        -22.1,
+        2.12,
+        -73.8
+      ],
+      "size": [
+        0.2,
+        4.02,
+        7.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_R0_PIER_0",
+      "center": [
+        -37.74,
+        2.1,
+        -70.42
+      ],
+      "size": [
+        0.46,
+        4.0,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_R0_PIER_1",
+      "center": [
+        -30.259999999999998,
+        2.1,
+        -70.42
+      ],
+      "size": [
+        0.46,
+        4.0,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_R0_SILL",
+      "center": [
+        -34.55,
+        0.67,
+        -70.42
+      ],
+      "size": [
+        6.65,
+        1.1,
+        0.25
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_R0_LINTEL",
+      "center": [
+        -34.0,
+        3.48,
+        -70.42
+      ],
+      "size": [
+        7.62,
+        1.1,
+        0.25
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_R0_PODIUM",
+      "center": [
+        -34.0,
+        0.32,
+        -75.7
+      ],
+      "size": [
+        7.0,
+        0.2,
+        2.2
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_R1_PIER_0",
+      "center": [
+        -29.740000000000002,
+        2.1,
+        -70.42
+      ],
+      "size": [
+        0.46,
+        4.0,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_R1_PIER_1",
+      "center": [
+        -22.259999999999998,
+        2.1,
+        -70.42
+      ],
+      "size": [
+        0.46,
+        4.0,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_R1_SILL",
+      "center": [
+        -26.55,
+        0.67,
+        -70.42
+      ],
+      "size": [
+        6.65,
+        1.1,
+        0.25
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_R1_LINTEL",
+      "center": [
+        -26.0,
+        3.48,
+        -70.42
+      ],
+      "size": [
+        7.62,
+        1.1,
+        0.25
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_R1_PODIUM",
+      "center": [
+        -26.0,
+        0.32,
+        -75.7
+      ],
+      "size": [
+        7.0,
+        0.2,
+        2.2
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F0_CORRIDOR",
+      "center": [
+        -30.0,
+        0.16,
+        -69.3
+      ],
+      "size": [
+        16.0,
+        0.22,
+        2.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_SLAB",
+      "center": [
+        -30.0,
+        4.36,
+        -73.8
+      ],
+      "size": [
+        16.0,
+        0.22,
+        7.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_BACK_WALL",
+      "center": [
+        -30.0,
+        6.37,
+        -77.2
+      ],
+      "size": [
+        16.0,
+        4.02,
+        0.2
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_SIDE_WALL_0",
+      "center": [
+        -37.9,
+        6.37,
+        -73.8
+      ],
+      "size": [
+        0.2,
+        4.02,
+        7.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_SIDE_WALL_1",
+      "center": [
+        -22.1,
+        6.37,
+        -73.8
+      ],
+      "size": [
+        0.2,
+        4.02,
+        7.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_R0_PIER_0",
+      "center": [
+        -37.74,
+        6.35,
+        -70.42
+      ],
+      "size": [
+        0.46,
+        4.0,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_R0_PIER_1",
+      "center": [
+        -30.259999999999998,
+        6.35,
+        -70.42
+      ],
+      "size": [
+        0.46,
+        4.0,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_R0_SILL",
+      "center": [
+        -34.55,
+        4.92,
+        -70.42
+      ],
+      "size": [
+        6.65,
+        1.1,
+        0.25
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_R0_LINTEL",
+      "center": [
+        -34.0,
+        7.73,
+        -70.42
+      ],
+      "size": [
+        7.62,
+        1.1,
+        0.25
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_R0_PODIUM",
+      "center": [
+        -34.0,
+        4.57,
+        -75.7
+      ],
+      "size": [
+        7.0,
+        0.2,
+        2.2
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_R1_PIER_0",
+      "center": [
+        -29.740000000000002,
+        6.35,
+        -70.42
+      ],
+      "size": [
+        0.46,
+        4.0,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_R1_PIER_1",
+      "center": [
+        -22.259999999999998,
+        6.35,
+        -70.42
+      ],
+      "size": [
+        0.46,
+        4.0,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_R1_SILL",
+      "center": [
+        -26.55,
+        4.92,
+        -70.42
+      ],
+      "size": [
+        6.65,
+        1.1,
+        0.25
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_R1_LINTEL",
+      "center": [
+        -26.0,
+        7.73,
+        -70.42
+      ],
+      "size": [
+        7.62,
+        1.1,
+        0.25
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_R1_PODIUM",
+      "center": [
+        -26.0,
+        4.57,
+        -75.7
+      ],
+      "size": [
+        7.0,
+        0.2,
+        2.2
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_CORRIDOR",
+      "center": [
+        -30.0,
+        4.41,
+        -69.3
+      ],
+      "size": [
+        16.0,
+        0.22,
+        2.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_F1_RAIL",
+      "center": [
+        -30.0,
+        5.3100000000000005,
+        -68.32
+      ],
+      "size": [
+        16.0,
+        1.7,
+        0.12
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_0",
+      "center": [
+        -23.0,
+        0.001842105263157895,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_1",
+      "center": [
+        -23.3,
+        0.22552631578947369,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_2",
+      "center": [
+        -23.6,
+        0.4492105263157895,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_3",
+      "center": [
+        -23.9,
+        0.6728947368421053,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_4",
+      "center": [
+        -24.2,
+        0.896578947368421,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_5",
+      "center": [
+        -24.5,
+        1.1202631578947368,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_6",
+      "center": [
+        -24.8,
+        1.3439473684210526,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_7",
+      "center": [
+        -25.1,
+        1.5676315789473683,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_8",
+      "center": [
+        -25.4,
+        1.7913157894736842,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_9",
+      "center": [
+        -25.7,
+        2.015,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_10",
+      "center": [
+        -26.0,
+        2.238684210526316,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_11",
+      "center": [
+        -26.3,
+        2.4623684210526315,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_12",
+      "center": [
+        -26.6,
+        2.6860526315789475,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_13",
+      "center": [
+        -26.9,
+        2.9097368421052634,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_14",
+      "center": [
+        -27.2,
+        3.133421052631579,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_15",
+      "center": [
+        -27.5,
+        3.357105263157895,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_16",
+      "center": [
+        -27.8,
+        3.5807894736842107,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_17",
+      "center": [
+        -28.1,
+        3.8044736842105262,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_NORTH_STAIR_STEP_18",
+      "center": [
+        -28.4,
+        4.028157894736842,
+        -69.3
+      ],
+      "size": [
+        0.3,
+        0.22,
+        1.65
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_SLAB",
+      "center": [
+        39.5,
+        0.11,
+        -53.0
+      ],
+      "size": [
+        8.5,
+        0.22,
+        34.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_BACK_WALL",
+      "center": [
+        35.35,
+        2.12,
+        -53.0
+      ],
+      "size": [
+        0.2,
+        4.02,
+        34.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_END_WALL_0",
+      "center": [
+        39.5,
+        2.12,
+        -69.9
+      ],
+      "size": [
+        8.5,
+        4.02,
+        0.2
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_END_WALL_1",
+      "center": [
+        39.5,
+        2.12,
+        -36.1
+      ],
+      "size": [
+        8.5,
+        4.02,
+        0.2
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R0_PIER_0",
+      "center": [
+        43.63,
+        2.05,
+        -69.75999999999999
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R0_PIER_1",
+      "center": [
+        43.63,
+        2.05,
+        -58.90666666666666
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R0_SILL",
+      "center": [
+        43.63,
+        0.64,
+        -64.88333333333333
+      ],
+      "size": [
+        0.24,
+        1.08,
+        9.883333333333335
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R0_LINTEL",
+      "center": [
+        43.63,
+        3.43,
+        -64.33333333333333
+      ],
+      "size": [
+        0.24,
+        1.2,
+        10.983333333333334
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R0_TEACHER_PLATFORM",
+      "center": [
+        38.5,
+        0.3,
+        -68.45
+      ],
+      "size": [
+        7.0,
+        0.25,
+        2.1
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R1_PIER_0",
+      "center": [
+        43.63,
+        2.05,
+        -58.42666666666667
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R1_PIER_1",
+      "center": [
+        43.63,
+        2.05,
+        -47.57333333333333
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R1_SILL",
+      "center": [
+        43.63,
+        0.64,
+        -53.55
+      ],
+      "size": [
+        0.24,
+        1.08,
+        9.883333333333335
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R1_LINTEL",
+      "center": [
+        43.63,
+        3.43,
+        -53.0
+      ],
+      "size": [
+        0.24,
+        1.2,
+        10.983333333333334
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R1_TEACHER_PLATFORM",
+      "center": [
+        38.5,
+        0.3,
+        -57.11666666666667
+      ],
+      "size": [
+        7.0,
+        0.25,
+        2.1
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R2_PIER_0",
+      "center": [
+        43.63,
+        2.05,
+        -47.093333333333334
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R2_PIER_1",
+      "center": [
+        43.63,
+        2.05,
+        -36.239999999999995
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R2_SILL",
+      "center": [
+        43.63,
+        0.64,
+        -42.21666666666666
+      ],
+      "size": [
+        0.24,
+        1.08,
+        9.883333333333335
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R2_LINTEL",
+      "center": [
+        43.63,
+        3.43,
+        -41.666666666666664
+      ],
+      "size": [
+        0.24,
+        1.2,
+        10.983333333333334
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_R2_TEACHER_PLATFORM",
+      "center": [
+        38.5,
+        0.3,
+        -45.78333333333333
+      ],
+      "size": [
+        7.0,
+        0.25,
+        2.1
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F0_CORRIDOR",
+      "center": [
+        44.67,
+        0.16,
+        -53.0
+      ],
+      "size": [
+        1.9,
+        0.22,
+        34.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_SLAB",
+      "center": [
+        39.5,
+        4.36,
+        -53.0
+      ],
+      "size": [
+        8.5,
+        0.22,
+        34.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_BACK_WALL",
+      "center": [
+        35.35,
+        6.37,
+        -53.0
+      ],
+      "size": [
+        0.2,
+        4.02,
+        34.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_END_WALL_0",
+      "center": [
+        39.5,
+        6.37,
+        -69.9
+      ],
+      "size": [
+        8.5,
+        4.02,
+        0.2
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_END_WALL_1",
+      "center": [
+        39.5,
+        6.37,
+        -36.1
+      ],
+      "size": [
+        8.5,
+        4.02,
+        0.2
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R0_PIER_0",
+      "center": [
+        43.63,
+        6.3,
+        -69.75999999999999
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R0_PIER_1",
+      "center": [
+        43.63,
+        6.3,
+        -58.90666666666666
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R0_SILL",
+      "center": [
+        43.63,
+        4.89,
+        -64.88333333333333
+      ],
+      "size": [
+        0.24,
+        1.08,
+        9.883333333333335
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R0_LINTEL",
+      "center": [
+        43.63,
+        7.68,
+        -64.33333333333333
+      ],
+      "size": [
+        0.24,
+        1.2,
+        10.983333333333334
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R0_TEACHER_PLATFORM",
+      "center": [
+        38.5,
+        4.55,
+        -68.45
+      ],
+      "size": [
+        7.0,
+        0.25,
+        2.1
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R1_PIER_0",
+      "center": [
+        43.63,
+        6.3,
+        -58.42666666666667
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R1_PIER_1",
+      "center": [
+        43.63,
+        6.3,
+        -47.57333333333333
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R1_SILL",
+      "center": [
+        43.63,
+        4.89,
+        -53.55
+      ],
+      "size": [
+        0.24,
+        1.08,
+        9.883333333333335
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R1_LINTEL",
+      "center": [
+        43.63,
+        7.68,
+        -53.0
+      ],
+      "size": [
+        0.24,
+        1.2,
+        10.983333333333334
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R1_TEACHER_PLATFORM",
+      "center": [
+        38.5,
+        4.55,
+        -57.11666666666667
+      ],
+      "size": [
+        7.0,
+        0.25,
+        2.1
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R2_PIER_0",
+      "center": [
+        43.63,
+        6.3,
+        -47.093333333333334
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R2_PIER_1",
+      "center": [
+        43.63,
+        6.3,
+        -36.239999999999995
+      ],
+      "size": [
+        0.26,
+        3.9,
+        0.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R2_SILL",
+      "center": [
+        43.63,
+        4.89,
+        -42.21666666666666
+      ],
+      "size": [
+        0.24,
+        1.08,
+        9.883333333333335
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R2_LINTEL",
+      "center": [
+        43.63,
+        7.68,
+        -41.666666666666664
+      ],
+      "size": [
+        0.24,
+        1.2,
+        10.983333333333334
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_R2_TEACHER_PLATFORM",
+      "center": [
+        38.5,
+        4.55,
+        -45.78333333333333
+      ],
+      "size": [
+        7.0,
+        0.25,
+        2.1
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_CORRIDOR",
+      "center": [
+        44.67,
+        4.41,
+        -53.0
+      ],
+      "size": [
+        1.9,
+        0.22,
+        34.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_F1_RAIL",
+      "center": [
+        45.6,
+        5.29,
+        -53.0
+      ],
+      "size": [
+        0.12,
+        1.7,
+        34.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_0",
+      "center": [
+        44.8,
+        0.001842105263157895,
+        -37.3
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_1",
+      "center": [
+        44.8,
+        0.22552631578947369,
+        -37.57
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_2",
+      "center": [
+        44.8,
+        0.4492105263157895,
+        -37.839999999999996
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_3",
+      "center": [
+        44.8,
+        0.6728947368421053,
+        -38.11
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_4",
+      "center": [
+        44.8,
+        0.896578947368421,
+        -38.379999999999995
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_5",
+      "center": [
+        44.8,
+        1.1202631578947368,
+        -38.65
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_6",
+      "center": [
+        44.8,
+        1.3439473684210526,
+        -38.919999999999995
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_7",
+      "center": [
+        44.8,
+        1.5676315789473683,
+        -39.19
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_8",
+      "center": [
+        44.8,
+        1.7913157894736842,
+        -39.459999999999994
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_9",
+      "center": [
+        44.8,
+        2.015,
+        -39.73
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_10",
+      "center": [
+        44.8,
+        2.238684210526316,
+        -40.0
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_11",
+      "center": [
+        44.8,
+        2.4623684210526315,
+        -40.269999999999996
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_12",
+      "center": [
+        44.8,
+        2.6860526315789475,
+        -40.54
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_13",
+      "center": [
+        44.8,
+        2.9097368421052634,
+        -40.809999999999995
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_14",
+      "center": [
+        44.8,
+        3.133421052631579,
+        -41.08
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_15",
+      "center": [
+        44.8,
+        3.357105263157895,
+        -41.349999999999994
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_16",
+      "center": [
+        44.8,
+        3.5807894736842107,
+        -41.62
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_17",
+      "center": [
+        44.8,
+        3.8044736842105262,
+        -41.89
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V48_REAR_EAST_STAIR_STEP_18",
+      "center": [
+        44.8,
+        4.028157894736842,
+        -42.16
+      ],
+      "size": [
+        1.6,
+        0.22,
+        0.27
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V50_HALL_REAR_SOLID_WALL",
+      "center": [
+        -37.5,
+        1.95,
+        35.87
+      ],
+      "size": [
+        18.0,
+        3.9,
+        0.26
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V50_HALL_COURTYARD_WALL_0",
+      "center": [
+        -45.787499999999994,
+        1.95,
+        29.13
+      ],
+      "size": [
+        1.4250000000000043,
+        3.9,
+        0.26
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V50_HALL_COURTYARD_WALL_1",
+      "center": [
+        -37.8625,
+        1.95,
+        29.13
+      ],
+      "size": [
+        11.324999999999996,
+        3.9,
+        0.26
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V50_HALL_COURTYARD_WALL_2",
+      "center": [
+        -28.950000000000003,
+        1.95,
+        29.13
+      ],
+      "size": [
+        0.9000000000000021,
+        3.9,
+        0.26
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V50_HALL_SINGLE_TOP_LINTEL",
+      "center": [
+        -44.3,
+        3.325,
+        29.13
+      ],
+      "size": [
+        1.55,
+        1.15,
+        0.26
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V50_HALL_SINGLE_THRESHOLD",
+      "center": [
+        -44.3,
+        0.055,
+        28.81
+      ],
+      "size": [
+        1.55,
+        0.11,
+        0.55
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V50_HALL_DOUBLE_TOP_LINTEL",
+      "center": [
+        -30.8,
+        3.325,
+        29.13
+      ],
+      "size": [
+        2.8,
+        1.15,
+        0.26
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V50_HALL_DOUBLE_THRESHOLD",
+      "center": [
+        -30.8,
+        0.055,
+        28.81
+      ],
+      "size": [
+        2.8,
+        0.11,
+        0.55
+      ],
+      "type": "fixedCuboid"
+    }
+  ],
+  "advice": "Retain V48 structural colliders except removed front-wall/window fragments; split hall front into wall piers and lintels, leave doorway apertures clear. Roof normals and rail trimming are visual geometry changes.",
+  "baseModel": "THPT_Kien_An_V49_Roofs_Hall_Doors_Rail_Fixed.glb",
+  "v49DeleteColliderNodes": [
+    "LEFT_RAIL_1",
+    "LEFT_RAIL_TOP_1",
+    "V48_HALL_FRONT_WALL_-1",
+    "V48_HALL_FRONT_WALL_1",
+    "V48_HALL_ENTRANCE_HEADER",
+    "V48_HALL_ENTRY_FRAME_-1",
+    "V48_HALL_WINDOW_-1_GLASS",
+    "V48_HALL_WINDOW_-1_FRAME_SIDE_-0.925",
+    "V48_HALL_WINDOW_-1_FRAME_SIDE_0.925",
+    "V48_HALL_WINDOW_-1_FRAME_TOP_-0.675",
+    "V48_HALL_WINDOW_-1_FRAME_TOP_0.675",
+    "V48_HALL_WINDOW_-1_MULLION",
+    "V48_HALL_WINDOW_-1_TRANSOM",
+    "V48_HALL_ENTRY_FRAME_1",
+    "V48_HALL_WINDOW_1_GLASS",
+    "V48_HALL_WINDOW_1_FRAME_SIDE_-0.925",
+    "V48_HALL_WINDOW_1_FRAME_SIDE_0.925",
+    "V48_HALL_WINDOW_1_FRAME_TOP_-0.675",
+    "V48_HALL_WINDOW_1_FRAME_TOP_0.675",
+    "V48_HALL_WINDOW_1_MULLION",
+    "V48_HALL_WINDOW_1_TRANSOM"
+  ],
+  "v49AddedColliderNodes": [
+    "V49_HALL_FRONT_SOLID_0",
+    "V49_HALL_FRONT_SOLID_1",
+    "V49_HALL_FRONT_SOLID_2",
+    "V49_HALL_SINGLE_LINTEL",
+    "V49_HALL_SINGLE_THRESHOLD",
+    "V49_HALL_DOUBLE_LINTEL",
+    "V49_HALL_DOUBLE_THRESHOLD"
+  ],
+  "v50RemoveColliderNodes": [
+    "V49_HALL_FRONT_SOLID_0",
+    "V49_HALL_FRONT_SOLID_1",
+    "V49_HALL_FRONT_SOLID_2",
+    "V49_HALL_SINGLE_LINTEL",
+    "V49_HALL_SINGLE_JAMB_0",
+    "V49_HALL_SINGLE_JAMB_1",
+    "V49_HALL_SINGLE_FRAME_TOP",
+    "V49_HALL_SINGLE_THRESHOLD",
+    "V49_HALL_SINGLE_HEADER_ACCENT",
+    "V49_HALL_DOUBLE_LINTEL",
+    "V49_HALL_DOUBLE_JAMB_0",
+    "V49_HALL_DOUBLE_JAMB_1",
+    "V49_HALL_DOUBLE_FRAME_TOP",
+    "V49_HALL_DOUBLE_THRESHOLD",
+    "V49_HALL_DOUBLE_HEADER_ACCENT",
+    "V49_HALL_SINGLE_DOOR_OPEN",
+    "V49_HALL_DOUBLE_DOOR_LEFT_OPEN",
+    "V49_HALL_DOUBLE_DOOR_RIGHT_OPEN",
+    "V48_ASSEMBLY_HALL_BACK"
+  ],
+  "v50AddColliderNodes": [
+    "V50_HALL_REAR_SOLID_WALL",
+    "V50_HALL_COURTYARD_WALL_0",
+    "V50_HALL_COURTYARD_WALL_1",
+    "V50_HALL_COURTYARD_WALL_2",
+    "V50_HALL_SINGLE_TOP_LINTEL",
+    "V50_HALL_SINGLE_THRESHOLD",
+    "V50_HALL_DOUBLE_TOP_LINTEL",
+    "V50_HALL_DOUBLE_THRESHOLD"
+  ],
+  "v50Guidance": "Important: delete old V49 hall facade collider chunks at Z≈36 and V48_ASSEMBLY_HALL_BACK collider at Z≈29. Then register only new V50 front-wall segments and rear wall at Z≈35.87. Keep courtyard side openings near X=-44.3 and X=-30.8 free of solid colliders. Door meshes are visual only."
+}
