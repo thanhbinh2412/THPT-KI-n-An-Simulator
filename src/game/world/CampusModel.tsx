@@ -12,6 +12,7 @@ import { batchStaticCampusMeshes } from "./batchCampusInteriors";
 
 const UP = new THREE.Vector3(0, 1, 0);
 const LED_TEXTURE_URL = "/assets/school/led.png";
+const GUARD_ROOM_BANNER_TEXTURE_URL = "/assets/school/Kiến An School Reunion Banner.png";
 const CENTER_STAGE_LED_MESH = "V31_CENTER_STAGE_LED_BLOCKER";
 const GUARD_ROOM_BANNER_MESH = "V65_GUARD_ROAD_BANNER_CONTENT";
 const GUARD_ROOM_BANNER_TEXT = "THPT Kiến An - Ngày trở về";
@@ -164,38 +165,18 @@ function prepareCenterStageLed(scene: THREE.Group, texture: THREE.Texture) {
   return () => { mesh.material = original; mesh.geometry = originalGeometry; geometry.dispose(); material.dispose(); };
 }
 
-function createGuardRoomBannerTexture() {
-  const canvas = document.createElement("canvas");
-  canvas.width = 2048; canvas.height = 512;
-  const context = canvas.getContext("2d");
-  if (!context) return null;
-  context.fillStyle = "#fffdf7";
-  context.fillRect(0, 0, canvas.width, canvas.height);
-  context.fillStyle = "#a53931";
-  context.font = "700 126px Arial, sans-serif";
-  context.textAlign = "center";
-  context.textBaseline = "middle";
-  context.fillText(GUARD_ROOM_BANNER_TEXT, canvas.width / 2, canvas.height / 2 + 4);
-  const texture = new THREE.CanvasTexture(canvas);
-  // The authored banner UV is horizontally mirrored. Match its vertical GLTF
-  // orientation and reverse U only, so the new Vietnamese text reads normally.
-  texture.flipY = false;
-  texture.repeat.set(-1, 1);
-  texture.offset.set(1, 0);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.needsUpdate = true;
-  return texture;
-}
-
-function prepareGuardRoomBanner(scene: THREE.Group) {
+/** Replaces only the banner content texture; the GLB keeps its original frame. */
+function prepareGuardRoomBanner(scene: THREE.Group, sourceTexture: THREE.Texture) {
   const mesh = scene.getObjectByName(GUARD_ROOM_BANNER_MESH);
   if (!(mesh instanceof THREE.Mesh)) {
-    if (process.env.NODE_ENV !== "production") console.warn(`[Campus V72] guard-room banner mesh not found: ${GUARD_ROOM_BANNER_MESH}`);
+    if (process.env.NODE_ENV !== "production") console.warn(`[Campus] guard-room banner mesh not found: ${GUARD_ROOM_BANNER_MESH}`);
     return () => undefined;
   }
-  const texture = createGuardRoomBannerTexture();
-  if (!texture) return () => undefined;
   const original = mesh.material;
+  const texture = sourceTexture.clone();
+  // This surface's authored UV runs in the opposite U direction.
+  texture.flipY = false; texture.repeat.set(-1, 1); texture.offset.set(1, 0);
+  texture.colorSpace = THREE.SRGBColorSpace; texture.needsUpdate = true;
   const material = new THREE.MeshBasicMaterial({ map: texture, color: 0xffffff, side: THREE.DoubleSide, toneMapped: false });
   mesh.material = material;
   return () => { mesh.material = original; material.dispose(); texture.dispose(); };
@@ -242,6 +223,7 @@ function AnimatedGate({ spec, scene }: { spec: GateSpec; scene: THREE.Group }) {
 export function CampusModel({ collisionsEnabled = true }: { collisionsEnabled?: boolean }) {
   const { scene, animations } = useGLTF(campusConfig.modelUrl);
   const ledTexture = useTexture(LED_TEXTURE_URL);
+  const guardRoomBannerTexture = useTexture(GUARD_ROOM_BANNER_TEXTURE_URL);
   const trafficMixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
   useLayoutEffect(() => {
     const restoreV76Decals = prepareV76Decals(scene);
@@ -251,6 +233,7 @@ export function CampusModel({ collisionsEnabled = true }: { collisionsEnabled?: 
     return () => { restoreStaticInstances(); restoreV76Decals(); };
   }, [scene]);
   useLayoutEffect(() => prepareCenterStageLed(scene, ledTexture), [ledTexture, scene]);
+  useLayoutEffect(() => prepareGuardRoomBanner(scene, guardRoomBannerTexture), [guardRoomBannerTexture, scene]);
   useEffect(() => {
     const traffic = animations.find((clip) => clip.name === "TrafficLoop_V23");
     // V60 has no campus animation clips; keep this optional so the loader does
@@ -265,3 +248,4 @@ export function CampusModel({ collisionsEnabled = true }: { collisionsEnabled?: 
 
 useGLTF.preload(campusConfig.modelUrl);
 useTexture.preload(LED_TEXTURE_URL);
+useTexture.preload(GUARD_ROOM_BANNER_TEXTURE_URL);
