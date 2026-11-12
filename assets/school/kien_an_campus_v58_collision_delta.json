@@ -1,6 +1,6 @@
 {
-  "version": "V51",
-  "model": "THPT_Kien_An_V51_Hall_Corridor_Roof_Sign.glb",
+  "version": "V58",
+  "model": "THPT_Kien_An_V58_Teachers_Hall_Covered_Passage.glb",
   "removedGeometry": [
     "LEFT_BACK_0",
     "LEFT_BACK_1",
@@ -2733,7 +2733,7 @@
     }
   ],
   "advice": "Retain V48 structural colliders except removed front-wall/window fragments; split hall front into wall piers and lintels, leave doorway apertures clear. Roof normals and rail trimming are visual geometry changes.",
-  "baseModel": "THPT_Kien_An_V50_Hall_Courtyard_Doors_Fixed.glb",
+  "baseModel": "THPT_Kien_An_V57_Teachers_Wide_Central_Stair.glb",
   "v49DeleteColliderNodes": [
     "LEFT_RAIL_1",
     "LEFT_RAIL_TOP_1",
@@ -3471,5 +3471,1985 @@
     "V51_COVERED_CORRIDOR_FLOOR is walkable, and pillars are solid.",
     "Doors are modeled in an open static pose; if interactive door animation is desired, integrate hinges separately.",
     "Guard sign and roof fascia need no colliders; retain all unrelated V50 physics."
+  ],
+  "v52AddFixedCuboids": [
+    {
+      "node": "V52_BOARD_STAINLESS_LEG_LEFT",
+      "center": [
+        -24.080000000000002,
+        1.42,
+        29.55
+      ],
+      "size": [
+        0.11,
+        2.83,
+        0.15
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V52_BOARD_STAINLESS_LEG_RIGHT",
+      "center": [
+        -20.12,
+        1.42,
+        29.55
+      ],
+      "size": [
+        0.11,
+        2.83,
+        0.15
+      ],
+      "type": "fixedCuboid"
+    }
+  ],
+  "v52Guidance": [
+    "Keep all V51 colliders. New standalone board is visual except optional fixed leg colliders. Do not block the gap between hall and guard room."
+  ],
+  "v53RemoveColliderMeshPrefixes": [
+    "V48_REAR_EAST_STAIR_"
+  ],
+  "v53RemoveColliderMeshNames": [
+    "V48_REAR_EAST_F1_RAIL"
+  ],
+  "v53AddFixedCuboids": [
+    {
+      "node": "V53_TEACHER_LEFT_F0_CROPPED_END_SEAL",
+      "center": [
+        -32.0,
+        2.5,
+        12.88
+      ],
+      "size": [
+        12.0,
+        4.74,
+        0.22
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V53_V48_REAR_EAST_F0_BACK_CORNER_SEAL_ZMIN",
+      "center": [
+        35.35000038146973,
+        2.12,
+        -69.91
+      ],
+      "size": [
+        0.27,
+        4.01,
+        0.24
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V53_V48_REAR_EAST_F0_BACK_CORNER_SEAL_ZMAX",
+      "center": [
+        35.35000038146973,
+        2.12,
+        -36.09
+      ],
+      "size": [
+        0.27,
+        4.01,
+        0.24
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V53_V48_REAR_EAST_F1_BACK_CORNER_SEAL_ZMIN",
+      "center": [
+        35.35000038146973,
+        6.37,
+        -69.91
+      ],
+      "size": [
+        0.27,
+        4.01,
+        0.24
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V53_V48_REAR_EAST_F1_BACK_CORNER_SEAL_ZMAX",
+      "center": [
+        35.35000038146973,
+        6.37,
+        -36.09
+      ],
+      "size": [
+        0.27,
+        4.01,
+        0.24
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V53_V48_REAR_WEST_F0_BACK_CORNER_SEAL_ZMIN",
+      "center": [
+        -48.14999961853027,
+        2.12,
+        -72.91
+      ],
+      "size": [
+        0.27,
+        4.01,
+        0.24
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V53_V48_REAR_WEST_F0_BACK_CORNER_SEAL_ZMAX",
+      "center": [
+        -48.14999961853027,
+        2.12,
+        -40.09
+      ],
+      "size": [
+        0.27,
+        4.01,
+        0.24
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V53_V48_REAR_WEST_F1_BACK_CORNER_SEAL_ZMIN",
+      "center": [
+        -48.14999961853027,
+        6.37,
+        -72.91
+      ],
+      "size": [
+        0.27,
+        4.01,
+        0.24
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V53_V48_REAR_WEST_F1_BACK_CORNER_SEAL_ZMAX",
+      "center": [
+        -48.14999961853027,
+        6.37,
+        -40.09
+      ],
+      "size": [
+        0.27,
+        4.01,
+        0.24
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V53_REAR_NORTH_F0_CORNER_SEAL_LEFT",
+      "center": [
+        -37.88,
+        2.12,
+        -77.20000076293945
+      ],
+      "size": [
+        0.26,
+        4.01,
+        0.28
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V53_REAR_NORTH_F0_CORNER_SEAL_RIGHT",
+      "center": [
+        -22.12,
+        2.12,
+        -77.20000076293945
+      ],
+      "size": [
+        0.26,
+        4.01,
+        0.28
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V53_REAR_NORTH_F1_CORNER_SEAL_LEFT",
+      "center": [
+        -37.88,
+        6.37,
+        -77.20000076293945
+      ],
+      "size": [
+        0.26,
+        4.01,
+        0.28
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V53_REAR_NORTH_F1_CORNER_SEAL_RIGHT",
+      "center": [
+        -22.12,
+        6.37,
+        -77.20000076293945
+      ],
+      "size": [
+        0.26,
+        4.01,
+        0.28
+      ],
+      "type": "fixedCuboid"
+    }
+  ],
+  "v53RailMeshPrefixes": [
+    "V53_GLOBAL_RAIL_",
+    "V53_REAR_EAST_CENTER_STAIR_"
+  ],
+  "v53Guidance": [
+    "Treat v53 as an incremental collision delta from v52, never regenerate wall boxes over valid door/window/corridor openings.",
+    "Remove obsolete east rear outer stair and continuous upper rail collision before adding v53 replacement.",
+    "Only add simplified shaft/rail collision to edges, do not make the whole staircase unwalkable.",
+    "No comprehensive in-engine collision audit performed; test with player in Next.js."
+  ],
+  "v54RemoveLegacyColliderPrefixes": [
+    "V30_RIGHT_REAR_STAIR_",
+    "V53_REAR_EAST_CENTER_STAIR_",
+    "V53_REAR_EAST_CENTER_STAIR",
+    "V53_REAR_EAST_UPPER_BALCONY_RAIL_",
+    "RIGHT_REAR_2F_FLOOR_1",
+    "RIGHT_REAR_2F_HALL_RAIL_"
+  ],
+  "v54RemoveLegacyColliderNames": [
+    "V30_RIGHT_REAR_LANDING_SIDE_GUARD",
+    "V53_REAR_EAST_OLD_STAIR_EDGE_TRIM"
+  ],
+  "v54AddFixedCuboids": [],
+  "v54Notes": [
+    "Use this as a delta from V53: remove legacy external-stair collision before creating V54 internal staircase collision.",
+    "A real floor-2 shaft hole replaces the original right-rear upper floor mesh.",
+    "Preserve all other V53 colliders and moving doors.",
+    "Rail colliders must be narrow and placed at edges, not across the staircase entrance.",
+    "No gameplay browser physics test has been executed; inspect slope/step height and corridor clearance."
+  ],
+  "v55RemoveColliderPrefixes": [
+    "V54_RIGHT_REAR_CENTER_STAIR_",
+    "V54_RIGHT_REAR_F1_SLAB_",
+    "V54_RIGHT_REAR_F1_RAIL_",
+    "V54_REAR_EAST_F1_RESTORED_BALCONY_RAIL",
+    "V48_REAR_EAST_F1_SLAB",
+    "V48_REAR_EAST_F0_R1_",
+    "V48_REAR_EAST_F1_R1_"
+  ],
+  "v55AddFixedCuboids": [
+    {
+      "node": "V55_RIGHT_REAR_F1_SLAB_NORTH",
+      "center": [
+        35.45,
+        5.04,
+        -36.825
+      ],
+      "size": [
+        12.899999999999999,
+        0.28,
+        15.649999999999999
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_RIGHT_REAR_F1_SLAB_SOUTH",
+      "center": [
+        35.45,
+        5.04,
+        -59.375
+      ],
+      "size": [
+        12.899999999999999,
+        0.28,
+        15.25
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_RIGHT_REAR_F1_SLAB_FRONT_WALKWAY",
+      "center": [
+        30.6,
+        5.04,
+        -48.2
+      ],
+      "size": [
+        3.200000000000003,
+        0.28,
+        7.100000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_RIGHT_REAR_F1_SLAB_BACK_EDGE",
+      "center": [
+        41.675,
+        5.04,
+        -48.2
+      ],
+      "size": [
+        0.44999999999999574,
+        0.28,
+        7.100000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_EAST_F1_SLAB_NORTH",
+      "center": [
+        39.5,
+        4.36,
+        -40.325
+      ],
+      "size": [
+        8.5,
+        0.22,
+        8.649999999999999
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_EAST_F1_SLAB_SOUTH",
+      "center": [
+        39.5,
+        4.36,
+        -60.875
+      ],
+      "size": [
+        8.5,
+        0.22,
+        18.25
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_EAST_F1_SLAB_OUTER_BAND",
+      "center": [
+        42.6,
+        4.36,
+        -48.2
+      ],
+      "size": [
+        2.299999999999997,
+        0.22,
+        7.100000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_EAST_F0_BACK_WALL_NORTH",
+      "center": [
+        35.35,
+        2.12,
+        -40.325
+      ],
+      "size": [
+        0.2,
+        4.02,
+        8.649999999999999
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_EAST_F0_BACK_WALL_SOUTH",
+      "center": [
+        35.35,
+        2.12,
+        -60.875
+      ],
+      "size": [
+        0.2,
+        4.02,
+        18.25
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_EAST_F1_BACK_WALL_NORTH",
+      "center": [
+        35.35,
+        6.41,
+        -40.325
+      ],
+      "size": [
+        0.2,
+        4.02,
+        8.649999999999999
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_EAST_F1_BACK_WALL_SOUTH",
+      "center": [
+        35.35,
+        6.41,
+        -60.875
+      ],
+      "size": [
+        0.2,
+        4.02,
+        18.25
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN0_STEP_00",
+      "center": [
+        33.25625,
+        0.37916666666666665,
+        -50.5
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN0_STEP_01",
+      "center": [
+        33.868750000000006,
+        0.5833333333333333,
+        -50.5
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN0_STEP_02",
+      "center": [
+        34.48125,
+        0.7874999999999999,
+        -50.5
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN0_STEP_03",
+      "center": [
+        35.09375,
+        0.9916666666666665,
+        -50.5
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN0_STEP_04",
+      "center": [
+        35.70625,
+        1.195833333333333,
+        -50.5
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN0_STEP_05",
+      "center": [
+        36.31875,
+        1.3999999999999997,
+        -50.5
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN0_STEP_06",
+      "center": [
+        36.93125,
+        1.6041666666666663,
+        -50.5
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN0_STEP_07",
+      "center": [
+        37.54375,
+        1.808333333333333,
+        -50.5
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN0_STEP_08",
+      "center": [
+        38.15625,
+        2.0124999999999997,
+        -50.5
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN0_STEP_09",
+      "center": [
+        38.76875,
+        2.2166666666666663,
+        -50.5
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN0_STEP_10",
+      "center": [
+        39.381249999999994,
+        2.420833333333333,
+        -50.5
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN0_STEP_11",
+      "center": [
+        39.99375,
+        2.6249999999999996,
+        -50.5
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN1_STEP_00",
+      "center": [
+        39.99375,
+        2.829166666666666,
+        -46.55
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN1_STEP_01",
+      "center": [
+        39.381249999999994,
+        3.0333333333333328,
+        -46.55
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN1_STEP_02",
+      "center": [
+        38.76875,
+        3.2374999999999994,
+        -46.55
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN1_STEP_03",
+      "center": [
+        38.15625,
+        3.4416666666666664,
+        -46.55
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN1_STEP_04",
+      "center": [
+        37.54375,
+        3.6458333333333326,
+        -46.55
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN1_STEP_05",
+      "center": [
+        36.93125,
+        3.8499999999999996,
+        -46.55
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN1_STEP_06",
+      "center": [
+        36.31875,
+        4.054166666666666,
+        -46.55
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN1_STEP_07",
+      "center": [
+        35.70625,
+        4.258333333333333,
+        -46.55
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN1_STEP_08",
+      "center": [
+        35.09375,
+        4.4624999999999995,
+        -46.55
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN1_STEP_09",
+      "center": [
+        34.48125,
+        4.666666666666666,
+        -46.55
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN1_STEP_10",
+      "center": [
+        33.868750000000006,
+        4.870833333333333,
+        -46.55
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_RUN1_STEP_11",
+      "center": [
+        33.25625,
+        5.074999999999999,
+        -46.55
+      ],
+      "size": [
+        0.6374999999999995,
+        0.21,
+        1.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_MID_LANDING",
+      "center": [
+        40.38,
+        2.6249999999999996,
+        -48.52
+      ],
+      "size": [
+        1.45,
+        0.21,
+        5.15
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_TOP_JOIN",
+      "center": [
+        32.46,
+        5.03,
+        -46.55
+      ],
+      "size": [
+        1.08,
+        0.3,
+        1.6
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_SIDE_WALL_-51.87",
+      "center": [
+        36.87,
+        2.5,
+        -51.87
+      ],
+      "size": [
+        9.2,
+        4.45,
+        0.22
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_F1_SIDE_WALL_-51.87",
+      "center": [
+        36.87,
+        7.35,
+        -51.87
+      ],
+      "size": [
+        9.2,
+        4.3,
+        0.22
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_SIDE_WALL_-44.53",
+      "center": [
+        36.87,
+        2.5,
+        -44.53
+      ],
+      "size": [
+        9.2,
+        4.45,
+        0.22
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_CROSS_STAIR_F1_SIDE_WALL_-44.53",
+      "center": [
+        36.87,
+        7.35,
+        -44.53
+      ],
+      "size": [
+        9.2,
+        4.3,
+        0.22
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_F1_CORRIDOR_GUARD_NORTH",
+      "center": [
+        29.12,
+        5.72,
+        -37.0
+      ],
+      "size": [
+        0.15,
+        1.1,
+        15.0
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V55_REAR_RIGHT_F1_CORRIDOR_GUARD_SOUTH",
+      "center": [
+        29.12,
+        5.72,
+        -59.175
+      ],
+      "size": [
+        0.15,
+        1.1,
+        14.649999999999999
+      ],
+      "type": "fixedCuboid"
+    }
+  ],
+  "v55Notes": [
+    "V55 changes stair orientation from longitudinal Z to crosswise X as per right-front three-story building.",
+    "Apply this collision delta and remove V54 stair and old floor solid colliders.",
+    "Central stair requires a rectangular opening in level 2 and floor/structural wall colliders must match those openings.",
+    "The overlapping historical building volumes of RIGHT_REAR_2F and V48_REAR_EAST were both considered.",
+    "This file has been structurally verified but not runtime tested in Next.js."
+  ],
+  "v56RemoveColliderPrefixes": [
+    "V31_LEFT_INTERNAL_RIGHT_STAIR_2_F0_",
+    "V31_LEFT_INTERNAL_STAIR_RAIL_",
+    "V53_GLOBAL_RAIL_V31_LEFT_INTERNAL_RIGHT_STAIR_2_F0_",
+    "V53_LANDING_EDGE_V31_LEFT_INTERNAL_RIGHT_STAIR_2_F0_",
+    "V48_LEFT_F1_CROPPED_FLOOR",
+    "LEFT_ROOM_PART_0_1",
+    "LEFT_ROOM_PART_1_1",
+    "V48_TEACHERS_F0_OFFICE_1_",
+    "V48_TEACHERS_F1_OFFICE_1_"
+  ],
+  "v56AddFixedCuboids": [
+    {
+      "node": "V56_LEFT_F1_SLAB_SOUTH",
+      "center": [
+        -32.0,
+        5.06,
+        -19.275
+      ],
+      "size": [
+        12.0,
+        0.32,
+        15.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_F1_SLAB_NORTH",
+      "center": [
+        -32.0,
+        5.06,
+        4.275
+      ],
+      "size": [
+        12.0,
+        0.32,
+        17.45
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_F1_SLAB_BACK_STRIP",
+      "center": [
+        -37.81,
+        5.06,
+        -8.0
+      ],
+      "size": [
+        0.38000000000000256,
+        0.32,
+        7.1000000000000005
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_F1_SLAB_FRONT_WALKWAY",
+      "center": [
+        -27.525,
+        5.06,
+        -8.0
+      ],
+      "size": [
+        3.0500000000000007,
+        0.32,
+        7.1000000000000005
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_F0_END_WALL_SOUTH",
+      "center": [
+        -33.35,
+        2.48,
+        -11.55
+      ],
+      "size": [
+        8.45,
+        4.75,
+        0.18
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_F1_END_WALL_SOUTH",
+      "center": [
+        -33.35,
+        7.38,
+        -11.55
+      ],
+      "size": [
+        8.45,
+        4.75,
+        0.18
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_F0_END_WALL_NORTH",
+      "center": [
+        -33.35,
+        2.48,
+        -4.45
+      ],
+      "size": [
+        8.45,
+        4.75,
+        0.18
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_F1_END_WALL_NORTH",
+      "center": [
+        -33.35,
+        7.38,
+        -4.45
+      ],
+      "size": [
+        8.45,
+        4.75,
+        0.18
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_F0_CLASS_FACADE_PATCH_SOUTH",
+      "center": [
+        -29.2,
+        2.48,
+        -14.075000000000001
+      ],
+      "size": [
+        0.16,
+        4.74,
+        5.050000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_F0_CLASS_FACADE_PATCH_NORTH",
+      "center": [
+        -29.2,
+        2.48,
+        -0.7750000000000001
+      ],
+      "size": [
+        0.16,
+        4.74,
+        7.35
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_F1_CLASS_FACADE_PATCH_SOUTH",
+      "center": [
+        -29.2,
+        7.38,
+        -14.075000000000001
+      ],
+      "size": [
+        0.16,
+        4.74,
+        5.050000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_F1_CLASS_FACADE_PATCH_NORTH",
+      "center": [
+        -29.2,
+        7.38,
+        -0.7750000000000001
+      ],
+      "size": [
+        0.16,
+        4.74,
+        7.35
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN0_STEP_00",
+      "center": [
+        -29.708333333333332,
+        0.4141666666666667,
+        -8.95
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN0_STEP_01",
+      "center": [
+        -30.325,
+        0.6183333333333333,
+        -8.95
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN0_STEP_02",
+      "center": [
+        -30.941666666666666,
+        0.8224999999999999,
+        -8.95
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN0_STEP_03",
+      "center": [
+        -31.55833333333333,
+        1.0266666666666664,
+        -8.95
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN0_STEP_04",
+      "center": [
+        -32.175,
+        1.2308333333333332,
+        -8.95
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN0_STEP_05",
+      "center": [
+        -32.791666666666664,
+        1.4349999999999998,
+        -8.95
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN0_STEP_06",
+      "center": [
+        -33.40833333333333,
+        1.6391666666666664,
+        -8.95
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN0_STEP_07",
+      "center": [
+        -34.025,
+        1.843333333333333,
+        -8.95
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN0_STEP_08",
+      "center": [
+        -34.641666666666666,
+        2.0475,
+        -8.95
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN0_STEP_09",
+      "center": [
+        -35.25833333333333,
+        2.2516666666666665,
+        -8.95
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN0_STEP_10",
+      "center": [
+        -35.875,
+        2.455833333333333,
+        -8.95
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN0_STEP_11",
+      "center": [
+        -36.49166666666667,
+        2.6599999999999997,
+        -8.95
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN1_STEP_00",
+      "center": [
+        -36.49166666666667,
+        2.8641666666666663,
+        -5.9
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN1_STEP_01",
+      "center": [
+        -35.875,
+        3.068333333333333,
+        -5.9
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN1_STEP_02",
+      "center": [
+        -35.25833333333333,
+        3.2724999999999995,
+        -5.9
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN1_STEP_03",
+      "center": [
+        -34.641666666666666,
+        3.4766666666666666,
+        -5.9
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN1_STEP_04",
+      "center": [
+        -34.025,
+        3.6808333333333327,
+        -5.9
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN1_STEP_05",
+      "center": [
+        -33.40833333333333,
+        3.885,
+        -5.9
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN1_STEP_06",
+      "center": [
+        -32.791666666666664,
+        4.089166666666666,
+        -5.9
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN1_STEP_07",
+      "center": [
+        -32.175,
+        4.293333333333333,
+        -5.9
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN1_STEP_08",
+      "center": [
+        -31.55833333333333,
+        4.4975,
+        -5.9
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN1_STEP_09",
+      "center": [
+        -30.941666666666666,
+        4.701666666666665,
+        -5.9
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN1_STEP_10",
+      "center": [
+        -30.325,
+        4.905833333333333,
+        -5.9
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_RUN1_STEP_11",
+      "center": [
+        -29.708333333333332,
+        5.109999999999999,
+        -5.9
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        1.52
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_MID_LANDING",
+      "center": [
+        -37.0,
+        2.6599999999999997,
+        -7.425
+      ],
+      "size": [
+        1.22,
+        0.22,
+        5.1
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_TOP_JOIN",
+      "center": [
+        -28.5,
+        5.09,
+        -5.9
+      ],
+      "size": [
+        1.45,
+        0.26,
+        1.8
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V56_LEFT_CENTER_STAIR_GROUND_JOIN",
+      "center": [
+        -28.48,
+        0.26,
+        -8.95
+      ],
+      "size": [
+        1.5,
+        0.16,
+        1.8
+      ],
+      "type": "fixedCuboid"
+    }
+  ],
+  "v56Notes": [
+    "Remove old teachers building stairs colliders and the old uncut second floor slab.",
+    "Register V56 left-center staircase tread, landing, floor and wall patches as fixed cuboids.",
+    "Do not block either stair entry/exit or the preserved corridor around x=-26.5.",
+    "Colliders from deleted classroom furniture or affected wall panels must not remain active.",
+    "Three.js/Rapier runtime test is still required, especially player clearance at top landing."
+  ],
+  "v57RemoveColliderMeshNames": [
+    "V56_LEFT_CENTER_STAIR_RUN0_STEP_00",
+    "V56_LEFT_CENTER_STAIR_RUN0_STEP_01",
+    "V56_LEFT_CENTER_STAIR_RUN0_STEP_02",
+    "V56_LEFT_CENTER_STAIR_RUN0_STEP_03",
+    "V56_LEFT_CENTER_STAIR_RUN0_STEP_04",
+    "V56_LEFT_CENTER_STAIR_RUN0_STEP_05",
+    "V56_LEFT_CENTER_STAIR_RUN0_STEP_06",
+    "V56_LEFT_CENTER_STAIR_RUN0_STEP_07",
+    "V56_LEFT_CENTER_STAIR_RUN0_STEP_08",
+    "V56_LEFT_CENTER_STAIR_RUN0_STEP_09",
+    "V56_LEFT_CENTER_STAIR_RUN0_STEP_10",
+    "V56_LEFT_CENTER_STAIR_RUN0_STEP_11",
+    "V56_LEFT_CENTER_STAIR_RUN0_HANDRAIL",
+    "V56_LEFT_CENTER_STAIR_RUN0_POST_0",
+    "V56_LEFT_CENTER_STAIR_RUN0_POST_1",
+    "V56_LEFT_CENTER_STAIR_RUN0_POST_2",
+    "V56_LEFT_CENTER_STAIR_RUN0_POST_3",
+    "V56_LEFT_CENTER_STAIR_RUN0_POST_4",
+    "V56_LEFT_CENTER_STAIR_RUN0_POST_5",
+    "V56_LEFT_CENTER_STAIR_RUN0_POST_6",
+    "V56_LEFT_CENTER_STAIR_RUN1_STEP_00",
+    "V56_LEFT_CENTER_STAIR_RUN1_STEP_01",
+    "V56_LEFT_CENTER_STAIR_RUN1_STEP_02",
+    "V56_LEFT_CENTER_STAIR_RUN1_STEP_03",
+    "V56_LEFT_CENTER_STAIR_RUN1_STEP_04",
+    "V56_LEFT_CENTER_STAIR_RUN1_STEP_05",
+    "V56_LEFT_CENTER_STAIR_RUN1_STEP_06",
+    "V56_LEFT_CENTER_STAIR_RUN1_STEP_07",
+    "V56_LEFT_CENTER_STAIR_RUN1_STEP_08",
+    "V56_LEFT_CENTER_STAIR_RUN1_STEP_09",
+    "V56_LEFT_CENTER_STAIR_RUN1_STEP_10",
+    "V56_LEFT_CENTER_STAIR_RUN1_STEP_11",
+    "V56_LEFT_CENTER_STAIR_RUN1_HANDRAIL",
+    "V56_LEFT_CENTER_STAIR_RUN1_POST_0",
+    "V56_LEFT_CENTER_STAIR_RUN1_POST_1",
+    "V56_LEFT_CENTER_STAIR_RUN1_POST_2",
+    "V56_LEFT_CENTER_STAIR_RUN1_POST_3",
+    "V56_LEFT_CENTER_STAIR_RUN1_POST_4",
+    "V56_LEFT_CENTER_STAIR_RUN1_POST_5",
+    "V56_LEFT_CENTER_STAIR_RUN1_POST_6",
+    "V56_LEFT_CENTER_STAIR_MID_LANDING",
+    "V56_LEFT_CENTER_STAIR_MID_OUTER_GUARD",
+    "V56_LEFT_CENTER_STAIR_MID_POST_0",
+    "V56_LEFT_CENTER_STAIR_MID_POST_1",
+    "V56_LEFT_CENTER_STAIR_MID_POST_2",
+    "V56_LEFT_CENTER_STAIR_TOP_JOIN",
+    "V56_LEFT_CENTER_STAIR_GROUND_JOIN",
+    "V56_LEFT_CENTER_STAIR_SHAFT_GUARD_SOUTH",
+    "V56_LEFT_CENTER_STAIR_SHAFT_POST_SOUTH_0",
+    "V56_LEFT_CENTER_STAIR_SHAFT_POST_SOUTH_1",
+    "V56_LEFT_CENTER_STAIR_SHAFT_POST_SOUTH_2",
+    "V56_LEFT_CENTER_STAIR_SHAFT_POST_SOUTH_3",
+    "V56_LEFT_CENTER_STAIR_SHAFT_GUARD_NORTH",
+    "V56_LEFT_CENTER_STAIR_SHAFT_POST_NORTH_0",
+    "V56_LEFT_CENTER_STAIR_SHAFT_POST_NORTH_1",
+    "V56_LEFT_CENTER_STAIR_SHAFT_POST_NORTH_2",
+    "V56_LEFT_CENTER_STAIR_SHAFT_POST_NORTH_3"
+  ],
+  "v57AddFixedCuboids": [
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN0_STEP_00",
+      "center": [
+        -29.708333333333332,
+        0.4141666666666667,
+        -9.74
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN0_STEP_01",
+      "center": [
+        -30.325,
+        0.6183333333333334,
+        -9.74
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN0_STEP_02",
+      "center": [
+        -30.941666666666666,
+        0.8225000000000001,
+        -9.74
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN0_STEP_03",
+      "center": [
+        -31.55833333333333,
+        1.0266666666666666,
+        -9.74
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN0_STEP_04",
+      "center": [
+        -32.175,
+        1.2308333333333332,
+        -9.74
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN0_STEP_05",
+      "center": [
+        -32.791666666666664,
+        1.435,
+        -9.74
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN0_STEP_06",
+      "center": [
+        -33.40833333333333,
+        1.6391666666666669,
+        -9.74
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN0_STEP_07",
+      "center": [
+        -34.025,
+        1.8433333333333335,
+        -9.74
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN0_STEP_08",
+      "center": [
+        -34.641666666666666,
+        2.0475000000000003,
+        -9.74
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN0_STEP_09",
+      "center": [
+        -35.25833333333333,
+        2.2516666666666665,
+        -9.74
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN0_STEP_10",
+      "center": [
+        -35.875,
+        2.4558333333333335,
+        -9.74
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN0_STEP_11",
+      "center": [
+        -36.49166666666667,
+        2.66,
+        -9.74
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN1_STEP_00",
+      "center": [
+        -36.49166666666667,
+        2.8641666666666667,
+        -6.26
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN1_STEP_01",
+      "center": [
+        -35.875,
+        3.0683333333333334,
+        -6.26
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN1_STEP_02",
+      "center": [
+        -35.25833333333333,
+        3.2725,
+        -6.26
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN1_STEP_03",
+      "center": [
+        -34.641666666666666,
+        3.4766666666666666,
+        -6.26
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN1_STEP_04",
+      "center": [
+        -34.025,
+        3.6808333333333336,
+        -6.26
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN1_STEP_05",
+      "center": [
+        -33.40833333333333,
+        3.8850000000000002,
+        -6.26
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN1_STEP_06",
+      "center": [
+        -32.791666666666664,
+        4.089166666666666,
+        -6.26
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN1_STEP_07",
+      "center": [
+        -32.175,
+        4.293333333333333,
+        -6.26
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN1_STEP_08",
+      "center": [
+        -31.55833333333333,
+        4.4975,
+        -6.26
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN1_STEP_09",
+      "center": [
+        -30.941666666666666,
+        4.701666666666666,
+        -6.26
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN1_STEP_10",
+      "center": [
+        -30.325,
+        4.905833333333333,
+        -6.26
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_RUN1_STEP_11",
+      "center": [
+        -29.708333333333332,
+        5.109999999999999,
+        -6.26
+      ],
+      "size": [
+        0.6416666666666666,
+        0.22,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_MID_LANDING",
+      "center": [
+        -37.0,
+        2.66,
+        -8.0
+      ],
+      "size": [
+        1.22,
+        0.22,
+        6.760000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_GROUND_JOIN",
+      "center": [
+        -28.48,
+        0.26,
+        -9.74
+      ],
+      "size": [
+        1.5,
+        0.16,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V57_LEFT_CENTER_WIDE_STAIR_TOP_JOIN",
+      "center": [
+        -28.5,
+        5.09,
+        -6.26
+      ],
+      "size": [
+        1.45,
+        0.26,
+        3.280000000000001
+      ],
+      "type": "fixedCuboid"
+    }
+  ],
+  "v57Notes": [
+    "Remove V56 stair tread, landing and corridor pad colliders identified in v57RemoveColliderMeshNames.",
+    "Register the wider V57 cuboids. Keep V56 left stairwell side walls, F1 floor opening and other unrelated colliders.",
+    "The exposed stair edges have central handrails; side-wall handrails are purely decorative.",
+    "Verify avatar clearance in live Rapier physics; assets alone cannot certify walkability."
+  ],
+  "v58RemoveColliderMeshNames": [
+    "V53_TEACHER_LEFT_F0_CROPPED_END_SEAL",
+    "LEFT_ROOM_PART_0_3",
+    "LEFT_CLASS_RIGHT_0_3"
+  ],
+  "v58AddFixedCuboids": [
+    {
+      "node": "V58_LEFT_TEACHERS_OFFICE3_SHORTENED_BACK_PARTITION",
+      "center": [
+        -33.5,
+        2.5,
+        9.82
+      ],
+      "size": [
+        8.94,
+        4.76,
+        0.24
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V58_LEFT_TEACHERS_OFFICE3_EAST_WALL_RETAINED",
+      "center": [
+        -29.2,
+        2.45,
+        9.46
+      ],
+      "size": [
+        0.22,
+        4.7,
+        0.76
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V58_LEFT_TEACHERS_PASSAGE_THRESHOLD",
+      "center": [
+        -30.8,
+        0.15,
+        12.84
+      ],
+      "size": [
+        2.74,
+        0.13,
+        0.38
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V58_LEFT_TEACHERS_PASSAGE_INNER_JAMB_WEST",
+      "center": [
+        -32.23,
+        1.58,
+        12.48
+      ],
+      "size": [
+        0.1,
+        3.13,
+        0.26
+      ],
+      "type": "fixedCuboid"
+    },
+    {
+      "node": "V58_LEFT_TEACHERS_PASSAGE_INNER_JAMB_EAST",
+      "center": [
+        -29.38,
+        1.58,
+        12.48
+      ],
+      "size": [
+        0.1,
+        3.13,
+        0.26
+      ],
+      "type": "fixedCuboid"
+    }
+  ],
+  "v58PassageOpening": {
+    "x": [
+      -32.2,
+      -29.4
+    ],
+    "z": [
+      9.96,
+      19.0
+    ],
+    "heightClearance": 3.05
+  },
+  "v58Notes": [
+    "Remove collider belonging to V53_TEACHER_LEFT_F0_CROPPED_END_SEAL: it blocks the V51 covered passage entrance.",
+    "Remove old LEFT_ROOM_PART_0_3 and LEFT_CLASS_RIGHT_0_3 colliders, then add corresponding V58 partition and shortened east wall.",
+    "Keep V51_TEACHERS_END_WALL_SEGMENT_0/1 and header because they already frame the aperture correctly.",
+    "Do not introduce full-width bounding-box collider for the shortened office or covered passage.",
+    "Do not collide the shallow floor join strip; preserve walkable flooring in both connected buildings.",
+    "Verify E-key doors, player capsule clearance and outdoor-to-hall walking route in the game runtime."
   ]
 }

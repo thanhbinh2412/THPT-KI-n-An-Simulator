@@ -1,4 +1,4 @@
-import v51SceneConfig from "../../../assets/school/kien_an_campus_v51_scene_config.json";
+import v58SceneConfig from "../../../assets/school/kien_an_campus_v58_scene_config.json";
 import type { Vec3 } from "@/game/types";
 
 type Grade = 10 | 11 | 12;
@@ -26,7 +26,7 @@ export type ClassroomConfig = ClassroomRegistryEntry & {
   furniture: { rows: number; columns: number; frontX: number; rowSpacing: number; columnSpacing: number; orientationY: number; floorY: number };
 };
 
-const signRecords = v51SceneConfig.classroomSigns.meshSigns;
+const signRecords = v58SceneConfig.classroomSigns.meshSigns;
 export const classroomRegistry: ClassroomRegistryEntry[] = signRecords.map((sign) => ({
   id: sign.label,
   grade: sign.grade as Grade,
@@ -38,7 +38,7 @@ export const classroomRegistry: ClassroomRegistryEntry[] = signRecords.map((sign
 }));
 
 if (classroomRegistry.length !== 24 || new Set(classroomRegistry.map((classroom) => classroom.id)).size !== 24) {
-  throw new Error("V51 classroom registry must contain 24 uniquely named classrooms.");
+  throw new Error("V58 classroom registry must contain 24 uniquely named classrooms.");
 }
 
 const roomSlots = [
@@ -53,10 +53,10 @@ const floors = [
   { floor: 3, grade: 10, lowerY: 11.581566, surfaceY: 10.0834 },
 ] as const;
 
-/** Runtime door metadata: V51 preserves the V35 right-wing door leaf nodes. */
+/** Runtime door metadata: V58 preserves the V35 right-wing door leaf nodes. */
 export const classrooms: ClassroomConfig[] = floors.flatMap((floor) => roomSlots.map((room) => {
   const registry = classroomRegistry.find((classroom) => classroom.floor === floor.floor && classroom.section === room.section && classroom.building === "right");
-  if (!registry) throw new Error(`Missing V51 sign metadata for right floor ${floor.floor}, section ${room.section}.`);
+  if (!registry) throw new Error(`Missing V58 sign metadata for right floor ${floor.floor}, section ${room.section}.`);
   const id = registry.id as ClassroomDoorId;
   const suffix = `${floor.floor - 1}_${room.slot}`;
   return {

@@ -35,4 +35,6 @@ COPY --from=builder --chown=node:node /app/node_modules ./node_modules
 USER node
 EXPOSE 3000
 
+HEALTHCHECK --interval=10s --timeout=3s --start-period=15s --retries=3 CMD node -e "fetch('http://127.0.0.1:3000').then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"
+
 CMD ["node_modules/.bin/tsx", "server.ts", "--production"]

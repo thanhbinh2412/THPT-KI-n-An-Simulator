@@ -1,7 +1,7 @@
 {
-  "version": "V51",
-  "baseModel": "THPT_Kien_An_V50_Hall_Courtyard_Doors_Fixed.glb",
-  "campusModel": "THPT_Kien_An_V51_Hall_Corridor_Roof_Sign.glb",
+  "version": "V58",
+  "baseModel": "THPT_Kien_An_V57_Teachers_Wide_Central_Stair.glb",
+  "campusModel": "THPT_Kien_An_V58_Teachers_Hall_Covered_Passage.glb",
   "upAxis": "Y",
   "rightBuilding": {
     "classroomSequenceLeftToRight": {
@@ -883,5 +883,179 @@
     "guardSign": "PHÒNG BẢO VỆ, corrected facing and UV texture",
     "teacherRoof": "red visible fascia added to courtyard and south-facing edges",
     "preserveOtherCampus": "classrooms, naming, gates, pole photo, traffic, basketball and all other static content unchanged"
+  },
+  "v52BulletinBoard": {
+    "name": "Stainless courtyard bulletin board",
+    "position": [
+      -22.1,
+      0,
+      29.55
+    ],
+    "faces": "courtyard (-Z)",
+    "contentMeshName": "SCHOOL_BULLETIN_BOARD_CONTENT",
+    "contentDimensions": [
+      3.88,
+      1.44
+    ],
+    "blankContent": true,
+    "material": "blank dark green matte board face with stainless steel legs, frame and roof",
+    "usage": "Apply THREE.TextureLoader image map to named content mesh at runtime; do not bake posters into GLB",
+    "collision": "Only optional simple fixed colliders for two legs and base plates; never use large plane collider across board"
+  },
+  "v53ArchitectureUpdate": {
+    "centralRearEastStairs": {
+      "newPrefix": "V53_REAR_EAST_CENTER_STAIR",
+      "center": [
+        47.4,
+        0,
+        -53.0
+      ],
+      "oldPrefix": "V48_REAR_EAST_STAIR_",
+      "balconyOpeningZRange": [
+        -50.2,
+        -47.8
+      ]
+    },
+    "additionalRailings": 44,
+    "wallSealNotes": [
+      "Removed 20 obsolete rear-east external-stair meshes; created central U-shaped stair and split upper balcony rail.",
+      "Added paired slope-following rails for 22 existing stair flights, with top rails on 9 mid-landings.",
+      "Closed missing ground-floor teachers-building south end wall (upper-floor corresponding wall already present).",
+      "Sealed rear-classroom corner-wall joints; left classroom windows and doors remain as modeled."
+    ],
+    "preserveAllV52Props": true
+  },
+  "v54RearRightStair": {
+    "targetBuilding": "RIGHT_REAR_2F",
+    "insideFootprint": {
+      "x": [
+        29,
+        31.8
+      ],
+      "z": [
+        -53.1,
+        -42.5
+      ]
+    },
+    "steps": 24,
+    "twoFlights": true,
+    "floor2Opening": true,
+    "removedExternalStairs": [
+      "V30_RIGHT_REAR_STAIR_*",
+      "V53_REAR_EAST_CENTER_STAIR_*"
+    ],
+    "preserveV53OtherAssets": true
+  },
+  "v55CrosswiseStair": {
+    "target": "RIGHT_REAR_2F",
+    "orientation": "X axis (perpendicular to long Z axis)",
+    "centralBayZ": [
+      -51.75,
+      -44.65
+    ],
+    "stairRunX": [
+      32.95,
+      40.3
+    ],
+    "level0": 0.28,
+    "level1": 5.18,
+    "stepCount": 24,
+    "landings": 2,
+    "legacyMeshPrefixesRemoved": [
+      "V54_RIGHT_REAR_CENTER_STAIR_",
+      "V54_RIGHT_REAR_F1_SLAB_"
+    ],
+    "remarks": "Replacing the previous Z-axis run. Central classroom bay made into central stairwell."
+  },
+  "v56TeachersCentralStair": {
+    "building": "LEFT_TEACHERS_2F",
+    "orientation": "X-axis, transverse to building long Z-axis",
+    "shaftBounds": {
+      "x": [
+        -37.62,
+        -29.05
+      ],
+      "z": [
+        -11.55,
+        -4.45
+      ]
+    },
+    "groundFloorY": 0.32,
+    "upperFloorY": 5.22,
+    "stairFlights": 2,
+    "treadsPerFlight": 12,
+    "newNodePrefix": "V56_LEFT_CENTER_STAIR_",
+    "removedPrefixes": [
+      "V31_LEFT_INTERNAL_RIGHT_STAIR_2_F0_",
+      "V31_LEFT_INTERNAL_STAIR_RAIL_",
+      "V53_GLOBAL_RAIL_V31_LEFT_INTERNAL_RIGHT_STAIR_2_F0_",
+      "V53_LANDING_EDGE_V31_LEFT_INTERNAL_RIGHT_STAIR_2_F0_"
+    ],
+    "notes": "Existing off-center teacher-block V31 stairs are replaced by a U-shaped central stair. Second floor slab cut with real opening."
+  },
+  "v57TeachersWideStair": {
+    "building": "LEFT_TEACHERS_2F",
+    "goal": "Widen both U-stair flights from 1.52m to fit between the existing two lateral walls",
+    "shaftZ": [
+      -11.55,
+      -4.45
+    ],
+    "innerWallFacesZ": [
+      -11.46,
+      -4.54
+    ],
+    "run0Z": [
+      -11.38,
+      -8.1
+    ],
+    "run1Z": [
+      -7.9,
+      -4.62
+    ],
+    "runWidth": 3.280000000000001,
+    "wallClearance": 0.08,
+    "centralSeparatorGap": 0.2,
+    "retainedExistingEndWalls": [
+      "V56_LEFT_CENTER_STAIR_F0_END_WALL_SOUTH",
+      "V56_LEFT_CENTER_STAIR_F0_END_WALL_NORTH",
+      "V56_LEFT_CENTER_STAIR_F1_END_WALL_SOUTH",
+      "V56_LEFT_CENTER_STAIR_F1_END_WALL_NORTH"
+    ],
+    "newPrefix": "V57_LEFT_CENTER_WIDE_STAIR_",
+    "preserve": "24 steps, two flights across X; central stair location, floor-2 shaft, door and window positions, original campus"
+  },
+  "v58TeachersHallPassage": {
+    "building": "LEFT_TEACHERS_2F",
+    "floor": 1,
+    "connectedTo": "V51_COVERED_CORRIDOR_FLOOR",
+    "officeRoom": "V48_TEACHERS_F0_OFFICE_3",
+    "shortenedOfficeEndZ": 9.82,
+    "clearPassageX": [
+      -32.2,
+      -29.4
+    ],
+    "clearPassageZ": [
+      9.96,
+      19.0
+    ],
+    "originalOfficeDoorAndWindowPreserved": true,
+    "removedObstructionMeshes": [
+      "V53_TEACHER_LEFT_F0_CROPPED_END_SEAL",
+      "LEFT_ROOM_PART_0_3",
+      "LEFT_CLASS_RIGHT_0_3"
+    ],
+    "addedMeshNames": [
+      "V58_LEFT_TEACHERS_OFFICE3_SHORTENED_BACK_PARTITION",
+      "V58_LEFT_TEACHERS_OFFICE3_EAST_WALL_RETAINED",
+      "V58_LEFT_TEACHERS_PASSAGE_THRESHOLD",
+      "V58_LEFT_TEACHERS_PASSAGE_INNER_JAMB_WEST",
+      "V58_LEFT_TEACHERS_PASSAGE_INNER_JAMB_EAST",
+      "V58_LEFT_TEACHERS_PASSAGE_FLOOR_JOIN"
+    ],
+    "notes": [
+      "Preserve V51 end-wall opening and covered roof; remove V53 solid seal blocking it.",
+      "Keep passage clear from left-building east corridor to the assembly-hall double entrance.",
+      "All other geometry from V57 remains unchanged."
+    ]
   }
 }

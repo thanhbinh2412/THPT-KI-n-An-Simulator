@@ -10,24 +10,34 @@ import { useGameStore } from "@/game/store/useGameStore";
 import { ClassroomDoors } from "@/game/classrooms/ClassroomDoors";
 import { CampusCollision } from "./CampusCollision";
 import { batchEmbeddedStudentDesks } from "./batchCampusInteriors";
-import v51CollisionDelta from "../../../assets/school/kien_an_campus_v51_collision_delta.json";
+import v58CollisionDelta from "../../../assets/school/kien_an_campus_v58_collision_delta.json";
 
 const UP = new THREE.Vector3(0, 1, 0);
-type V51CollisionDelta = { removedGeometry: string[]; v51RemoveColliderNodes: string[] };
+type V58CollisionDelta = {
+  removedGeometry: string[];
+  v51RemoveColliderNodes: string[];
+  v56RemoveColliderPrefixes: string[];
+  v57RemoveColliderMeshNames: string[];
+  v58RemoveColliderMeshNames: string[];
+};
 
-// The V51 export retains legacy V48–V50 nodes in its hierarchy. They are not
-// part of the V51 campus layout and would otherwise overlap the enlarged hall.
+// The V58 export retains some legacy nodes in its hierarchy. They are not part
+// of the active campus layout and would otherwise overlap the corrected hall
+// or seal the new teachers-to-hall passage.
 // Keep the corrected V34 guard sign: it is listed only because it never needs
 // a static collider, not because its visual mesh is obsolete.
-const legacyV51VisualPrefixes = [
-  ...(v51CollisionDelta as V51CollisionDelta).removedGeometry,
-  ...(v51CollisionDelta as V51CollisionDelta).v51RemoveColliderNodes,
+const legacyV58VisualPrefixes = [
+  ...(v58CollisionDelta as V58CollisionDelta).removedGeometry,
+  ...(v58CollisionDelta as V58CollisionDelta).v51RemoveColliderNodes,
+  ...(v58CollisionDelta as V58CollisionDelta).v56RemoveColliderPrefixes,
+  ...(v58CollisionDelta as V58CollisionDelta).v57RemoveColliderMeshNames,
+  ...(v58CollisionDelta as V58CollisionDelta).v58RemoveColliderMeshNames,
 ].filter((name) => name !== "V34_GUARD_GATE_FACING_SIGN");
 
-function hideLegacyV51Geometry(scene: THREE.Group) {
+function hideLegacyV58Geometry(scene: THREE.Group) {
   const changed: Array<{ object: THREE.Object3D; visible: boolean }> = [];
   scene.traverse((object) => {
-    if (!legacyV51VisualPrefixes.some((prefix) => object.name.startsWith(prefix))) return;
+    if (!legacyV58VisualPrefixes.some((prefix) => object.name.startsWith(prefix))) return;
     changed.push({ object, visible: object.visible });
     object.visible = false;
   });
@@ -69,19 +79,19 @@ function AnimatedGate({ spec, scene }: { spec: GateSpec; scene: THREE.Group }) {
   return <>{spec.pivots.map((_, index) => <RigidBody key={index} ref={(body) => { bodies.current[index] = body; }} type="kinematicPosition" colliders={false}><CuboidCollider args={spec.colliders[index]} /></RigidBody>)}</>;
 }
 
-/** Primary V51 visual scene. Its expanded hall, covered corridor, corrected guard sign and pole photo are embedded in the cached GLB. */
+/** Primary V58 visual scene. It includes the opened teachers-to-hall passage and covered corridor. */
 export function CampusModel() {
   const { scene, animations } = useGLTF(campusConfig.modelUrl);
   const trafficMixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
   useLayoutEffect(() => {
-    const restoreLegacyGeometry = hideLegacyV51Geometry(scene);
+    const restoreLegacyGeometry = hideLegacyV58Geometry(scene);
     const restoreDeskMeshes = batchEmbeddedStudentDesks(scene);
     const restoreMaterials = applyUnlitMaterials(scene);
     return () => { restoreMaterials(); restoreDeskMeshes(); restoreLegacyGeometry(); };
   }, [scene]);
   useEffect(() => {
     const traffic = animations.find((clip) => clip.name === "TrafficLoop_V23");
-    if (!traffic) { console.warn("Campus V51 traffic clip missing: TrafficLoop_V23"); return; }
+    if (!traffic) { console.warn("Campus V58 traffic clip missing: TrafficLoop_V23"); return; }
     const action = trafficMixer.clipAction(traffic); action.setLoop(THREE.LoopRepeat, Infinity); action.play();
     return () => { action.stop(); trafficMixer.stopAllAction(); trafficMixer.uncacheRoot(scene); };
   }, [animations, scene, trafficMixer]);
