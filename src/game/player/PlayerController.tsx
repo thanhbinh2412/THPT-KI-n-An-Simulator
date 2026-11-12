@@ -18,6 +18,7 @@ import { useVoice } from "@/game/voice/VoiceProvider";
 
 const GRAVITY = 9.81;
 const JUMP_SPEED = Math.sqrt(2 * GRAVITY * .7);
+const UP = new THREE.Vector3(0, 1, 0);
 type CharacterController = ReturnType<ReturnType<typeof useRapier>["world"]["createCharacterController"]>;
 
 /** Physics-first player: a kinematic Rapier character controller, never visual-only movement. */
@@ -62,7 +63,7 @@ export function PlayerController({ bodyRef, enabled = true, spawn }: { bodyRef: 
       body.setTranslation({ x: stoneBenchConfig.standingBodyPosition[0], y: stoneBenchConfig.standingBodyPosition[1], z: stoneBenchConfig.standingBodyPosition[2] }, true);
       velocity.current.set(0, 0, 0); verticalVelocity.current = 0; wasSitting.current = false;
     }
-    direction.current.set(rightInput, 0, -forwardInput); if (direction.current.lengthSq() > 1) direction.current.normalize(); direction.current.applyAxisAngle(new THREE.Vector3(0, 1, 0), getCameraHeading());
+    direction.current.set(rightInput, 0, -forwardInput); if (direction.current.lengthSq() > 1) direction.current.normalize(); direction.current.applyAxisAngle(UP, getCameraHeading());
     const running = enabled && (input.current.run || useGameStore.getState().run); const maxSpeed = running ? 6.4 : 4.1;
     velocity.current.x = THREE.MathUtils.damp(velocity.current.x, direction.current.x * maxSpeed, 18, dt); velocity.current.z = THREE.MathUtils.damp(velocity.current.z, direction.current.z * maxSpeed, 18, dt);
     const askedJump = enabled && (input.current.jump || useGameStore.getState().mobileJump);

@@ -22,7 +22,7 @@ function interpolateAngle(from: number, to: number, amount: number) {
 }
 
 function RemotePlayer({ player, bubble, speaking }: { player: PlayerState; bubble?: import("@/shared/multiplayer-types").ChatMessage; speaking?: boolean }) {
-  const root = useRef<THREE.Group>(null); const motion = useRef<PlayerMotionState>(player.locomotion); const speed = useRef(0); const velocity = useRef(new THREE.Vector3()); const snapshots = useRef<Snapshot[]>([{ receivedAt: performance.now(), position: new THREE.Vector3(player.position.x, player.position.y, player.position.z), rotationY: player.rotationY, locomotion: player.locomotion }]); const lastSequence = useRef(player.sequence);
+  const root = useRef<THREE.Group>(null); const motion = useRef<PlayerMotionState>(player.locomotion); const speed = useRef(0); const velocity = useRef(new THREE.Vector3()); const snapshots = useRef<Snapshot[]>([{ receivedAt: performance.now(), position: new THREE.Vector3(player.position.x, player.position.y, player.position.z), rotationY: player.rotationY, locomotion: player.locomotion }]); const lastSequence = useRef(player.sequence); const target = useRef(new THREE.Vector3()); const before = useRef(new THREE.Vector3());
   useEffect(() => {
     if (player.sequence <= lastSequence.current) return;
     lastSequence.current = player.sequence;
@@ -40,12 +40,12 @@ function RemotePlayer({ player, bubble, speaking }: { player: PlayerState; bubbl
     }
     const span = Math.max(1, later.receivedAt - earlier.receivedAt);
     const amount = THREE.MathUtils.clamp((renderAt - earlier.receivedAt) / span, 0, 1);
-    const target = earlier.position.clone().lerp(later.position, amount);
+    target.current.copy(earlier.position).lerp(later.position, amount);
     const targetYaw = interpolateAngle(earlier.rotationY, later.rotationY, amount);
     motion.current = amount < .5 ? earlier.locomotion : later.locomotion;
-    const before = root.current.position.clone();
-    root.current.position.lerp(target, 1 - Math.exp(-delta * 22));
-    const moved = root.current.position.distanceTo(before); speed.current = moved / Math.max(delta, .001); velocity.current.copy(root.current.position).sub(before).multiplyScalar(1 / Math.max(delta, .001));
+    before.current.copy(root.current.position);
+    root.current.position.lerp(target.current, 1 - Math.exp(-delta * 22));
+    const moved = root.current.position.distanceTo(before.current); speed.current = moved / Math.max(delta, .001); velocity.current.copy(root.current.position).sub(before.current).multiplyScalar(1 / Math.max(delta, .001));
     root.current.rotation.y = interpolateAngle(root.current.rotation.y, targetYaw, 1 - Math.exp(-delta * 18));
   });
   return <group ref={root} position={[player.position.x, player.position.y, player.position.z]}><PlayerCharacter gender={player.gender} motion={motion} speed={speed} velocity={velocity} visible orientToVelocity={false} /><ChatBubble message={bubble} /><VoiceIndicator speaking={speaking} /><Html position={[0, 1.35, 0]} center distanceFactor={10} style={{ pointerEvents: "none" }}><span className="remote-name">{player.name}</span></Html></group>;

@@ -8,6 +8,7 @@ import { campusConfig, campusGateConfig, type CampusGateId } from "@/game/config
 import { useGameStore } from "@/game/store/useGameStore";
 import { ClassroomDoors } from "@/game/classrooms/ClassroomDoors";
 import { CampusCollision } from "./CampusCollision";
+import { batchStaticCampusMeshes } from "./batchCampusInteriors";
 
 const UP = new THREE.Vector3(0, 1, 0);
 const LED_TEXTURE_URL = "/assets/school/led.png";
@@ -244,9 +245,10 @@ export function CampusModel({ collisionsEnabled = true }: { collisionsEnabled?: 
   const trafficMixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
   useLayoutEffect(() => {
     const restoreV76Decals = prepareV76Decals(scene);
+    const restoreStaticInstances = batchStaticCampusMeshes(scene);
     // V76 is intentionally rendered with GLTFLoader's original materials and
     // geometry. Do not replace, clone, batch, recolour, or hide model nodes.
-    return restoreV76Decals;
+    return () => { restoreStaticInstances(); restoreV76Decals(); };
   }, [scene]);
   useLayoutEffect(() => prepareCenterStageLed(scene, ledTexture), [ledTexture, scene]);
   useEffect(() => {
