@@ -18,6 +18,8 @@ import { useGameStore } from "@/game/store/useGameStore";
 import { BackgroundMusicProvider } from "@/game/audio/BackgroundMusicProvider";
 import { VoiceProvider } from "@/game/voice/VoiceProvider";
 import { VoiceControls } from "@/components/game-ui/VoiceControls";
+import { GraphicsSettingsProvider, useGraphicsSettings } from "@/game/performance/GraphicsSettings";
+import { PerformanceMonitor, PerformanceOverlay } from "@/components/game-ui/PerformanceOverlay";
 import type { Vec3 } from "@/game/types";
 
 function SceneReady({ onReady }: { onReady: () => void }) {
@@ -30,14 +32,17 @@ function Scene({ onReady }: { onReady: () => void }) {
   const { localPlayer } = useMultiplayer();
   const paused = useGameStore((s) => s.paused);
   const spawn: Vec3 | undefined = localPlayer ? [localPlayer.position.x, localPlayer.position.y, localPlayer.position.z] : undefined;
+  const graphics = useGraphicsSettings();
   return <>
-    <Physics gravity={[0, -18, 0]}><SchoolWorld /><PlayerController bodyRef={player} enabled={!!localPlayer && !paused} spawn={spawn} /><RemotePlayers /></Physics>
-    <CameraController player={player} /><InteractionManager /><SceneReady onReady={onReady} />
+    <Physics gravity={[0, -18, 0]}>{graphics.campusVisible && <SchoolWorld collisionsEnabled={graphics.collisionsEnabled} />}<PlayerController bodyRef={player} enabled={!!localPlayer && !paused} spawn={spawn} /><RemotePlayers /></Physics>
+    <CameraController player={player} /><InteractionManager /><PerformanceMonitor /><SceneReady onReady={onReady} />
   </>;
 }
 
 export default function Game() {
   const [sceneReady, setSceneReady] = useState(false);
   const markSceneReady = useCallback(() => setSceneReady(true), []);
-  return <BackgroundMusicProvider><MultiplayerProvider><VoiceProvider><main className="game-shell relative"><Canvas shadows={false} dpr={[1, 1.25]} camera={{ fov: 58, position: [0, 5, 27]}} gl={{ antialias: false, powerPreference: "high-performance", toneMapping: THREE.NoToneMapping, outputColorSpace: THREE.SRGBColorSpace }}><Suspense fallback={null}><Scene onReady={markSceneReady} /></Suspense></Canvas><GameLoadingScreen ready={sceneReady} /><GameHUD /><MobileControls /><ChatPanel /><VoiceControls /><MultiplayerUI /></main></VoiceProvider></MultiplayerProvider></BackgroundMusicProvider>;
+  return <BackgroundMusicProvider><MultiplayerProvider><VoiceProvider><GraphicsSettingsProvider><GameContent sceneReady={sceneReady} markSceneReady={markSceneReady} /></GraphicsSettingsProvider></VoiceProvider></MultiplayerProvider></BackgroundMusicProvider>;
 }
+
+function GameContent({ sceneReady, markSceneReady }: { sceneReady: boolean; markSceneReady: () => void }) { const graphics = useGraphicsSettings(); return <main className="game-shell relative"><Canvas shadows={graphics.shadows} dpr={graphics.dpr} camera={{ fov: 58, position: [0, 5, 27]}} gl={{ antialias: false, powerPreference: "high-performance", toneMapping: THREE.NoToneMapping, outputColorSpace: THREE.SRGBColorSpace }}><Suspense fallback={null}><Scene onReady={markSceneReady} /></Suspense></Canvas><GameLoadingScreen ready={sceneReady} /><GameHUD /><MobileControls /><ChatPanel /><VoiceControls /><MultiplayerUI /><PerformanceOverlay /></main>; }

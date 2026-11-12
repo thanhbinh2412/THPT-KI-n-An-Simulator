@@ -49,6 +49,10 @@ export function CameraController({ player }: { player: React.RefObject<RapierRig
   const target = useRef(new THREE.Vector3());
   const desired = useRef(new THREE.Vector3());
   const arm = useRef(new THREE.Vector3());
+  const forward = useRef(new THREE.Vector3());
+  const look = useRef(new THREE.Vector3());
+  const armLift = useRef(new THREE.Vector3(0, 1.35, 0));
+  const lookLift = useRef(new THREE.Vector3());
   const raycaster = useRef(new THREE.Raycaster());
   const currentDistance = useRef(TPS_DISTANCE);
   const lastOcclusionSample = useRef(-Infinity);
@@ -100,7 +104,7 @@ export function CameraController({ player }: { player: React.RefObject<RapierRig
     const p = body.translation();
     const cameraHeight = sittingOnBench ? (mode === "first" ? .3 : .52) : (mode === "first" ? .62 : .95);
     target.current.set(p.x, p.y + cameraHeight, p.z);
-    const forward = new THREE.Vector3(Math.sin(heading), 0, Math.cos(heading));
+    forward.current.set(Math.sin(heading), 0, Math.cos(heading));
 
     if (mode === "first") {
       clearFadedOccluder();
@@ -113,7 +117,7 @@ export function CameraController({ player }: { player: React.RefObject<RapierRig
     } else {
       // Camera arm starts at the player and retracts before the closest visual
       // wall/railing/ceiling, solving corridors and stair landings alike.
-      arm.current.copy(forward).multiplyScalar(TPS_DISTANCE).add(new THREE.Vector3(0, 1.35, 0));
+      arm.current.copy(forward.current).multiplyScalar(TPS_DISTANCE).add(armLift.current);
       const armLength = arm.current.length();
       const armDirection = arm.current.normalize();
       if (state.clock.elapsedTime - lastOcclusionSample.current >= 1 / 30) {
@@ -143,10 +147,8 @@ export function CameraController({ player }: { player: React.RefObject<RapierRig
       setFadedOccluder(occlusion.current.mesh && allowedDistance <= TPS_MIN_DISTANCE + .01 ? occlusion.current.mesh : null);
     }
 
-    const look = target.current.clone()
-      .add(new THREE.Vector3(0, Math.sin(cameraPitch) * 4, 0))
-      .addScaledVector(forward, -8);
-    camera.lookAt(look);
+    look.current.copy(target.current).add(lookLift.current.set(0, Math.sin(cameraPitch) * 4, 0)).addScaledVector(forward.current, -8);
+    camera.lookAt(look.current);
   });
 
   return null;

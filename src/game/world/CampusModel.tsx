@@ -132,7 +132,7 @@ function AnimatedGate({ spec, scene }: { spec: GateSpec; scene: THREE.Group }) {
 }
 
 /** Primary V61 visual scene. The 12A3 class photo and school bulletin board are embedded in this single GLB. */
-export function CampusModel() {
+export function CampusModel({ collisionsEnabled = true }: { collisionsEnabled?: boolean }) {
   const { scene, animations } = useGLTF(campusConfig.modelUrl);
   const trafficMixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
   useLayoutEffect(() => {
@@ -151,7 +151,7 @@ export function CampusModel() {
     return () => { action.stop(); trafficMixer.stopAllAction(); trafficMixer.uncacheRoot(scene); };
   }, [animations, scene, trafficMixer]);
   useFrame((_, delta) => trafficMixer.update(delta));
-  return <group position={campusConfig.position} rotation={campusConfig.rotation} scale={campusConfig.scale}><primitive object={scene} /><CampusCollision scene={scene} /><ClassroomDoors scene={scene} />{gateSpecs.map((spec) => <AnimatedGate key={spec.id} spec={spec} scene={scene} />)}</group>;
+  return <group position={campusConfig.position} rotation={campusConfig.rotation} scale={campusConfig.scale}><primitive object={scene} />{collisionsEnabled && <CampusCollision scene={scene} />}<ClassroomDoors scene={scene} />{gateSpecs.map((spec) => <AnimatedGate key={spec.id} spec={spec} scene={scene} />)}</group>;
 }
 
 useGLTF.preload(campusConfig.modelUrl);

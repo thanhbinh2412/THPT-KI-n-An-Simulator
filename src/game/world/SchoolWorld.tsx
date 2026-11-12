@@ -9,10 +9,10 @@ import { TeacherNpc } from "./TeacherNpc";
 import { StoneBench } from "./StoneBench";
 
 /** The V61 GLB is the complete campus visual; its navigation layer is separate. */
-export function SchoolWorld() {
+export function SchoolWorld({ collisionsEnabled = true }: { collisionsEnabled?: boolean }) {
   return <>
     <SkyEnvironment />
-    <CampusModel />
+    <CampusModel collisionsEnabled={collisionsEnabled} />
     <BikeStudentNpc />
     <GateGreeter />
     <TeacherNpc />

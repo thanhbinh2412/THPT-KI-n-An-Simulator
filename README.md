@@ -24,7 +24,8 @@ server restart.
 Joined players can use the **Chat chung** panel in the lower-left corner.
 Messages are sent on the existing Socket.IO connection, are retained only in a
 100-message in-memory buffer, and appear briefly above the sender's character.
-Press Enter to send, Shift+Enter for a new line, and Escape to leave the input.
+Press `Y` to focus chat, Enter to send, Shift+Enter for a new line, and Escape
+to leave the input.
 
 For development, run `pnpm dev`. To let phones or other computers on the same
 network join, find this computer's LAN IP (for example `ipconfig` on Windows)

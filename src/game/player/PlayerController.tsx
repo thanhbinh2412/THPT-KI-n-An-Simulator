@@ -25,7 +25,7 @@ export function PlayerController({ bodyRef, enabled = true, spawn }: { bodyRef: 
   const { world } = useRapier(); const input = useInputControls(enabled); const collider = useRef<RapierCollider | null>(null);
   const { localPlayer, chatBubbles } = useMultiplayer();
   const { speaking } = useVoice();
-  const controller = useRef<CharacterController | null>(null); const velocity = useRef(new THREE.Vector3()); const verticalVelocity = useRef(0); const grounded = useRef(false); const lastReport = useRef(0);
+  const controller = useRef<CharacterController | null>(null); const velocity = useRef(new THREE.Vector3()); const direction = useRef(new THREE.Vector3()); const verticalVelocity = useRef(0); const grounded = useRef(false); const lastReport = useRef(0);
   const motion = useRef<PlayerMotionState>("idle"); const visualSpeed = useRef(0); const reportedGrounded = useRef(false); const appliedSpawn = useRef(""); const wasSitting = useRef(false); const cameraMode = useGameStore((s) => s.cameraMode); const physicsDebug = useGameStore((s) => s.physicsDebug);
   useEffect(() => {
     const next = world.createCharacterController(.035);
@@ -62,9 +62,9 @@ export function PlayerController({ bodyRef, enabled = true, spawn }: { bodyRef: 
       body.setTranslation({ x: stoneBenchConfig.standingBodyPosition[0], y: stoneBenchConfig.standingBodyPosition[1], z: stoneBenchConfig.standingBodyPosition[2] }, true);
       velocity.current.set(0, 0, 0); verticalVelocity.current = 0; wasSitting.current = false;
     }
-    const direction = new THREE.Vector3(rightInput, 0, -forwardInput); if (direction.lengthSq() > 1) direction.normalize(); direction.applyAxisAngle(new THREE.Vector3(0, 1, 0), getCameraHeading());
+    direction.current.set(rightInput, 0, -forwardInput); if (direction.current.lengthSq() > 1) direction.current.normalize(); direction.current.applyAxisAngle(new THREE.Vector3(0, 1, 0), getCameraHeading());
     const running = enabled && (input.current.run || useGameStore.getState().run); const maxSpeed = running ? 6.4 : 4.1;
-    velocity.current.x = THREE.MathUtils.damp(velocity.current.x, direction.x * maxSpeed, 18, dt); velocity.current.z = THREE.MathUtils.damp(velocity.current.z, direction.z * maxSpeed, 18, dt);
+    velocity.current.x = THREE.MathUtils.damp(velocity.current.x, direction.current.x * maxSpeed, 18, dt); velocity.current.z = THREE.MathUtils.damp(velocity.current.z, direction.current.z * maxSpeed, 18, dt);
     const askedJump = enabled && (input.current.jump || useGameStore.getState().mobileJump);
     if (askedJump && grounded.current) { verticalVelocity.current = JUMP_SPEED; grounded.current = false; input.current.jump = false; useGameStore.getState().setMobileJump(false); }
     if (!grounded.current) verticalVelocity.current -= GRAVITY * dt; else if (verticalVelocity.current < 0) verticalVelocity.current = 0;
