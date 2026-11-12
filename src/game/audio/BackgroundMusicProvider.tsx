@@ -4,7 +4,8 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState, ty
 
 const MUSIC_URL = "/music/luceris-nostalgic-590392.mp3";
 const STORAGE_KEY = "kien-an-bgm-preferences";
-const DEFAULT_VOLUME = .35;
+const DEFAULT_VOLUME = .18;
+const LEGACY_DEFAULT_VOLUME = .35;
 const FADE_DURATION_MS = 420;
 
 function clampVolume(value: number) {
@@ -29,7 +30,8 @@ function readPreferences(): MusicPreferences {
     if (!value || typeof value !== "object") return { volume: DEFAULT_VOLUME, playing: true };
     const preferences = value as Partial<MusicPreferences>;
     return {
-      volume: typeof preferences.volume === "number" ? clampVolume(preferences.volume) : DEFAULT_VOLUME,
+      // Lower the shipped default without overwriting a deliberately customized volume.
+      volume: typeof preferences.volume === "number" ? (preferences.volume === LEGACY_DEFAULT_VOLUME ? DEFAULT_VOLUME : clampVolume(preferences.volume)) : DEFAULT_VOLUME,
       playing: typeof preferences.playing === "boolean" ? preferences.playing : true,
     };
   } catch { return { volume: DEFAULT_VOLUME, playing: true }; }
