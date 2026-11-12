@@ -3,13 +3,14 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useGameStore } from "@/game/store/useGameStore";
 import { getMultiplayerSocket } from "./socket-client";
-import type { JoinResult, PlayerGender, PlayerState, WorldSnapshot } from "@/shared/multiplayer-types";
+import type { ChatMessage, ChatSendResult, JoinResult, PlayerGender, PlayerState, WorldSnapshot } from "@/shared/multiplayer-types";
 import { stoneBenchConfig } from "@/game/world/stoneBench.config";
 
 type ConnectionStatus = "guest" | "connecting" | "connected" | "reconnecting" | "disconnected" | "error";
 type MultiplayerContextValue = {
   localPlayer: PlayerState | null; remotePlayers: PlayerState[]; onlineCount: number; status: ConnectionStatus; error: string | null;
   join: (name: string, gender: PlayerGender) => void; leave: () => void;
+  chatMessages: ChatMessage[]; chatBubbles: Record<string, ChatMessage>; sendChat: (content: string) => Promise<ChatSendResult>;
 };
 const MultiplayerContext = createContext<MultiplayerContextValue | null>(null);
 const STORAGE_KEY = "kien-an-player-profile";
@@ -22,6 +23,8 @@ export function MultiplayerProvider({ children }: { children: ReactNode }) {
   const [onlineCount, setOnlineCount] = useState(0);
   const [status, setStatus] = useState<ConnectionStatus>("guest");
   const [error, setError] = useState<string | null>(null);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [chatBubbles, setChatBubbles] = useState<Record<string, ChatMessage>>({});
   const remoteRef = useRef(new Map<string, PlayerState>());
   const profileRef = useRef<{ name: string; gender: PlayerGender } | null>(null);
   const sequenceRef = useRef(0);
@@ -29,6 +32,24 @@ export function MultiplayerProvider({ children }: { children: ReactNode }) {
   const latestMotion = useRef<PlayerState["locomotion"]>("idle");
   const lastYaw = useRef(Math.PI);
   const joiningRef = useRef(false);
+  const chatIdsRef = useRef(new Set<string>());
+  const bubbleTimersRef = useRef(new Map<string, number>());
+
+  const mergeChat = useCallback((messages: ChatMessage[]) => {
+    setChatMessages((current) => {
+      const merged = [...current];
+      messages.forEach((message) => { if (!chatIdsRef.current.has(message.id)) { chatIdsRef.current.add(message.id); merged.push(message); } });
+      return merged.sort((a, b) => a.timestamp - b.timestamp).slice(-100);
+    });
+  }, []);
+  const clearChat = useCallback(() => {
+    bubbleTimersRef.current.forEach((timer) => window.clearTimeout(timer)); bubbleTimersRef.current.clear(); chatIdsRef.current.clear(); setChatMessages([]); setChatBubbles({});
+  }, []);
+  const showBubble = useCallback((message: ChatMessage) => {
+    const previous = bubbleTimersRef.current.get(message.playerId); if (previous) window.clearTimeout(previous);
+    setChatBubbles((current) => ({ ...current, [message.playerId]: message }));
+    bubbleTimersRef.current.set(message.playerId, window.setTimeout(() => { setChatBubbles((current) => { const { [message.playerId]: _, ...rest } = current; return rest; }); bubbleTimersRef.current.delete(message.playerId); }, 5000));
+  }, []);
 
   const publishRemotes = useCallback(() => setRemotePlayers(samePlayerList(remoteRef.current)), []);
   const applySnapshot = useCallback((snapshot: WorldSnapshot) => {
@@ -56,14 +77,16 @@ export function MultiplayerProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const socket = getMultiplayerSocket();
     const joined = ({ player }: { player: PlayerState }) => { if (player.id !== localPlayer?.id) { remoteRef.current.set(player.id, player); publishRemotes(); } };
-    const left = ({ playerId }: { playerId: string }) => { remoteRef.current.delete(playerId); publishRemotes(); };
+    const left = ({ playerId }: { playerId: string }) => { remoteRef.current.delete(playerId); const timer = bubbleTimersRef.current.get(playerId); if (timer) window.clearTimeout(timer); bubbleTimersRef.current.delete(playerId); setChatBubbles((current) => { const { [playerId]: _, ...rest } = current; return rest; }); publishRemotes(); };
     const count = ({ count: nextCount }: { count: number }) => setOnlineCount(nextCount);
+    const history = ({ messages }: { messages: ChatMessage[] }) => mergeChat(messages);
+    const message = (chatMessage: ChatMessage) => { mergeChat([chatMessage]); showBubble(chatMessage); };
     const connected = () => { if (profileRef.current && !localPlayer) performJoin(profileRef.current.name, profileRef.current.gender, true); };
-    const disconnected = () => { useGameStore.getState().setBenchSeatIndex(null); if (profileRef.current) { setLocalPlayer(null); remoteRef.current.clear(); publishRemotes(); setStatus("reconnecting"); } else setStatus("disconnected"); };
-    socket.on("player:joined", joined); socket.on("player:left", left); socket.on("world:snapshot", applySnapshot); socket.on("world:online-count", count); socket.on("connect", connected); socket.on("disconnect", disconnected);
+    const disconnected = () => { useGameStore.getState().setBenchSeatIndex(null); bubbleTimersRef.current.forEach((timer) => window.clearTimeout(timer)); bubbleTimersRef.current.clear(); setChatBubbles({}); if (profileRef.current) { setLocalPlayer(null); remoteRef.current.clear(); publishRemotes(); setStatus("reconnecting"); } else setStatus("disconnected"); };
+    socket.on("player:joined", joined); socket.on("player:left", left); socket.on("world:snapshot", applySnapshot); socket.on("world:online-count", count); socket.on("chat:history", history); socket.on("chat:message", message); socket.on("connect", connected); socket.on("disconnect", disconnected);
     socket.emit("world:online-count", (result) => setOnlineCount(result.count));
-    return () => { socket.off("player:joined", joined); socket.off("player:left", left); socket.off("world:snapshot", applySnapshot); socket.off("world:online-count", count); socket.off("connect", connected); socket.off("disconnect", disconnected); };
-  }, [applySnapshot, localPlayer, performJoin, publishRemotes]);
+    return () => { socket.off("player:joined", joined); socket.off("player:left", left); socket.off("world:snapshot", applySnapshot); socket.off("world:online-count", count); socket.off("chat:history", history); socket.off("chat:message", message); socket.off("connect", connected); socket.off("disconnect", disconnected); };
+  }, [applySnapshot, localPlayer, mergeChat, performJoin, publishRemotes, showBubble]);
 
   useEffect(() => {
     if (!localPlayer) return;
@@ -100,9 +123,17 @@ export function MultiplayerProvider({ children }: { children: ReactNode }) {
     if (socket.connected) { socket.emit("bench:leave"); socket.emit("player:leave"); }
     useGameStore.getState().setBenchSeatIndex(null);
     setLocalPlayer(null); publishRemotes(); setStatus("guest"); setError(null);
-  }, [publishRemotes]);
+    clearChat();
+  }, [clearChat, publishRemotes]);
 
-  const value = useMemo(() => ({ localPlayer, remotePlayers, onlineCount, status, error, join: (name: string, gender: PlayerGender) => performJoin(name, gender), leave }), [localPlayer, remotePlayers, onlineCount, status, error, performJoin, leave]);
+  useEffect(() => () => { bubbleTimersRef.current.forEach((timer) => window.clearTimeout(timer)); }, []);
+  const sendChat = useCallback((content: string) => new Promise<ChatSendResult>((resolve) => {
+    const socket = getMultiplayerSocket();
+    if (!localPlayer || status !== "connected" || !socket.connected) return resolve({ success: false, code: "NOT_JOINED", message: "Đang mất kết nối." });
+    socket.timeout(4000).emit("chat:send", { content }, (timeoutError, result?: ChatSendResult) => resolve(timeoutError || !result ? { success: false, code: "NOT_JOINED", message: "Không thể gửi tin nhắn." } : result));
+  }), [localPlayer, status]);
+
+  const value = useMemo(() => ({ localPlayer, remotePlayers, onlineCount, status, error, chatMessages, chatBubbles, sendChat, join: (name: string, gender: PlayerGender) => performJoin(name, gender), leave }), [localPlayer, remotePlayers, onlineCount, status, error, chatMessages, chatBubbles, sendChat, performJoin, leave]);
   return <MultiplayerContext.Provider value={value}>{children}</MultiplayerContext.Provider>;
 }
 

@@ -12,6 +12,9 @@ import { campusConfig } from "@/game/config/campus.config";
 import { stoneBenchConfig } from "@/game/world/stoneBench.config";
 import { leaveStoneBenchSeat } from "@/game/world/benchSeatClient";
 import { useMultiplayer } from "@/game/multiplayer/MultiplayerProvider";
+import { ChatBubble } from "@/components/game-ui/ChatBubble";
+import { VoiceIndicator } from "@/components/game-ui/VoiceIndicator";
+import { useVoice } from "@/game/voice/VoiceProvider";
 
 const GRAVITY = 9.81;
 const JUMP_SPEED = Math.sqrt(2 * GRAVITY * .7);
@@ -20,7 +23,8 @@ type CharacterController = ReturnType<ReturnType<typeof useRapier>["world"]["cre
 /** Physics-first player: a kinematic Rapier character controller, never visual-only movement. */
 export function PlayerController({ bodyRef, enabled = true, spawn }: { bodyRef: React.RefObject<RapierRigidBody | null>; enabled?: boolean; spawn?: Vec3 }) {
   const { world } = useRapier(); const input = useInputControls(enabled); const collider = useRef<RapierCollider | null>(null);
-  const { localPlayer } = useMultiplayer();
+  const { localPlayer, chatBubbles } = useMultiplayer();
+  const { speaking } = useVoice();
   const controller = useRef<CharacterController | null>(null); const velocity = useRef(new THREE.Vector3()); const verticalVelocity = useRef(0); const grounded = useRef(false); const lastReport = useRef(0);
   const motion = useRef<PlayerMotionState>("idle"); const visualSpeed = useRef(0); const reportedGrounded = useRef(false); const appliedSpawn = useRef(""); const wasSitting = useRef(false); const cameraMode = useGameStore((s) => s.cameraMode); const physicsDebug = useGameStore((s) => s.physicsDebug);
   useEffect(() => {
@@ -80,5 +84,7 @@ export function PlayerController({ bodyRef, enabled = true, spawn }: { bodyRef: 
     <CapsuleCollider ref={collider} args={[.53,.32]} />
     {physicsDebug && <mesh><capsuleGeometry args={[.32, 1.06, 8, 12]} /><meshBasicMaterial color="#22d3ee" wireframe transparent opacity={.8} depthTest={false} /></mesh>}
     <PlayerCharacter gender={localPlayer?.gender ?? "male"} motion={motion} speed={visualSpeed} velocity={velocity} visible={cameraMode === "third"} seatedYaw={stoneBenchConfig.seatedYaw} />
+    <ChatBubble message={localPlayer ? chatBubbles[localPlayer.id] : undefined} />
+    <VoiceIndicator speaking={localPlayer ? speaking[localPlayer.id] : false} />
   </RigidBody>;
 }

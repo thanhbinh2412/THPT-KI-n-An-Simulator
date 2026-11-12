@@ -1,0 +1,2 @@
+export const VOICE_CONFIG = { fullVolumeDistance: 2, maxHearingDistance: 20, disconnectDistance: 24, maxNearbyPeers: 6, nearbyCheckIntervalMs: 500, spatialAudioUpdateIntervalMs: 50, volumeSmoothingSeconds: .08, pushToTalkKey: "KeyT" } as const;
+export function voiceIceServers(): RTCIceServer[] { try { const configured = JSON.parse(process.env.NEXT_PUBLIC_VOICE_ICE_SERVERS_JSON ?? "null"); if (Array.isArray(configured)) return configured; } catch { /* Development fallback below. */ } return [{ urls: "stun:stun.l.google.com:19302" }]; }

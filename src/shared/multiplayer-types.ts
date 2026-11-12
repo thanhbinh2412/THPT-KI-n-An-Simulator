@@ -29,12 +29,25 @@ export type JoinFailure = { success: false; code: "INVALID_NAME" | "WORLD_FULL" 
 export type JoinResult = JoinSuccess | JoinFailure;
 export type WorldSnapshot = { type: "delta" | "full"; serverTime: number; players: PlayerState[] };
 export type BenchSeatResult = { success: true; seatIndex: number } | { success: false; code: "BENCH_FULL" | "NOT_JOINED" };
+export type ChatMessage = { id: string; playerId: string; playerName: string; content: string; timestamp: number };
+export type ChatSendPayload = { content: string };
+export type ChatSendResult = { success: true; messageId: string } | { success: false; code: "NOT_JOINED" | "INVALID_MESSAGE" | "RATE_LIMITED"; message: string };
+export type VoiceState = { playerId: string; enabled: boolean; muted: boolean; speaking: boolean };
+export type VoiceSignalPayload = { targetPlayerId: string; description?: RTCSessionDescriptionInit; candidate?: RTCIceCandidateInit };
 
 export type ServerToClientEvents = {
   "player:joined": (payload: { player: PlayerState }) => void;
   "player:left": (payload: { playerId: string }) => void;
   "world:snapshot": (payload: WorldSnapshot) => void;
   "world:online-count": (payload: { count: number }) => void;
+  "chat:message": (message: ChatMessage) => void;
+  "chat:history": (payload: { messages: ChatMessage[] }) => void;
+  "voice:peers": (payload: { playerIds: string[] }) => void;
+  "voice:state": (payload: VoiceState) => void;
+  "voice:peer-left": (payload: { playerId: string }) => void;
+  "voice:offer": (payload: VoiceSignalPayload & { playerId: string; description: RTCSessionDescriptionInit }) => void;
+  "voice:answer": (payload: VoiceSignalPayload & { playerId: string; description: RTCSessionDescriptionInit }) => void;
+  "voice:ice-candidate": (payload: VoiceSignalPayload & { playerId: string; candidate: RTCIceCandidateInit }) => void;
 };
 
 export type ClientToServerEvents = {
@@ -44,4 +57,10 @@ export type ClientToServerEvents = {
   "world:online-count": (acknowledgement: (payload: { count: number }) => void) => void;
   "bench:occupy": (acknowledgement: (result: BenchSeatResult) => void) => void;
   "bench:leave": (acknowledgement?: () => void) => void;
+  "chat:send": (payload: ChatSendPayload, acknowledgement: (result: ChatSendResult) => void) => void;
+  "voice:enable": (payload: { enabled: boolean; muted: boolean }, acknowledgement?: (result: { success: boolean; message?: string }) => void) => void;
+  "voice:state": (payload: { muted: boolean; speaking: boolean }) => void;
+  "voice:offer": (payload: VoiceSignalPayload) => void;
+  "voice:answer": (payload: VoiceSignalPayload) => void;
+  "voice:ice-candidate": (payload: VoiceSignalPayload) => void;
 };

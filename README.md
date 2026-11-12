@@ -19,6 +19,13 @@ an incognito window and join with a second name. Players see each other move
 in the shared school world; all state is held in memory and is reset on a
 server restart.
 
+### Text chat
+
+Joined players can use the **Chat chung** panel in the lower-left corner.
+Messages are sent on the existing Socket.IO connection, are retained only in a
+100-message in-memory buffer, and appear briefly above the sender's character.
+Press Enter to send, Shift+Enter for a new line, and Escape to leave the input.
+
 For development, run `pnpm dev`. To let phones or other computers on the same
 network join, find this computer's LAN IP (for example `ipconfig` on Windows)
 and open `http://LAN_IP:3000/game`; permit the port through Windows Firewall if
@@ -33,6 +40,19 @@ pnpm start
 
 The optional multiplayer settings are documented in `.env.example`. Keep one
 application replica because active players are stored in the process memory.
+
+### Proximity voice chat
+
+Voice is off by default. A player must press **Bật** in the Voice panel before
+the browser is asked for microphone permission. Hold `T` to talk; the first
+press requests microphone permission and later holds transmit audio.
+Audio is WebRTC peer-to-peer; Socket.IO carries only signaling and voice state.
+
+For development a public STUN fallback is used. Production voice requires HTTPS
+and normally a TURN service. Set `NEXT_PUBLIC_VOICE_ICE_SERVERS_JSON` to a JSON
+array of ICE server entries. Never put long-lived TURN credentials in this
+public variable; use short-lived credentials or an authenticated configuration
+endpoint when deploying a TURN relay.
 
 ## Docker deployment
 
