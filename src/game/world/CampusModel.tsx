@@ -1,6 +1,6 @@
 "use client";
 import { useFrame } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, useTexture } from "@react-three/drei";
 import { CuboidCollider, RigidBody, type RapierRigidBody } from "@react-three/rapier";
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
@@ -11,8 +11,13 @@ import { ClassroomDoors } from "@/game/classrooms/ClassroomDoors";
 import { CampusCollision } from "./CampusCollision";
 import { batchEmbeddedStudentDesks } from "./batchCampusInteriors";
 import v58CollisionDelta from "../../../assets/school/kien_an_campus_v58_collision_delta.json";
+import v71SceneConfig from "../../../assets/school/kien_an_campus_v71_scene_config.json";
 
 const UP = new THREE.Vector3(0, 1, 0);
+const LED_TEXTURE_URL = "/assets/school/led.png";
+const CENTER_STAGE_LED_MESH = "V31_CENTER_STAGE_LED_BLOCKER";
+const GUARD_ROOM_BANNER_MESH = "V65_GUARD_ROAD_BANNER_CONTENT";
+const GUARD_ROOM_BANNER_TEXT = "THPT Kiến An - Ngày trở về";
 const photoMeshNames = new Set([
   "SCHOOL_BULLETIN_BOARD_CONTENT",
   "CLASS_12A3_PHOTO_FRONT",
@@ -25,24 +30,38 @@ type V58CollisionDelta = {
   v57RemoveColliderMeshNames: string[];
   v58RemoveColliderMeshNames: string[];
 };
+type V71SceneConfig = {
+  removedMeshes: string[];
+  v67Changes?: { removedMeshNames: string[] };
+  v71Changes?: { removedOutdatedVisualMeshes: string[] };
+};
+const sceneConfig = v71SceneConfig as V71SceneConfig;
 
 // The V58 export retains some legacy nodes in its hierarchy. They are not part
 // of the active campus layout and would otherwise overlap the corrected hall
 // or seal the new teachers-to-hall passage.
 // Keep the corrected V34 guard sign: it is listed only because it never needs
 // a static collider, not because its visual mesh is obsolete.
-const legacyV58VisualPrefixes = [
+const legacyVisualPrefixes = [
   ...(v58CollisionDelta as V58CollisionDelta).removedGeometry,
   ...(v58CollisionDelta as V58CollisionDelta).v51RemoveColliderNodes,
   ...(v58CollisionDelta as V58CollisionDelta).v56RemoveColliderPrefixes,
   ...(v58CollisionDelta as V58CollisionDelta).v57RemoveColliderMeshNames,
   ...(v58CollisionDelta as V58CollisionDelta).v58RemoveColliderMeshNames,
+  ...sceneConfig.removedMeshes,
+  ...(sceneConfig.v67Changes?.removedMeshNames ?? []),
+  ...(sceneConfig.v71Changes?.removedOutdatedVisualMeshes ?? []),
+  // The nearby utility-pole photo is intentionally excluded from the school scene.
+  "V47_ROAD_POLE_2_USER_PHOTO",
+  "V47_POLE_PHOTO_BACKING",
+  "V47_POLE_PHOTO_CLAMP_TOP",
+  "V47_POLE_PHOTO_CLAMP_BOTTOM",
 ].filter((name) => name !== "V34_GUARD_GATE_FACING_SIGN");
 
-function hideLegacyV58Geometry(scene: THREE.Group) {
+function hideLegacyGeometry(scene: THREE.Group) {
   const changed: Array<{ object: THREE.Object3D; visible: boolean }> = [];
   scene.traverse((object) => {
-    if (!legacyV58VisualPrefixes.some((prefix) => object.name.startsWith(prefix))) return;
+    if (!legacyVisualPrefixes.some((prefix) => object.name.startsWith(prefix))) return;
     changed.push({ object, visible: object.visible });
     object.visible = false;
   });
@@ -50,7 +69,7 @@ function hideLegacyV58Geometry(scene: THREE.Group) {
 }
 
 /**
- * V63 keeps the original photographs as GLB textures. The campus is made
+ * V71 keeps the original photographs as GLB textures. The campus is made
  * unlit for performance, so give only these display surfaces dedicated,
  * untinted materials after that conversion. This preserves their embedded
  * maps while making their front/back faces reliable without touching boards,
@@ -87,13 +106,99 @@ function preparePhotoDisplayMaterials(scene: THREE.Group) {
     photoMeshNames.forEach((name) => {
       if (!reported.has(name)) diagnostics.push({ name, found: false, hasMap: false, hasImage: false });
     });
-    console.info("[Campus V63] photo display materials", diagnostics);
+    console.info("[Campus V71] photo display materials", diagnostics);
   }
   return () => {
     originals.forEach(({ mesh, material }) => { mesh.material = material; });
     // These targeted clones are not owned by the GLTF cache.
     replacements.forEach((material) => material.dispose());
   };
+}
+
+function addPlanarUv(geometry: THREE.BufferGeometry) {
+  const position = geometry.getAttribute("position");
+  if (!position || geometry.getAttribute("uv")) return;
+  geometry.computeBoundingBox();
+  const bounds = geometry.boundingBox;
+  if (!bounds) return;
+  const size = new THREE.Vector3();
+  bounds.getSize(size);
+  // The LED is a flat facade panel. Project across its two largest local axes
+  // so the supplied image covers it even though the GLB export has no UVs.
+  type VectorAxis = "x" | "y" | "z";
+  const componentIndex: Record<VectorAxis, number> = { x: 0, y: 1, z: 2 };
+  const axes: VectorAxis[] = ["x", "y", "z"];
+  axes.sort((left, right) => size[right] - size[left]);
+  const first = axes[0]; const second = axes[1];
+  const firstSpan = Math.max(size[first], Number.EPSILON);
+  const secondSpan = Math.max(size[second], Number.EPSILON);
+  const uv = new Float32Array(position.count * 2);
+  const minimum = bounds.min;
+  for (let index = 0; index < position.count; index += 1) {
+    uv[index * 2] = (position.getComponent(index, componentIndex[first]) - minimum[first]) / firstSpan;
+    uv[index * 2 + 1] = (position.getComponent(index, componentIndex[second]) - minimum[second]) / secondSpan;
+  }
+  geometry.setAttribute("uv", new THREE.BufferAttribute(uv, 2));
+}
+
+/** Replaces only the central-building LED panel content; its surrounding frame remains part of the GLB. */
+function prepareCenterStageLed(scene: THREE.Group, texture: THREE.Texture) {
+  const mesh = scene.getObjectByName(CENTER_STAGE_LED_MESH);
+  if (!(mesh instanceof THREE.Mesh)) {
+    if (process.env.NODE_ENV !== "production") console.warn(`[Campus V71] LED mesh not found: ${CENTER_STAGE_LED_MESH}`);
+    return () => undefined;
+  }
+  const original = mesh.material;
+  const originalGeometry = mesh.geometry;
+  // GLB V71's display surface has vertex colours but no UV attribute.
+  // Clone before adding UVs because useGLTF caches the source geometry.
+  const geometry = originalGeometry.clone();
+  addPlanarUv(geometry);
+  mesh.geometry = geometry;
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.wrapS = THREE.ClampToEdgeWrapping;
+  texture.wrapT = THREE.ClampToEdgeWrapping;
+  texture.needsUpdate = true;
+  const material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide, toneMapped: false });
+  mesh.material = material;
+  return () => { mesh.material = original; mesh.geometry = originalGeometry; geometry.dispose(); material.dispose(); };
+}
+
+function createGuardRoomBannerTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 2048; canvas.height = 512;
+  const context = canvas.getContext("2d");
+  if (!context) return null;
+  context.fillStyle = "#fffdf7";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = "#a53931";
+  context.font = "700 126px Arial, sans-serif";
+  context.textAlign = "center";
+  context.textBaseline = "middle";
+  context.fillText(GUARD_ROOM_BANNER_TEXT, canvas.width / 2, canvas.height / 2 + 4);
+  const texture = new THREE.CanvasTexture(canvas);
+  // The authored banner UV is horizontally mirrored. Match its vertical GLTF
+  // orientation and reverse U only, so the new Vietnamese text reads normally.
+  texture.flipY = false;
+  texture.repeat.set(-1, 1);
+  texture.offset.set(1, 0);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.needsUpdate = true;
+  return texture;
+}
+
+function prepareGuardRoomBanner(scene: THREE.Group) {
+  const mesh = scene.getObjectByName(GUARD_ROOM_BANNER_MESH);
+  if (!(mesh instanceof THREE.Mesh)) {
+    if (process.env.NODE_ENV !== "production") console.warn(`[Campus V71] guard-room banner mesh not found: ${GUARD_ROOM_BANNER_MESH}`);
+    return () => undefined;
+  }
+  const texture = createGuardRoomBannerTexture();
+  if (!texture) return () => undefined;
+  const original = mesh.material;
+  const material = new THREE.MeshBasicMaterial({ map: texture, color: 0xffffff, side: THREE.DoubleSide, toneMapped: false });
+  mesh.material = material;
+  return () => { mesh.material = original; material.dispose(); texture.dispose(); };
 }
 
 type GateSpec = {
@@ -131,17 +236,20 @@ function AnimatedGate({ spec, scene }: { spec: GateSpec; scene: THREE.Group }) {
   return <>{spec.pivots.map((_, index) => <RigidBody key={index} ref={(body) => { bodies.current[index] = body; }} type="kinematicPosition" colliders={false}><CuboidCollider args={spec.colliders[index]} /></RigidBody>)}</>;
 }
 
-/** Primary V63 visual scene. Embedded photo displays retain their original GLB textures. */
+/** Primary V71 visual scene. Embedded photo displays retain their original GLB textures. */
 export function CampusModel({ collisionsEnabled = true }: { collisionsEnabled?: boolean }) {
   const { scene, animations } = useGLTF(campusConfig.modelUrl);
+  const ledTexture = useTexture(LED_TEXTURE_URL);
   const trafficMixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
   useLayoutEffect(() => {
-    const restoreLegacyGeometry = hideLegacyV58Geometry(scene);
+    const restoreLegacyGeometry = hideLegacyGeometry(scene);
     const restoreDeskMeshes = batchEmbeddedStudentDesks(scene);
     const restoreMaterials = applyUnlitMaterials(scene);
     const restorePhotoMaterials = preparePhotoDisplayMaterials(scene);
-    return () => { restorePhotoMaterials(); restoreMaterials(); restoreDeskMeshes(); restoreLegacyGeometry(); };
-  }, [scene]);
+    const restoreLed = prepareCenterStageLed(scene, ledTexture);
+    const restoreGuardRoomBanner = prepareGuardRoomBanner(scene);
+    return () => { restoreGuardRoomBanner(); restoreLed(); restorePhotoMaterials(); restoreMaterials(); restoreDeskMeshes(); restoreLegacyGeometry(); };
+  }, [ledTexture, scene]);
   useEffect(() => {
     const traffic = animations.find((clip) => clip.name === "TrafficLoop_V23");
     // V60 has no campus animation clips; keep this optional so the loader does
@@ -155,3 +263,4 @@ export function CampusModel({ collisionsEnabled = true }: { collisionsEnabled?: 
 }
 
 useGLTF.preload(campusConfig.modelUrl);
+useTexture.preload(LED_TEXTURE_URL);
