@@ -27,6 +27,15 @@ function SceneReady({ onReady }: { onReady: () => void }) {
   return null;
 }
 
+/** Enables the existing collider-box renderer only for local development. */
+function PhysicsDebugQuery() {
+  useEffect(() => {
+    if (process.env.NODE_ENV === "production" || new URLSearchParams(window.location.search).get("debugPhysics") !== "true") return;
+    if (!useGameStore.getState().physicsDebug) useGameStore.getState().togglePhysicsDebug();
+  }, []);
+  return null;
+}
+
 function Scene({ onReady }: { onReady: () => void }) {
   const player = useRef<RapierRigidBody | null>(null);
   const { localPlayer } = useMultiplayer();
@@ -35,7 +44,7 @@ function Scene({ onReady }: { onReady: () => void }) {
   const graphics = useGraphicsSettings();
   return <>
     <Physics gravity={[0, -18, 0]}>{graphics.campusVisible && <SchoolWorld collisionsEnabled={graphics.collisionsEnabled} />}<PlayerController bodyRef={player} enabled={!!localPlayer && !paused} spawn={spawn} /><RemotePlayers /></Physics>
-    <CameraController player={player} /><InteractionManager /><PerformanceMonitor /><SceneReady onReady={onReady} />
+    <CameraController player={player} /><InteractionManager /><PerformanceMonitor /><PhysicsDebugQuery /><SceneReady onReady={onReady} />
   </>;
 }
 

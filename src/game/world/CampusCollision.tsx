@@ -1,6 +1,6 @@
 "use client";
 
-import { CuboidCollider, RigidBody } from "@react-three/rapier";
+import { CuboidCollider, RigidBody, TrimeshCollider } from "@react-three/rapier";
 import { useMemo } from "react";
 import * as THREE from "three";
 import { useGameStore } from "@/game/store/useGameStore";
@@ -10,6 +10,8 @@ import v72SceneConfig from "../../../assets/school/kien_an_campus_v72_scene_conf
 
 type ColliderKind = "blocking" | "walkable";
 type ColliderSpec = { id: string; position: [number, number, number]; rotation: [number, number, number]; halfExtents: [number, number, number]; kind: ColliderKind };
+type StairStep = { bounds: THREE.Box3 };
+type TrimeshSpec = { id: string; vertices: Float32Array; indices: Uint32Array; debug: ColliderSpec };
 type FixedCuboid = { node: string; center: number[]; size: number[] };
 type V58CollisionDelta = {
   removedGeometry: string[];
@@ -63,6 +65,7 @@ const removedMeshPrefixes = [
   "V48_ASSEMBLY_HALL_BACK",
 ];
 const walkableManifestNode = /(?:_FLOOR|_STAGE(?:$|_)|_THRESHOLD|STAGE_STEP)/;
+const stairManifestNode = /(?:STAIR|LANDING)/i;
 const retiredExplicitColliderNames = new Set([
   ...collisionDelta.v57RemoveColliderMeshNames,
   ...collisionDelta.v58RemoveColliderMeshNames,
@@ -82,7 +85,7 @@ const explicitColliders: Array<{ id: string; position: number[]; size: number[];
   ...collisionDelta.v56AddFixedCuboids,
   ...collisionDelta.v57AddFixedCuboids,
   ...collisionDelta.v58AddFixedCuboids,
-].filter(({ node }) => !retiredExplicitColliderNames.has(node))
+].filter(({ node }) => !retiredExplicitColliderNames.has(node) && !stairManifestNode.test(node))
   .map(({ node, center, size }) => ({
     id: node,
     position: center,
@@ -100,6 +103,8 @@ const windowPart = /(?:WINDOW|_BAR_)/i;
 // only. Keeping them out of generated collision prevents a floating blocker
 // beside the public road while preserving the existing pole/environment body.
 const decorativePolePhotoPart = /^(?:V47_ROAD_POLE_2_USER_PHOTO|V47_POLE_PHOTO_(?:BACKING|CLAMP_TOP|CLAMP_BOTTOM))$/;
+const stairStepPart = /^(.*(?:STAIR|STAIRS).*?)_STEP_?\d+(?:_|$)/i;
+const v64StairMesh = /^V64_STAIR_/;
 
 function boundsCollider(id: string, bounds: THREE.Box3, kind: ColliderKind = "blocking"): ColliderSpec | null {
   if (bounds.isEmpty()) return null;
@@ -120,6 +125,57 @@ function windowGroupId(name: string) {
   return name.replace(/(?:_BAR)?_[HV]_?\d+$/i, "");
 }
 
+function stairRampCollider(id: string, steps: StairStep[]): ColliderSpec | null {
+  if (steps.length < 2) return null;
+  const xSpan = Math.max(...steps.map(({ bounds }) => bounds.max.x)) - Math.min(...steps.map(({ bounds }) => bounds.min.x));
+  const zSpan = Math.max(...steps.map(({ bounds }) => bounds.max.z)) - Math.min(...steps.map(({ bounds }) => bounds.min.z));
+  const alongX = xSpan >= zSpan;
+  const otherSpan = alongX ? zSpan : xSpan;
+  const ordered = [...steps].sort((left, right) => {
+    const leftCenter = alongX ? left.bounds.getCenter(new THREE.Vector3()).x : left.bounds.getCenter(new THREE.Vector3()).z;
+    const rightCenter = alongX ? right.bounds.getCenter(new THREE.Vector3()).x : right.bounds.getCenter(new THREE.Vector3()).z;
+    return leftCenter - rightCenter;
+  });
+  const first = ordered[0].bounds; const last = ordered[ordered.length - 1].bounds;
+  const horizontalRun = alongX ? xSpan : zSpan;
+  const firstTop = first.max.y; const lastTop = last.max.y;
+  // Start at the lower landing/base of the first solid tread, not at its top.
+  // This removes the vertical lip that stopped the character before the ramp.
+  const ascending = lastTop >= firstTop;
+  const startY = ascending ? first.min.y : first.max.y;
+  const endY = ascending ? last.max.y : last.min.y;
+  const rise = endY - startY;
+  if (horizontalRun < .2 || Math.abs(rise) < .02) return null;
+  const angle = Math.atan2(rise, horizontalRun);
+  const thickness = .12;
+  const x = (Math.min(...steps.map(({ bounds }) => bounds.min.x)) + Math.max(...steps.map(({ bounds }) => bounds.max.x))) / 2;
+  const z = (Math.min(...steps.map(({ bounds }) => bounds.min.z)) + Math.max(...steps.map(({ bounds }) => bounds.max.z))) / 2;
+  const y = (startY + endY) / 2 - thickness * Math.cos(angle) / 2;
+  const slopedRun = Math.hypot(horizontalRun, rise);
+  return alongX
+    ? { id: `ramp:${id}`, position: [x, y, z], rotation: [0, 0, angle], halfExtents: [slopedRun / 2, thickness / 2, Math.max(otherSpan / 2, minimumThickness / 2)], kind: "walkable" }
+    : { id: `ramp:${id}`, position: [x, y, z], rotation: [-angle, 0, 0], halfExtents: [Math.max(otherSpan / 2, minimumThickness / 2), thickness / 2, slopedRun / 2], kind: "walkable" };
+}
+
+function trimeshFromWorldGeometry(mesh: THREE.Mesh): TrimeshSpec | null {
+  const source = mesh.geometry;
+  const position = source.getAttribute("position");
+  if (!position || position.count < 3) return null;
+  const vertices = new Float32Array(position.count * 3);
+  const point = new THREE.Vector3();
+  for (let index = 0; index < position.count; index += 1) {
+    point.fromBufferAttribute(position, index).applyMatrix4(mesh.matrixWorld);
+    vertices[index * 3] = point.x; vertices[index * 3 + 1] = point.y; vertices[index * 3 + 2] = point.z;
+  }
+  const sourceIndices = source.getIndex();
+  const indices = sourceIndices
+    ? Uint32Array.from({ length: sourceIndices.count }, (_, index) => sourceIndices.getX(index))
+    : Uint32Array.from({ length: position.count }, (_, index) => index);
+  const bounds = new THREE.Box3().setFromObject(mesh);
+  const debug = boundsCollider(`trimesh:${mesh.name}`, bounds, "walkable");
+  return debug ? { id: mesh.uuid, vertices, indices, debug } : null;
+}
+
 function buildColliders(scene: THREE.Group) {
   scene.updateMatrixWorld(true);
   const box = new THREE.Box3(); const centre = new THREE.Vector3(); const size = new THREE.Vector3();
@@ -127,6 +183,8 @@ function buildColliders(scene: THREE.Group) {
   const colliders: ColliderSpec[] = [];
   const furnitureBounds = new Map<string, THREE.Box3>();
   const windowBounds = new Map<string, THREE.Box3>();
+  const stairSteps = new Map<string, StairStep[]>();
+  const stairTrimeshes: TrimeshSpec[] = [];
   scene.traverse((object) => {
     if (!(object instanceof THREE.Mesh)) return;
     if (decorativePolePhotoPart.test(object.name)) return;
@@ -134,6 +192,21 @@ function buildColliders(scene: THREE.Group) {
     // window groups too, otherwise those old window bars would still create an
     // invisible collider even though their meshes are hidden from the scene.
     if (removedMeshPrefixes.some((prefix) => object.name.startsWith(prefix)) || explicitMeshNames.has(object.name)) return;
+    // V72's active multi-storey stairwells are V64_STAIR meshes. Their bounds
+    // span every flight and landing, so a CuboidCollider turns the whole shaft
+    // into a solid wall. Preserve the authored triangles instead.
+    if (v64StairMesh.test(object.name)) {
+      const trimesh = trimeshFromWorldGeometry(object);
+      if (trimesh) stairTrimeshes.push(trimesh);
+      return;
+    }
+    const stairStep = object.name.match(stairStepPart);
+    if (stairStep) {
+      const steps = stairSteps.get(stairStep[1]) ?? [];
+      steps.push({ bounds: new THREE.Box3().expandByObject(object) });
+      stairSteps.set(stairStep[1], steps);
+      return;
+    }
     const furnitureMatch = object.name.match(studentDeskPart) ?? object.name.match(teacherDeskPart);
     if (furnitureMatch) {
       const bounds = furnitureBounds.get(furnitureMatch[1]) ?? new THREE.Box3();
@@ -166,6 +239,18 @@ function buildColliders(scene: THREE.Group) {
   explicitColliders.forEach((collider) => {
     colliders.push({ id: collider.id, position: [...collider.position] as [number, number, number], rotation: [0, 0, 0], halfExtents: collider.size.map((value) => value / 2) as [number, number, number], kind: collider.kind });
   });
+  // A stair flight made of individual solid treads has vertical risers that can
+  // exceed the character controller's safe autostep limit. Keep the visible
+  // treads, but use one thin slope for traversal; rails and stairwell walls
+  // remain ordinary blocking colliders.
+  stairSteps.forEach((steps, id) => {
+    const ramp = stairRampCollider(id, steps);
+    if (ramp) { colliders.push(ramp); return; }
+    steps.forEach(({ bounds }, index) => {
+      const fallback = boundsCollider(`${id}:step:${index}`, bounds, "walkable");
+      if (fallback) colliders.push(fallback);
+    });
+  });
   furnitureBounds.forEach((bounds, id) => {
     const collider = boundsCollider(id, bounds);
     if (collider) colliders.push(collider);
@@ -174,7 +259,7 @@ function buildColliders(scene: THREE.Group) {
     const collider = boundsCollider(`window:${id}`, bounds);
     if (collider) colliders.push(collider);
   });
-  return colliders;
+  return { colliders, stairTrimeshes };
 }
 
 function DebugCollider({ collider }: { collider: ColliderSpec }) {
@@ -192,11 +277,15 @@ function DebugCollider({ collider }: { collider: ColliderSpec }) {
  * bounding-box collider. Dynamic gates and classroom doors stay kinematic.
  */
 export function CampusCollision({ scene }: { scene: THREE.Group }) {
-  const colliders = useMemo(() => buildColliders(scene), [scene]);
-  return <RigidBody type="fixed" colliders={false} userData={{ colliderCount: colliders.length, campusVersion: "V72" }}>
+  const { colliders, stairTrimeshes } = useMemo(() => buildColliders(scene), [scene]);
+  return <RigidBody type="fixed" colliders={false} userData={{ colliderCount: colliders.length + stairTrimeshes.length, campusVersion: "V72" }}>
     {colliders.map((collider) => <group key={collider.id}>
       <CuboidCollider position={collider.position} rotation={collider.rotation} args={collider.halfExtents} />
       <DebugCollider collider={collider} />
+    </group>)}
+    {stairTrimeshes.map((stair) => <group key={stair.id}>
+      <TrimeshCollider args={[stair.vertices, stair.indices]} />
+      <DebugCollider collider={stair.debug} />
     </group>)}
   </RigidBody>;
 }
