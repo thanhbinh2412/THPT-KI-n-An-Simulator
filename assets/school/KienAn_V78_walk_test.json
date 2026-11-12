@@ -1,0 +1,190 @@
+{
+ "tested": 26,
+ "passed": 26,
+ "controller": {
+  "capsule_radius": 0.25,
+  "capsule_height": 1.7,
+  "step_height": 0.22,
+  "collision": "axis-aligned boxes from KienAn_V77_colliders.json",
+  "doors": "treated as open",
+  "gates": "dynamic, treated as open"
+ },
+ "results": [
+  {
+   "path": "UP CENTER_RIGHT",
+   "ok": true,
+   "end_height": 10.08,
+   "max_rise_per_step": 0.164,
+   "target_height": 10.08
+  },
+  {
+   "path": "DOWN CENTER_RIGHT",
+   "ok": true,
+   "end_height": 0.283,
+   "max_rise_per_step": 0.0,
+   "target_height": 0.28
+  },
+  {
+   "path": "UP CENTER_LEFT",
+   "ok": true,
+   "end_height": 10.08,
+   "max_rise_per_step": 0.164,
+   "target_height": 10.08
+  },
+  {
+   "path": "DOWN CENTER_LEFT",
+   "ok": true,
+   "end_height": 0.283,
+   "max_rise_per_step": 0.0,
+   "target_height": 0.28
+  },
+  {
+   "path": "UP RIGHT_WING",
+   "ok": true,
+   "end_height": 10.08,
+   "max_rise_per_step": 0.164,
+   "target_height": 10.08
+  },
+  {
+   "path": "DOWN RIGHT_WING",
+   "ok": true,
+   "end_height": 0.66,
+   "max_rise_per_step": 0.0,
+   "target_height": 0.66
+  },
+  {
+   "path": "UP REAR",
+   "ok": true,
+   "end_height": 10.08,
+   "max_rise_per_step": 0.164,
+   "target_height": 10.08
+  },
+  {
+   "path": "DOWN REAR",
+   "ok": true,
+   "end_height": 0.283,
+   "max_rise_per_step": 0.0,
+   "target_height": 0.28
+  },
+  {
+   "path": "UP REAR_RIGHT",
+   "ok": true,
+   "end_height": 5.18,
+   "max_rise_per_step": 0.164,
+   "target_height": 5.18
+  },
+  {
+   "path": "DOWN REAR_RIGHT",
+   "ok": true,
+   "end_height": 0.283,
+   "max_rise_per_step": 0.0,
+   "target_height": 0.28
+  },
+  {
+   "path": "UP TEACHERS",
+   "ok": true,
+   "end_height": 5.2,
+   "max_rise_per_step": 0.164,
+   "target_height": 5.2
+  },
+  {
+   "path": "DOWN TEACHERS",
+   "ok": true,
+   "end_height": 0.32,
+   "max_rise_per_step": 0.0,
+   "target_height": 0.3
+  },
+  {
+   "path": "UP REAR_NORTH_EXT",
+   "ok": true,
+   "end_height": 4.52,
+   "max_rise_per_step": 0.166,
+   "target_height": 4.52
+  },
+  {
+   "path": "UP REAR_WEST_EXT",
+   "ok": true,
+   "end_height": 4.52,
+   "max_rise_per_step": 0.166,
+   "target_height": 4.52
+  },
+  {
+   "path": "TEACHERS F0 door z=-17.7",
+   "ok": true,
+   "end_height": 0.32,
+   "max_rise_per_step": 0.0
+  },
+  {
+   "path": "TEACHERS F0 door z=-12.55",
+   "ok": true,
+   "end_height": 0.32,
+   "max_rise_per_step": 0.0
+  },
+  {
+   "path": "TEACHERS F0 door z=1.8",
+   "ok": true,
+   "end_height": 0.32,
+   "max_rise_per_step": 0.0
+  },
+  {
+   "path": "TEACHERS F0 door z=8.7",
+   "ok": true,
+   "end_height": 0.32,
+   "max_rise_per_step": 0.0
+  },
+  {
+   "path": "TEACHERS F1 door z=-17.7",
+   "ok": true,
+   "end_height": 5.22,
+   "max_rise_per_step": 0.0
+  },
+  {
+   "path": "TEACHERS F1 door z=-12.55",
+   "ok": true,
+   "end_height": 5.22,
+   "max_rise_per_step": 0.0
+  },
+  {
+   "path": "TEACHERS F1 door z=1.8",
+   "ok": true,
+   "end_height": 5.22,
+   "max_rise_per_step": 0.0
+  },
+  {
+   "path": "TEACHERS F1 door z=11.8",
+   "ok": true,
+   "end_height": 5.22,
+   "max_rise_per_step": 0.0
+  },
+  {
+   "path": "TEACHERS courtyard->corridor steps",
+   "ok": true,
+   "end_height": 0.32,
+   "max_rise_per_step": 0.12
+  },
+  {
+   "path": "MAIN GATE street->courtyard",
+   "ok": true,
+   "end_height": -0.005,
+   "max_rise_per_step": 0.0
+  },
+  {
+   "path": "LEFT SIDE GATE street->courtyard",
+   "ok": true,
+   "end_height": -0.005,
+   "max_rise_per_step": 0.0
+  },
+  {
+   "path": "RIGHT SIDE GATE street->courtyard",
+   "ok": true,
+   "end_height": -0.005,
+   "max_rise_per_step": 0.0
+  }
+ ],
+ "glb": "KienAn_V78_SanGachMo.glb",
+ "colliders": "KienAn_V78_colliders.json",
+ "baseline_V72_per_node_bounding_boxes": {
+  "tested": 26,
+  "passed": 0
+ }
+}

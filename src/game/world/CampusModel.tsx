@@ -1,17 +1,13 @@
 "use client";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF, useTexture } from "@react-three/drei";
-import { CuboidCollider, RigidBody, type RapierRigidBody } from "@react-three/rapier";
+import { type RapierRigidBody } from "@react-three/rapier";
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { campusConfig, campusGateConfig, type CampusGateId } from "@/game/config/campus.config";
-import { applyUnlitMaterials } from "@/game/rendering/unlitMaterials";
 import { useGameStore } from "@/game/store/useGameStore";
 import { ClassroomDoors } from "@/game/classrooms/ClassroomDoors";
 import { CampusCollision } from "./CampusCollision";
-import { batchEmbeddedStudentDesks } from "./batchCampusInteriors";
-import v58CollisionDelta from "../../../assets/school/kien_an_campus_v58_collision_delta.json";
-import v72SceneConfig from "../../../assets/school/kien_an_campus_v72_scene_config.json";
 
 const UP = new THREE.Vector3(0, 1, 0);
 const LED_TEXTURE_URL = "/assets/school/led.png";
@@ -23,40 +19,13 @@ const photoMeshNames = new Set([
   "CLASS_12A3_PHOTO_FRONT",
   "CLASS_12A3_PHOTO_BACK",
 ]);
-type V58CollisionDelta = {
-  removedGeometry: string[];
-  v51RemoveColliderNodes: string[];
-  v56RemoveColliderPrefixes: string[];
-  v57RemoveColliderMeshNames: string[];
-  v58RemoveColliderMeshNames: string[];
-};
-type V72SceneConfig = {
-  removedMeshes: string[];
-  v67Changes?: { removedMeshNames: string[] };
-  v71Changes?: { removedOutdatedVisualMeshes: string[] };
-};
-const sceneConfig = v72SceneConfig as V72SceneConfig;
-
-// The V58 export retains some legacy nodes in its hierarchy. They are not part
-// of the active campus layout and would otherwise overlap the corrected hall
-// or seal the new teachers-to-hall passage.
-// Keep the corrected V34 guard sign: it is listed only because it never needs
-// a static collider, not because its visual mesh is obsolete.
 const legacyVisualPrefixes = [
-  ...(v58CollisionDelta as V58CollisionDelta).removedGeometry,
-  ...(v58CollisionDelta as V58CollisionDelta).v51RemoveColliderNodes,
-  ...(v58CollisionDelta as V58CollisionDelta).v56RemoveColliderPrefixes,
-  ...(v58CollisionDelta as V58CollisionDelta).v57RemoveColliderMeshNames,
-  ...(v58CollisionDelta as V58CollisionDelta).v58RemoveColliderMeshNames,
-  ...sceneConfig.removedMeshes,
-  ...(sceneConfig.v67Changes?.removedMeshNames ?? []),
-  ...(sceneConfig.v71Changes?.removedOutdatedVisualMeshes ?? []),
   // The nearby utility-pole photo is intentionally excluded from the school scene.
   "V47_ROAD_POLE_2_USER_PHOTO",
   "V47_POLE_PHOTO_BACKING",
   "V47_POLE_PHOTO_CLAMP_TOP",
   "V47_POLE_PHOTO_CLAMP_BOTTOM",
-].filter((name) => name !== "V34_GUARD_GATE_FACING_SIGN");
+];
 
 function hideLegacyGeometry(scene: THREE.Group) {
   const changed: Array<{ object: THREE.Object3D; visible: boolean }> = [];
@@ -112,6 +81,36 @@ function preparePhotoDisplayMaterials(scene: THREE.Group) {
     originals.forEach(({ mesh, material }) => { mesh.material = material; });
     // These targeted clones are not owned by the GLTF cache.
     replacements.forEach((material) => material.dispose());
+  };
+}
+
+/** Applies only the authored contact-shadow decal rules; PBR colours stay in the GLB. */
+function prepareV76Decals(scene: THREE.Group) {
+  const materialStates: Array<{ material: THREE.Material; depthWrite: boolean; polygonOffset: boolean; factor: number; units: number; vertexColors?: boolean }> = [];
+  const meshStates: Array<{ mesh: THREE.Mesh; castShadow: boolean; receiveShadow: boolean; renderOrder: number }> = [];
+  scene.traverse((object) => {
+    if (!(object instanceof THREE.Mesh)) return;
+    const materials = Array.isArray(object.material) ? object.material : [object.material];
+    materials.forEach((material) => {
+      const standard = material as THREE.MeshStandardMaterial;
+      if (material.name !== "KA75_DECAL_ao") return;
+      materialStates.push({ material, depthWrite: material.depthWrite, polygonOffset: material.polygonOffset, factor: material.polygonOffsetFactor, units: material.polygonOffsetUnits, vertexColors: "vertexColors" in standard ? standard.vertexColors : undefined });
+      material.depthWrite = false; material.polygonOffset = true; material.polygonOffsetFactor = -2; material.polygonOffsetUnits = -2;
+      if ("vertexColors" in standard) standard.vertexColors = true;
+      material.needsUpdate = true;
+    });
+    if (materials.some((material) => material.name === "KA75_DECAL_ao")) {
+      meshStates.push({ mesh: object, castShadow: object.castShadow, receiveShadow: object.receiveShadow, renderOrder: object.renderOrder });
+      object.castShadow = false; object.receiveShadow = false; object.renderOrder = 2;
+    }
+  });
+  return () => {
+    materialStates.forEach(({ material, depthWrite, polygonOffset, factor, units, vertexColors }) => {
+      material.depthWrite = depthWrite; material.polygonOffset = polygonOffset; material.polygonOffsetFactor = factor; material.polygonOffsetUnits = units;
+      if (vertexColors !== undefined) (material as THREE.MeshStandardMaterial).vertexColors = vertexColors;
+      material.needsUpdate = true;
+    });
+    meshStates.forEach(({ mesh, castShadow, receiveShadow, renderOrder }) => { mesh.castShadow = castShadow; mesh.receiveShadow = receiveShadow; mesh.renderOrder = renderOrder; });
   };
 }
 
@@ -233,7 +232,9 @@ function AnimatedGate({ spec, scene }: { spec: GateSpec; scene: THREE.Group }) {
     if (store.campusGateCloseRequested === spec.id && !occupied) store.closeCampusGateWhenClear(spec.id);
     spec.pivots.forEach((pivotPoint, index) => { angles.current[index] = THREE.MathUtils.damp(angles.current[index], open ? spec.open[index] : spec.closed[index], lambda, delta); if (hinges[index]) hinges[index]!.rotation.y = angles.current[index]; updateBody(bodies.current[index], pivotPoint, spec.offsets[index], angles.current[index], spec.colliderCenterY[index]); });
   });
-  return <>{spec.pivots.map((_, index) => <RigidBody key={index} ref={(body) => { bodies.current[index] = body; }} type="kinematicPosition" colliders={false}><CuboidCollider args={spec.colliders[index]} /></RigidBody>)}</>;
+  // The V75 collider manifest supplies the moving gate colliders from the
+  // actual leaf nodes. Keep this component strictly responsible for visuals.
+  return null;
 }
 
 /** Primary V72 visual scene. Embedded photo displays retain their original GLB textures. */
@@ -242,14 +243,12 @@ export function CampusModel({ collisionsEnabled = true }: { collisionsEnabled?: 
   const ledTexture = useTexture(LED_TEXTURE_URL);
   const trafficMixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
   useLayoutEffect(() => {
-    const restoreLegacyGeometry = hideLegacyGeometry(scene);
-    const restoreDeskMeshes = batchEmbeddedStudentDesks(scene);
-    const restoreMaterials = applyUnlitMaterials(scene);
-    const restorePhotoMaterials = preparePhotoDisplayMaterials(scene);
-    const restoreLed = prepareCenterStageLed(scene, ledTexture);
-    const restoreGuardRoomBanner = prepareGuardRoomBanner(scene);
-    return () => { restoreGuardRoomBanner(); restoreLed(); restorePhotoMaterials(); restoreMaterials(); restoreDeskMeshes(); restoreLegacyGeometry(); };
-  }, [ledTexture, scene]);
+    const restoreV76Decals = prepareV76Decals(scene);
+    // V76 is intentionally rendered with GLTFLoader's original materials and
+    // geometry. Do not replace, clone, batch, recolour, or hide model nodes.
+    return restoreV76Decals;
+  }, [scene]);
+  useLayoutEffect(() => prepareCenterStageLed(scene, ledTexture), [ledTexture, scene]);
   useEffect(() => {
     const traffic = animations.find((clip) => clip.name === "TrafficLoop_V23");
     // V60 has no campus animation clips; keep this optional so the loader does

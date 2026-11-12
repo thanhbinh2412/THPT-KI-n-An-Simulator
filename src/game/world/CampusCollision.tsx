@@ -1,12 +1,13 @@
 "use client";
 
-import { CuboidCollider, RigidBody, TrimeshCollider } from "@react-three/rapier";
-import { useMemo } from "react";
+import { CuboidCollider, RigidBody, TrimeshCollider, type RapierRigidBody } from "@react-three/rapier";
+import { useFrame } from "@react-three/fiber";
+import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useGameStore } from "@/game/store/useGameStore";
 import v58CollisionDelta from "../../../assets/school/kien_an_campus_v58_collision_delta.json";
-import v72CollisionDelta from "../../../assets/school/kien_an_campus_v72_collision_delta.json";
-import v72SceneConfig from "../../../assets/school/kien_an_campus_v72_scene_config.json";
+import v78ColliderManifest from "../../../assets/school/KienAn_V78_colliders.json";
+import { classrooms } from "@/game/classrooms/classroom.config";
 
 type ColliderKind = "blocking" | "walkable";
 type ColliderSpec = { id: string; position: [number, number, number]; rotation: [number, number, number]; halfExtents: [number, number, number]; kind: ColliderKind };
@@ -36,8 +37,10 @@ type V72CollisionDelta = { removedColliders: string[] };
 type V72SceneConfig = { removedMeshes: string[]; v71Changes?: { redPavingMeshes: string[]; removedOutdatedVisualMeshes: string[] } };
 
 const collisionDelta = v58CollisionDelta as V58CollisionDelta;
-const v72Delta = v72CollisionDelta as V72CollisionDelta;
-const v72Scene = v72SceneConfig as V72SceneConfig;
+// The V72 compatibility routine below is intentionally no longer rendered.
+// Keep its inert metadata local until the legacy implementation is removed.
+const v72Delta: V72CollisionDelta = { removedColliders: [] };
+const v72Scene: V72SceneConfig = { removedMeshes: [] };
 const v71VisualOnlyPrefixes = [
   ...(v72Scene.v71Changes?.redPavingMeshes ?? []),
   "V71_MAIN_GATE_CONCRETE_ONLY",
@@ -276,7 +279,7 @@ function DebugCollider({ collider }: { collider: ColliderSpec }) {
  * embedded desk set and teacher desk gets one simple
  * bounding-box collider. Dynamic gates and classroom doors stay kinematic.
  */
-export function CampusCollision({ scene }: { scene: THREE.Group }) {
+function LegacyCampusCollision({ scene }: { scene: THREE.Group }) {
   const { colliders, stairTrimeshes } = useMemo(() => buildColliders(scene), [scene]);
   return <RigidBody type="fixed" colliders={false} userData={{ colliderCount: colliders.length + stairTrimeshes.length, campusVersion: "V72" }}>
     {colliders.map((collider) => <group key={collider.id}>
@@ -288,4 +291,66 @@ export function CampusCollision({ scene }: { scene: THREE.Group }) {
       <DebugCollider collider={stair.debug} />
     </group>)}
   </RigidBody>;
+}
+
+type V78ColliderType = "walk" | "block" | "door" | "dynamic";
+type V78Manifest = { types: V78ColliderType[]; nodes: string[]; boxes: number[][] };
+type V78ColliderSpec = { id: string; type: V78ColliderType; node: string; center: [number, number, number]; halfExtents: [number, number, number] };
+
+const v78Manifest = v78ColliderManifest as V78Manifest;
+const v78Colliders: V78ColliderSpec[] = (() => {
+  if (v78Manifest.types.join(",") !== "walk,block,door,dynamic") throw new Error("Unsupported V78 collider manifest types.");
+  return v78Manifest.boxes.map((box, index) => {
+    const [minX, minY, minZ, maxX, maxY, maxZ, typeIndex, nodeIndex] = box;
+    const type = v78Manifest.types[typeIndex]; const node = v78Manifest.nodes[nodeIndex];
+    if (box.length !== 8 || !type || !node || maxX < minX || maxY < minY || maxZ < minZ) throw new Error(`Invalid V78 collider ${index}.`);
+    return { id: `${type}:${node}:${index}`, type, node, center: [(minX + maxX) / 2, (minY + maxY) / 2, (minZ + maxZ) / 2], halfExtents: [(maxX - minX) / 2, (maxY - minY) / 2, (maxZ - minZ) / 2] };
+  });
+})();
+
+const v75DoorIds = new Map(classrooms.map((room) => {
+  const suffix = room.doorNodeName.match(/_(\d+)_(\d+)$/);
+  return [suffix ? `V36_RIGHT_${suffix[1]}_${suffix[2]}_DOOR_OPEN` : "", room.id] as const;
+}));
+
+function V78DoorCollider({ spec }: { spec: V78ColliderSpec }) {
+  const id = v75DoorIds.get(spec.node);
+  const isOpen = useGameStore((state) => id ? state.classroomDoors[id] : false);
+  // Frames/jambs stay fixed: only V36's actual opening panel follows the room state.
+  return isOpen ? null : <CuboidCollider position={spec.center} args={spec.halfExtents} />;
+}
+
+function V78DynamicCollider({ spec, scene }: { spec: V78ColliderSpec; scene: THREE.Group }) {
+  const body = useRef<RapierRigidBody | null>(null);
+  const node = useMemo(() => scene.getObjectByName(spec.node), [scene, spec.node]);
+  const initial = useMemo(() => node?.matrixWorld.clone() ?? new THREE.Matrix4(), [node]);
+  const inverse = useMemo(() => initial.clone().invert(), [initial]);
+  const delta = useMemo(() => new THREE.Matrix4(), []);
+  const center = useMemo(() => new THREE.Vector3(...spec.center), [spec.center]);
+  const translation = useMemo(() => new THREE.Vector3(), []);
+  const rotation = useMemo(() => new THREE.Quaternion(), []);
+  useFrame(() => {
+    if (!node || !body.current) return;
+    delta.multiplyMatrices(node.matrixWorld, inverse);
+    translation.copy(center).applyMatrix4(delta);
+    rotation.setFromRotationMatrix(delta);
+    body.current.setNextKinematicTranslation(translation);
+    body.current.setNextKinematicRotation(rotation);
+  });
+  if (!node) return null;
+  return <RigidBody ref={body} type="kinematicPosition" colliders={false} position={spec.center}><CuboidCollider args={spec.halfExtents} /></RigidBody>;
+}
+
+/** V78 uses authored boxes only; visual mesh bounds are never converted to physics. */
+export function CampusCollision({ scene }: { scene: THREE.Group }) {
+  const staticColliders = useMemo(() => v78Colliders.filter((spec) => spec.type !== "dynamic"), []);
+  const dynamicColliders = useMemo(() => v78Colliders.filter((spec) => spec.type === "dynamic"), []);
+  return <>
+    <RigidBody type="fixed" colliders={false} userData={{ colliderCount: v78Colliders.length, campusVersion: "V78", source: "KienAn_V78_colliders.json" }}>
+      {staticColliders.map((spec) => <group key={spec.id}>
+        {spec.type === "door" ? <V78DoorCollider spec={spec} /> : <CuboidCollider position={spec.center} args={spec.halfExtents} />}
+      </group>)}
+    </RigidBody>
+    {dynamicColliders.map((spec) => <V78DynamicCollider key={spec.id} spec={spec} scene={scene} />)}
+  </>;
 }

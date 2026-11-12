@@ -43,7 +43,7 @@ function Scene({ onReady }: { onReady: () => void }) {
   const spawn: Vec3 | undefined = localPlayer ? [localPlayer.position.x, localPlayer.position.y, localPlayer.position.z] : undefined;
   const graphics = useGraphicsSettings();
   return <>
-    <Physics gravity={[0, -18, 0]}>{graphics.campusVisible && <SchoolWorld collisionsEnabled={graphics.collisionsEnabled} />}<PlayerController bodyRef={player} enabled={!!localPlayer && !paused} spawn={spawn} /><RemotePlayers /></Physics>
+    <Physics gravity={[0, -9.81, 0]}>{graphics.campusVisible && <SchoolWorld collisionsEnabled={graphics.collisionsEnabled} />}<PlayerController bodyRef={player} enabled={!!localPlayer && !paused} spawn={spawn} /><RemotePlayers /></Physics>
     <CameraController player={player} /><InteractionManager /><PerformanceMonitor /><PhysicsDebugQuery /><SceneReady onReady={onReady} />
   </>;
 }
@@ -54,4 +54,4 @@ export default function Game() {
   return <BackgroundMusicProvider><MultiplayerProvider><VoiceProvider><GraphicsSettingsProvider><GameContent sceneReady={sceneReady} markSceneReady={markSceneReady} /></GraphicsSettingsProvider></VoiceProvider></MultiplayerProvider></BackgroundMusicProvider>;
 }
 
-function GameContent({ sceneReady, markSceneReady }: { sceneReady: boolean; markSceneReady: () => void }) { const graphics = useGraphicsSettings(); return <main className="game-shell relative"><Canvas shadows={graphics.shadows} dpr={graphics.dpr} camera={{ fov: 58, position: [0, 5, 27]}} gl={{ antialias: false, powerPreference: "high-performance", toneMapping: THREE.NoToneMapping, outputColorSpace: THREE.SRGBColorSpace }}><Suspense fallback={null}><Scene onReady={markSceneReady} /></Suspense></Canvas><GameLoadingScreen ready={sceneReady} /><GameHUD /><MobileControls /><ChatPanel /><VoiceControls /><MultiplayerUI /><PerformanceOverlay /></main>; }
+function GameContent({ sceneReady, markSceneReady }: { sceneReady: boolean; markSceneReady: () => void }) { const graphics = useGraphicsSettings(); return <main className="game-shell relative"><Canvas shadows={graphics.shadows} dpr={graphics.dpr} camera={{ fov: 58, position: [0, 5, 27]}} gl={{ antialias: false, powerPreference: "high-performance", toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: .9, outputColorSpace: THREE.SRGBColorSpace }}><Suspense fallback={null}><Scene onReady={markSceneReady} /></Suspense></Canvas><GameLoadingScreen ready={sceneReady} /><GameHUD /><MobileControls /><ChatPanel /><VoiceControls /><MultiplayerUI /><PerformanceOverlay /></main>; }
