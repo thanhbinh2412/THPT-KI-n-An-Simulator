@@ -1,0 +1,15 @@
+# Blender Asset Catalog Definition File
+VERSION 1
+
+f4f5e1f2-783f-571c-b1bb-3a0ade232848:Class/Teacher:Teacher
+1ace07cc-2e7a-5b38-8875-91babc1cf306:Class/Walls:Walls
+abfa4a07-5593-528a-8d51-4e67c0a5f0db:Class/Doors:Doors
+9ddfe12a-5f89-5f22-801a-b95e90a842d9:Class/Windows:Windows
+1f11a559-2cc1-56af-b2db-0d2207af255f:Class/Fans:Fans
+5a7ddde7-7fd4-5f50-89da-64c68696ec99:Class/Boards:Boards
+bb2017ad-02d3-5b55-8732-ad35cdf31084:Class/Storage:Storage
+de1223cf-454f-5023-b67c-fcb00b978d39:Class/Student:Student
+66914d2a-e0a0-5f70-b468-70328d801c1b:Class/Decor:Decor
+64c7a850-ec86-588d-bacb-a72ea00f8f87:Class/Electrical:Electrical
+9da7a125-62df-526a-a903-bc562f4f11d6:Class/AV:AV
+9778cca2-3c00-5a81-847a-711770c31a22:Class/Computers:Computers
