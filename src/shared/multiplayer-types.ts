@@ -12,6 +12,7 @@ export type PlayerState = {
   locomotion: LocomotionState;
   /** Null when standing; the authoritative server assigns one of 3 bench seats. */
   benchSeat: number | null;
+  seatId: string | null;
   sequence: number;
   updatedAt: number;
 };
@@ -29,6 +30,10 @@ export type JoinFailure = { success: false; code: "INVALID_NAME" | "WORLD_FULL" 
 export type JoinResult = JoinSuccess | JoinFailure;
 export type WorldSnapshot = { type: "delta" | "full"; serverTime: number; players: PlayerState[] };
 export type BenchSeatResult = { success: true; seatIndex: number } | { success: false; code: "BENCH_FULL" | "NOT_JOINED" };
+export type ActionFailure = { success: false; code: "NOT_JOINED" | "TOO_FAR" | "OCCUPIED" | "INVALID_TARGET" | "ALREADY_SEATED"; message: string };
+export type SeatActionResult = { success: true; seatId: string | null; position: [number, number, number] } | ActionFailure;
+export type WorldInteractionState = { doors: Record<string, boolean>; pendingDoors: string[]; lights: Record<string, boolean>; seats: Record<string, string> };
+export type WorldActionResult = { success: true } | ActionFailure;
 export type ChatMessage = { id: string; playerId: string; playerName: string; content: string; timestamp: number };
 export type ChatSendPayload = { content: string };
 export type ChatSendResult = { success: true; messageId: string } | { success: false; code: "NOT_JOINED" | "INVALID_MESSAGE" | "RATE_LIMITED"; message: string };
@@ -36,6 +41,7 @@ export type VoiceState = { playerId: string; enabled: boolean; muted: boolean; s
 export type VoiceSignalPayload = { targetPlayerId: string; description?: RTCSessionDescriptionInit; candidate?: RTCIceCandidateInit };
 
 export type ServerToClientEvents = {
+  "world:interactions": (payload: WorldInteractionState) => void;
   "player:joined": (payload: { player: PlayerState }) => void;
   "player:left": (payload: { playerId: string }) => void;
   "world:snapshot": (payload: WorldSnapshot) => void;
@@ -51,6 +57,11 @@ export type ServerToClientEvents = {
 };
 
 export type ClientToServerEvents = {
+  "seat:occupy": (payload: { seatId: string }, acknowledgement: (result: SeatActionResult) => void) => void;
+  "seat:leave": (acknowledgement: (result: SeatActionResult) => void) => void;
+  "light:toggle": (payload: { roomId: string }, acknowledgement: (result: WorldActionResult) => void) => void;
+  "door:toggle": (payload: { doorId: string }, acknowledgement: (result: WorldActionResult) => void) => void;
+  "surface:stand": (payload: { surfaceId: string }, acknowledgement: (result: SeatActionResult) => void) => void;
   "player:join": (payload: PlayerProfile, acknowledgement: (result: JoinResult) => void) => void;
   "player:move": (payload: PlayerMovePayload) => void;
   "player:leave": (acknowledgement?: () => void) => void;

@@ -1,6 +1,6 @@
-import { campusSpawn } from "../../src/game/config/campusGameplay";
+import { campusSpawn, campusSeatsById, campusSurfacesById } from "../../src/game/config/campusGameplay";
 import { randomUUID } from "node:crypto";
-import type { BenchSeatResult, PlayerGender, PlayerMovePayload, PlayerState, Vector3State } from "../../src/shared/multiplayer-types";
+import type { BenchSeatResult, PlayerGender, PlayerMovePayload, PlayerState, Vector3State, SeatActionResult } from "../../src/shared/multiplayer-types";
 import { multiplayerConfig } from "./config";
 
 type Session = { player: PlayerState; lastAcceptedAt: number; changed: boolean };
@@ -17,7 +17,7 @@ export class PlayerManager {
     if (existing) return existing.player;
     const position = spawnPositions[this.spawnIndex++ % spawnPositions.length];
     const now = Date.now();
-    const player: PlayerState = { id: randomUUID(), name, gender, position: { ...position }, rotationY: Math.PI, locomotion: "idle", benchSeat: null, sequence: 0, updatedAt: now };
+    const player: PlayerState = { id: randomUUID(), name, gender, position: { ...position }, rotationY: Math.PI, locomotion: "idle", benchSeat: null, seatId: null, sequence: 0, updatedAt: now };
     this.sessions.set(socketId, { player, lastAcceptedAt: now, changed: true });
     return player;
   }
@@ -30,6 +30,11 @@ export class PlayerManager {
   updatePlayer(socketId: string, payload: PlayerMovePayload) {
     const session = this.sessions.get(socketId);
     if (!session || payload.sequence <= session.player.sequence) return undefined;
+    const seat = session.player.seatId ? campusSeatsById.get(session.player.seatId) : undefined;
+    if (seat) {
+      session.player = { ...session.player, position: { x: seat.position[0], y: seat.position[1], z: seat.position[2] }, rotationY: seat.rotationY, locomotion: "sit", sequence: payload.sequence, updatedAt: Date.now() };
+      session.changed = true; return session.player;
+    }
     const now = Date.now();
     const elapsedSeconds = Math.max(.05, (now - session.lastAcceptedAt) / 1000);
     const distance = Math.hypot(payload.position.x - session.player.position.x, payload.position.y - session.player.position.y, payload.position.z - session.player.position.z);
@@ -43,6 +48,7 @@ export class PlayerManager {
   occupyBenchSeat(socketId: string): BenchSeatResult {
     const session = this.sessions.get(socketId);
     if (!session) return { success: false, code: "NOT_JOINED" };
+    if (session.player.seatId) return { success: false, code: "BENCH_FULL" };
     if (session.player.benchSeat !== null) return { success: true, seatIndex: session.player.benchSeat };
     const occupied = new Set(this.getAllPlayers().map((player) => player.benchSeat).filter((seat): seat is number => seat !== null));
     const seatIndex = [0, 1, 2].find((seat) => !occupied.has(seat));
@@ -57,6 +63,46 @@ export class PlayerManager {
     if (!session || session.player.benchSeat === null) return;
     session.player = { ...session.player, benchSeat: null, updatedAt: Date.now() };
     session.changed = true;
+  }
+
+  occupySeat(socketId: string, seatId: string): SeatActionResult {
+    const session = this.sessions.get(socketId), seat = campusSeatsById.get(seatId);
+    if (!session) return { success: false, code: "NOT_JOINED", message: "Bạn cần vào trường trước." };
+    if (!seat) return { success: false, code: "INVALID_TARGET", message: "Không tìm thấy chỗ ngồi." };
+    if (session.player.seatId === seatId) return { success: true, seatId, position: seat.position };
+    if (session.player.seatId || session.player.benchSeat !== null) return { success: false, code: "ALREADY_SEATED", message: "Hãy đứng dậy trước khi đổi ghế." };
+    if (!this.isNear(socketId, seat.approach, seat.radius + .45)) return { success: false, code: "TOO_FAR", message: "Hãy đến gần lối vào chỗ ngồi." };
+    if (this.getAllPlayers().some(player => player.seatId === seatId)) return { success: false, code: "OCCUPIED", message: "Chỗ này đã có người ngồi." };
+    session.player = { ...session.player, seatId, benchSeat: null, position: { x: seat.position[0], y: seat.position[1], z: seat.position[2] }, rotationY: seat.rotationY, locomotion: "sit", updatedAt: Date.now() };
+    session.lastAcceptedAt = Date.now(); session.changed = true;
+    return { success: true, seatId, position: seat.position };
+  }
+
+  leaveSeat(socketId: string): SeatActionResult {
+    const session = this.sessions.get(socketId);
+    if (!session) return { success: false, code: "NOT_JOINED", message: "Bạn cần vào trường trước." };
+    const seat = session.player.seatId ? campusSeatsById.get(session.player.seatId) : undefined;
+    const position: [number, number, number] = seat?.exitPositions[0] ?? [session.player.position.x, session.player.position.y, session.player.position.z];
+    session.player = { ...session.player, seatId: null, position: { x: position[0], y: position[1], z: position[2] }, locomotion: "idle", updatedAt: Date.now() };
+    session.lastAcceptedAt = Date.now(); session.changed = true;
+    return { success: true, seatId: null, position };
+  }
+
+  standOnSurface(socketId: string, surfaceId: string): SeatActionResult {
+    const session = this.sessions.get(socketId), surface = campusSurfacesById.get(surfaceId);
+    if (!session) return { success: false, code: "NOT_JOINED", message: "Bạn cần vào trường trước." };
+    if (!surface) return { success: false, code: "INVALID_TARGET", message: "Không tìm thấy mặt bàn." };
+    if (session.player.seatId || session.player.benchSeat !== null) return { success: false, code: "ALREADY_SEATED", message: "Hãy đứng dậy trước." };
+    if (!this.isNear(socketId, surface.approach, surface.radius + .45)) return { success: false, code: "TOO_FAR", message: "Hãy đến gần bàn giáo viên." };
+    const position = surface.position;
+    session.player = { ...session.player, position: { x: position[0], y: position[1], z: position[2] }, locomotion: "idle", updatedAt: Date.now() };
+    session.lastAcceptedAt = Date.now(); session.changed = true;
+    return { success: true, seatId: null, position };
+  }
+
+  isNear(socketId: string, position: [number, number, number], radius: number) {
+    const player = this.getPlayer(socketId); if (!player) return false;
+    return Math.hypot(player.position.x-position[0], player.position.z-position[2]) <= radius && Math.abs(player.position.y-position[1]) < 1.35;
   }
 
   removePlayer(socketId: string) { const player = this.sessions.get(socketId)?.player; this.sessions.delete(socketId); return player; }

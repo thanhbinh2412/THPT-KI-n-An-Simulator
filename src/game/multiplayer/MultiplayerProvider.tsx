@@ -5,6 +5,8 @@ import { useGameStore } from "@/game/store/useGameStore";
 import { getMultiplayerSocket } from "./socket-client";
 import type { ChatMessage, ChatSendResult, JoinResult, PlayerGender, PlayerState, WorldSnapshot } from "@/shared/multiplayer-types";
 import { stoneBenchConfig } from "@/game/world/stoneBench.config";
+import { campusSeatsById } from "@/game/config/campusGameplay";
+import type { WorldInteractionState } from "@/shared/multiplayer-types";
 
 type ConnectionStatus = "guest" | "connecting" | "connected" | "reconnecting" | "disconnected" | "error";
 type MultiplayerContextValue = {
@@ -79,13 +81,14 @@ export function MultiplayerProvider({ children }: { children: ReactNode }) {
     const joined = ({ player }: { player: PlayerState }) => { if (player.id !== localPlayer?.id) { remoteRef.current.set(player.id, player); publishRemotes(); } };
     const left = ({ playerId }: { playerId: string }) => { remoteRef.current.delete(playerId); const timer = bubbleTimersRef.current.get(playerId); if (timer) window.clearTimeout(timer); bubbleTimersRef.current.delete(playerId); setChatBubbles((current) => { const { [playerId]: _, ...rest } = current; return rest; }); publishRemotes(); };
     const count = ({ count: nextCount }: { count: number }) => setOnlineCount(nextCount);
+    const worldInteractions = (state: WorldInteractionState) => { const store = useGameStore.getState(); store.applyInteractionState(state); if (localPlayer) { const ownSeat = Object.entries(state.seats).find(([, owner]) => owner === localPlayer.id)?.[0] ?? null; if (store.activeSeatId !== ownSeat) store.setActiveSeat(ownSeat); } };
     const history = ({ messages }: { messages: ChatMessage[] }) => mergeChat(messages);
     const message = (chatMessage: ChatMessage) => { mergeChat([chatMessage]); showBubble(chatMessage); };
     const connected = () => { if (profileRef.current && !localPlayer) performJoin(profileRef.current.name, profileRef.current.gender, true); };
-    const disconnected = () => { useGameStore.getState().setBenchSeatIndex(null); bubbleTimersRef.current.forEach((timer) => window.clearTimeout(timer)); bubbleTimersRef.current.clear(); setChatBubbles({}); if (profileRef.current) { setLocalPlayer(null); remoteRef.current.clear(); publishRemotes(); setStatus("reconnecting"); } else setStatus("disconnected"); };
-    socket.on("player:joined", joined); socket.on("player:left", left); socket.on("world:snapshot", applySnapshot); socket.on("world:online-count", count); socket.on("chat:history", history); socket.on("chat:message", message); socket.on("connect", connected); socket.on("disconnect", disconnected);
+    const disconnected = () => { useGameStore.getState().setBenchSeatIndex(null); useGameStore.getState().setActiveSeat(null); useGameStore.getState().setInteractionPending(false); bubbleTimersRef.current.forEach((timer) => window.clearTimeout(timer)); bubbleTimersRef.current.clear(); setChatBubbles({}); if (profileRef.current) { setLocalPlayer(null); remoteRef.current.clear(); publishRemotes(); setStatus("reconnecting"); } else setStatus("disconnected"); };
+    socket.on("world:interactions", worldInteractions); socket.on("player:joined", joined); socket.on("player:left", left); socket.on("world:snapshot", applySnapshot); socket.on("world:online-count", count); socket.on("chat:history", history); socket.on("chat:message", message); socket.on("connect", connected); socket.on("disconnect", disconnected);
     socket.emit("world:online-count", (result) => setOnlineCount(result.count));
-    return () => { socket.off("player:joined", joined); socket.off("player:left", left); socket.off("world:snapshot", applySnapshot); socket.off("world:online-count", count); socket.off("chat:history", history); socket.off("chat:message", message); socket.off("connect", connected); socket.off("disconnect", disconnected); };
+    return () => { socket.off("world:interactions", worldInteractions); socket.off("player:joined", joined); socket.off("player:left", left); socket.off("world:snapshot", applySnapshot); socket.off("world:online-count", count); socket.off("chat:history", history); socket.off("chat:message", message); socket.off("connect", connected); socket.off("disconnect", disconnected); };
   }, [applySnapshot, localPlayer, mergeChat, performJoin, publishRemotes, showBubble]);
 
   useEffect(() => {
@@ -106,7 +109,8 @@ export function MultiplayerProvider({ children }: { children: ReactNode }) {
       const position = state.playerPosition;
       const previous = latestPosition.current;
       const dx = previous ? position[0] - previous[0] : 0; const dz = previous ? position[2] - previous[2] : 0;
-      if (state.benchSeatIndex !== null) lastYaw.current = stoneBenchConfig.seatedYaw;
+      if (state.activeSeatId) lastYaw.current = campusSeatsById.get(state.activeSeatId)?.rotationY ?? lastYaw.current;
+      else if (state.benchSeatIndex !== null) lastYaw.current = stoneBenchConfig.seatedYaw;
       else if (Math.hypot(dx, dz) > .005) lastYaw.current = Math.atan2(dx, dz);
       latestPosition.current = position;
       latestMotion.current = state.playerMotion;
@@ -122,6 +126,8 @@ export function MultiplayerProvider({ children }: { children: ReactNode }) {
     profileRef.current = null; sequenceRef.current = 0; latestPosition.current = null; remoteRef.current.clear();
     if (socket.connected) { socket.emit("bench:leave"); socket.emit("player:leave"); }
     useGameStore.getState().setBenchSeatIndex(null);
+    useGameStore.getState().setActiveSeat(null);
+    useGameStore.getState().setInteractionPending(false);
     setLocalPlayer(null); publishRemotes(); setStatus("guest"); setError(null);
     clearChat();
   }, [clearChat, publishRemotes]);

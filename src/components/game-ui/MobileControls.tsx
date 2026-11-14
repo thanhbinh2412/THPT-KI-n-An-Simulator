@@ -12,6 +12,8 @@ export function MobileControls() {
   const setMove = useGameStore((s) => s.setMobileMove);
   const setJump = useGameStore((s) => s.setMobileJump);
   const nearby = useGameStore((s) => s.nearbyId);
+  const seated = useGameStore(s => s.activeSeatId !== null || s.benchSeatIndex !== null);
+  const pending = useGameStore(s => s.interactionPending);
   const toggle = useGameStore((s) => s.toggleCamera);
   const setRun = useGameStore((s) => s.setRun);
   const { localPlayer } = useMultiplayer();
@@ -89,7 +91,7 @@ export function MobileControls() {
         <button className="touch-button" onClick={() => setJump(true)}>
           JUMP
         </button>
-        <button className="touch-button" onClick={activateNearby} disabled={!nearby}>
+        <button className="touch-button" onClick={activateNearby} disabled={pending || (!nearby && !seated)}>
           USE
         </button>
         <button className="touch-button" onClick={() => setRun(!useGameStore.getState().run)}>

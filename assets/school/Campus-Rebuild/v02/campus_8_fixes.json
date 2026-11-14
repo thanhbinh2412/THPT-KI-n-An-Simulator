@@ -1,0 +1,759 @@
+{
+  "status": "APPLIED_NATIVE",
+  "reference_directory": "assets/map-overaround",
+  "surroundings_accuracy": "Approximate footprints/heights from supplied imagery; no surveyed terrain heights",
+  "retired_objects": [
+    "V02_Front_Ground_Guard_Teachers_Block_1_Base_Trim",
+    "V02_Front_Ground_Guard_Teachers_Block_1_Brick",
+    "V02_Front_Ground_Guard_Teachers_Block_1_Coping",
+    "V02_Front_Ground_Guard_Teachers_Block_1_Plinth",
+    "V02_Front_Ground_Guard_Teachers_Block_2_Base_Trim",
+    "V02_Front_Ground_Guard_Teachers_Block_2_Brick",
+    "V02_Front_Ground_Guard_Teachers_Block_2_Coping",
+    "V02_Front_Ground_Guard_Teachers_Block_2_Plinth",
+    "V02_Front_Stair_Access_Teachers_Block_1_Landing",
+    "V02_Front_Stair_Access_Teachers_Block_1_Step_1",
+    "V02_Front_Stair_Access_Teachers_Block_1_Step_2",
+    "V02_Front_Stair_Access_Teachers_Block_1_Step_3",
+    "V02_Teachers_Block_Corridor_Parapets",
+    "V02_Teachers_Block_Masonry",
+    "V02_Teachers_Block_V63_Window_Grilles_And_Door_Frames"
+  ],
+  "teacher_rooms": [
+    {
+      "id": "teacher-hall",
+      "title": "Phòng hội trường",
+      "floor": 1,
+      "u_bounds": [
+        -33.405,
+        -4.200625
+      ],
+      "v_bounds": [
+        -2.3925,
+        4.5425
+      ],
+      "floor_z": 0.33
+    },
+    {
+      "id": "teacher-F1-R1",
+      "title": "Phòng giáo viên 1",
+      "floor": 1,
+      "u_bounds": [
+        7.541125,
+        20.4730625
+      ],
+      "v_bounds": [
+        -2.3925,
+        4.5425
+      ],
+      "floor_z": 0.33
+    },
+    {
+      "id": "teacher-F1-R2",
+      "title": "Phòng giáo viên 2",
+      "floor": 1,
+      "u_bounds": [
+        20.4730625,
+        33.405
+      ],
+      "v_bounds": [
+        -2.3925,
+        4.5425
+      ],
+      "floor_z": 0.33
+    },
+    {
+      "id": "teacher-F2-R1",
+      "title": "Phòng giáo viên tầng 2 · 1",
+      "floor": 2,
+      "u_bounds": [
+        -33.405,
+        -18.8028125
+      ],
+      "v_bounds": [
+        -2.3925,
+        4.5425
+      ],
+      "floor_z": 3.98
+    },
+    {
+      "id": "teacher-F2-R2",
+      "title": "Phòng giáo viên tầng 2 · 2",
+      "floor": 2,
+      "u_bounds": [
+        -18.8028125,
+        -4.200625
+      ],
+      "v_bounds": [
+        -2.3925,
+        4.5425
+      ],
+      "floor_z": 3.98
+    },
+    {
+      "id": "teacher-F2-R3",
+      "title": "Phòng giáo viên tầng 2 · 3",
+      "floor": 2,
+      "u_bounds": [
+        7.541125,
+        20.4730625
+      ],
+      "v_bounds": [
+        -2.3925,
+        4.5425
+      ],
+      "floor_z": 3.98
+    },
+    {
+      "id": "teacher-F2-R4",
+      "title": "Phòng giáo viên tầng 2 · 4",
+      "floor": 2,
+      "u_bounds": [
+        20.4730625,
+        33.405
+      ],
+      "v_bounds": [
+        -2.3925,
+        4.5425
+      ],
+      "floor_z": 3.98
+    }
+  ],
+  "teacher_doors": [
+    {
+      "id": "teacher-hall-entrance-1",
+      "room": "teacher-hall",
+      "local_u": -27.5,
+      "floor": 1,
+      "position_blender": [
+        -44.35499572753906,
+        -30.985002517700195,
+        1.1799999475479126
+      ]
+    },
+    {
+      "id": "teacher-hall-entrance-2",
+      "room": "teacher-hall",
+      "local_u": -10.5,
+      "floor": 1,
+      "position_blender": [
+        -44.35499954223633,
+        -13.985000610351562,
+        1.1799999475479126
+      ]
+    },
+    {
+      "id": "teacher-F1-R1",
+      "room": "teacher-F1-R1",
+      "local_u": 19.1730625,
+      "floor": 1,
+      "position_blender": [
+        -44.355003356933594,
+        15.688065528869629,
+        1.1799999475479126
+      ]
+    },
+    {
+      "id": "teacher-F1-R2",
+      "room": "teacher-F1-R2",
+      "local_u": 32.105000000000004,
+      "floor": 1,
+      "position_blender": [
+        -44.35500717163086,
+        28.620004653930664,
+        1.1799999475479126
+      ]
+    },
+    {
+      "id": "teacher-F2-R1",
+      "room": "teacher-F2-R1",
+      "local_u": -20.102812500000002,
+      "floor": 2,
+      "position_blender": [
+        -44.35499954223633,
+        -23.587812423706055,
+        4.829999923706055
+      ]
+    },
+    {
+      "id": "teacher-F2-R2",
+      "room": "teacher-F2-R2",
+      "local_u": -5.500624999999999,
+      "floor": 2,
+      "position_blender": [
+        -44.35499954223633,
+        -8.985625267028809,
+        4.829999923706055
+      ]
+    },
+    {
+      "id": "teacher-F2-R3",
+      "room": "teacher-F2-R3",
+      "local_u": 19.1730625,
+      "floor": 2,
+      "position_blender": [
+        -44.355003356933594,
+        15.688065528869629,
+        4.829999923706055
+      ]
+    },
+    {
+      "id": "teacher-F2-R4",
+      "room": "teacher-F2-R4",
+      "local_u": 32.105000000000004,
+      "floor": 2,
+      "position_blender": [
+        -44.35500717163086,
+        28.620004653930664,
+        4.829999923706055
+      ]
+    }
+  ],
+  "rear_windows": [
+    {
+      "room": "teacher-hall",
+      "floor": 1,
+      "local_u": -30.5,
+      "width": 1.58,
+      "bottom": 1.29,
+      "top": 3.17
+    },
+    {
+      "room": "teacher-hall",
+      "floor": 1,
+      "local_u": -24.5,
+      "width": 1.58,
+      "bottom": 1.29,
+      "top": 3.17
+    },
+    {
+      "room": "teacher-hall",
+      "floor": 1,
+      "local_u": -18.5,
+      "width": 1.58,
+      "bottom": 1.29,
+      "top": 3.17
+    },
+    {
+      "room": "teacher-hall",
+      "floor": 1,
+      "local_u": -12.5,
+      "width": 1.58,
+      "bottom": 1.29,
+      "top": 3.17
+    },
+    {
+      "room": "teacher-hall",
+      "floor": 1,
+      "local_u": -6.5,
+      "width": 1.58,
+      "bottom": 1.29,
+      "top": 3.17
+    },
+    {
+      "room": "teacher-F1-R1",
+      "floor": 1,
+      "local_u": 11.032748125000001,
+      "width": 1.58,
+      "bottom": 1.29,
+      "top": 3.17
+    },
+    {
+      "room": "teacher-F1-R1",
+      "floor": 1,
+      "local_u": 16.59348125,
+      "width": 1.58,
+      "bottom": 1.29,
+      "top": 3.17
+    },
+    {
+      "room": "teacher-F1-R2",
+      "floor": 1,
+      "local_u": 23.964685625,
+      "width": 1.58,
+      "bottom": 1.29,
+      "top": 3.17
+    },
+    {
+      "room": "teacher-F1-R2",
+      "floor": 1,
+      "local_u": 29.52541875,
+      "width": 1.58,
+      "bottom": 1.29,
+      "top": 3.17
+    },
+    {
+      "room": "teacher-F2-R1",
+      "floor": 2,
+      "local_u": -29.462409375,
+      "width": 1.58,
+      "bottom": 4.9399999999999995,
+      "top": 6.82
+    },
+    {
+      "room": "teacher-F2-R1",
+      "floor": 2,
+      "local_u": -23.183468750000003,
+      "width": 1.58,
+      "bottom": 4.9399999999999995,
+      "top": 6.82
+    },
+    {
+      "room": "teacher-F2-R2",
+      "floor": 2,
+      "local_u": -14.860221875,
+      "width": 1.58,
+      "bottom": 4.9399999999999995,
+      "top": 6.82
+    },
+    {
+      "room": "teacher-F2-R2",
+      "floor": 2,
+      "local_u": -8.58128125,
+      "width": 1.58,
+      "bottom": 4.9399999999999995,
+      "top": 6.82
+    },
+    {
+      "room": "teacher-F2-R3",
+      "floor": 2,
+      "local_u": 11.032748125000001,
+      "width": 1.58,
+      "bottom": 4.9399999999999995,
+      "top": 6.82
+    },
+    {
+      "room": "teacher-F2-R3",
+      "floor": 2,
+      "local_u": 16.59348125,
+      "width": 1.58,
+      "bottom": 4.9399999999999995,
+      "top": 6.82
+    },
+    {
+      "room": "teacher-F2-R4",
+      "floor": 2,
+      "local_u": 23.964685625,
+      "width": 1.58,
+      "bottom": 4.9399999999999995,
+      "top": 6.82
+    },
+    {
+      "room": "teacher-F2-R4",
+      "floor": 2,
+      "local_u": 29.52541875,
+      "width": 1.58,
+      "bottom": 4.9399999999999995,
+      "top": 6.82
+    }
+  ],
+  "seam_seals": [
+    {
+      "room": "V02_Classroom_Main_Classrooms_10C5",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Main_Classrooms_10C6",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Main_Classrooms_10C7",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Main_Classrooms_10C8",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Main_Classrooms_10C9",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Main_Classrooms_11B5",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Main_Classrooms_11B6",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Main_Classrooms_11B7",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Main_Classrooms_11B8",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Main_Classrooms_11B9",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Main_Classrooms_12A5",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Main_Classrooms_12A6",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Main_Classrooms_12A7",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Main_Classrooms_12A8",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Main_Classrooms_12A9",
+      "width": 10.7118501663208,
+      "depth": 8.729999542236328,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F1_B1",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F1_B2",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F1_B3",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F1_B4",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F1_B5",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F1_B6",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F1_B7",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F1_B8",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F2_B1",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F2_B2",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F2_B3",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F2_B4",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F2_B5",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F2_B6",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F2_B7",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Rear_Auxiliary_Classrooms_F2_B8",
+      "width": 5.609445095062256,
+      "depth": 11.364999771118164,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Side_Front_Classrooms_10C1",
+      "width": 11.2,
+      "depth": 11.5,
+      "sealing_wall_thickness": 0.46,
+      "rear_sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Side_Front_Classrooms_10C2",
+      "width": 11.2,
+      "depth": 11.5,
+      "sealing_wall_thickness": 0.46
+    },
+    {
+      "room": "V02_Classroom_Side_Front_Classrooms_10C3",
+      "width": 11.2,
+      "depth": 11.5,
+      "sealing_wall_thickness": 0.46
+    },
+    {
+      "room": "V02_Classroom_Side_Front_Classrooms_10C4",
+      "width": 11.2,
+      "depth": 11.5,
+      "sealing_wall_thickness": 0.46
+    },
+    {
+      "room": "V02_Classroom_Side_Front_Classrooms_11B1",
+      "width": 11.2,
+      "depth": 11.5,
+      "sealing_wall_thickness": 0.46,
+      "rear_sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Side_Front_Classrooms_11B2",
+      "width": 11.2,
+      "depth": 11.5,
+      "sealing_wall_thickness": 0.46
+    },
+    {
+      "room": "V02_Classroom_Side_Front_Classrooms_11B3",
+      "width": 11.2,
+      "depth": 11.5,
+      "sealing_wall_thickness": 0.46
+    },
+    {
+      "room": "V02_Classroom_Side_Front_Classrooms_11B4",
+      "width": 11.2,
+      "depth": 11.5,
+      "sealing_wall_thickness": 0.46
+    },
+    {
+      "room": "V02_Classroom_Side_Front_Classrooms_12A1",
+      "width": 11.2,
+      "depth": 11.5,
+      "sealing_wall_thickness": 0.46,
+      "rear_sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Side_Front_Classrooms_12A2",
+      "width": 11.2,
+      "depth": 11.5,
+      "sealing_wall_thickness": 0.46
+    },
+    {
+      "room": "V02_Classroom_Side_Front_Classrooms_12A3",
+      "width": 11.2,
+      "depth": 11.5,
+      "sealing_wall_thickness": 0.46
+    },
+    {
+      "room": "V02_Classroom_Side_Front_Classrooms_12A4",
+      "width": 11.2,
+      "depth": 11.5,
+      "sealing_wall_thickness": 0.46
+    },
+    {
+      "room": "V02_Classroom_Side_Rear_Classrooms_F1_B1",
+      "width": 6.275834083557129,
+      "depth": 10.5,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Side_Rear_Classrooms_F1_B2",
+      "width": 6.275834083557129,
+      "depth": 10.5,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Side_Rear_Classrooms_F1_B3",
+      "width": 6.275834083557129,
+      "depth": 10.5,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Side_Rear_Classrooms_F1_B4",
+      "width": 6.275834083557129,
+      "depth": 10.5,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Side_Rear_Classrooms_F1_B5",
+      "width": 6.275834083557129,
+      "depth": 10.5,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Side_Rear_Classrooms_F2_B1",
+      "width": 6.275834083557129,
+      "depth": 10.5,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Side_Rear_Classrooms_F2_B2",
+      "width": 6.275834083557129,
+      "depth": 10.5,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Side_Rear_Classrooms_F2_B3",
+      "width": 6.275834083557129,
+      "depth": 10.5,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Side_Rear_Classrooms_F2_B4",
+      "width": 6.275834083557129,
+      "depth": 10.5,
+      "sealing_wall_thickness": 0.22
+    },
+    {
+      "room": "V02_Classroom_Side_Rear_Classrooms_F2_B5",
+      "width": 6.275834083557129,
+      "depth": 10.5,
+      "sealing_wall_thickness": 0.22
+    }
+  ],
+  "terrain_samples": [
+    [
+      -17.375,
+      -57.3,
+      -0.025
+    ],
+    [
+      0,
+      -69,
+      -0.155
+    ],
+    [
+      30,
+      -84,
+      -0.025
+    ],
+    [
+      146,
+      -110,
+      -0.155
+    ],
+    [
+      -80,
+      10,
+      -0.05
+    ],
+    [
+      20,
+      110,
+      -0.05
+    ]
+  ],
+  "surrounding_house_count": 85,
+  "hall_before_stairs": true,
+  "teacher_room_count": 7,
+  "teacher_door_count": 8,
+  "rear_room_window_count": 17,
+  "protected_objects_verified": 413,
+  "hall_clear_local_route": [
+    [
+      -30,
+      1.0,
+      0.33
+    ],
+    [
+      -6,
+      1.0,
+      0.33
+    ]
+  ],
+  "teacher_matrix": [
+    [
+      -1.3435885648505064e-07,
+      -1.0000001192092896,
+      0.0,
+      -46.747501373291016
+    ],
+    [
+      1.0000001192092896,
+      -1.3435885648505064e-07,
+      0.0,
+      -3.484999895095825
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "spacious_side_front": {
+    "rooms": 12,
+    "dimensions_m": [
+      11.2,
+      11.5,
+      3.45
+    ],
+    "private_owner": "12A1"
+  },
+  "wall_fixture_visibility_revision": "v01"
+}

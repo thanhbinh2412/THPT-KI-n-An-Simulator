@@ -1,6 +1,6 @@
 "use client";
 import { Html } from "@react-three/drei";
-import { campusDoors } from "@/game/config/campusGameplay";
+import { campusDoors, campusSeatsById, campusSurfacesById, campusLightSwitches } from "@/game/config/campusGameplay";
 import { interactions } from "@/game/config/school.config";
 import { useGameStore } from "@/game/store/useGameStore";
 import { stoneBenchConfig } from "@/game/world/stoneBench.config";
@@ -11,7 +11,7 @@ export function InteractionBeacon() {
   const teacher = useGameStore((store) => store.teacherPosition);
   const paused = useGameStore((store) => store.paused);
   const dialog = useGameStore((store) => store.activeDialog);
-  const target = campusDoors.find((door) => door.id === id) ?? interactions.find((item) => item.id === id);
+  const target = campusDoors.find((door) => door.id === id) ?? campusSeatsById.get(id ?? "") ?? campusSurfacesById.get(id ?? "") ?? campusLightSwitches.find(item => item.id === id) ?? interactions.find((item) => item.id === id);
   const position = id === "teacher-tam" ? teacher : id === stoneBenchConfig.id ? stoneBenchConfig.interactionPosition : target?.position;
   if (!position || paused || dialog) return null;
   return <Html position={[position[0], position[1] + 1.35, position[2]]} center zIndexRange={[5, 0]} style={{ pointerEvents: "none" }}>

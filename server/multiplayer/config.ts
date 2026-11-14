@@ -1,3 +1,5 @@
+import { campusWorldBounds } from "../../src/game/config/campusGameplay";
+
 function positiveInteger(value: string | undefined, fallback: number, minimum = 1) {
   const parsed = Number(value);
   return Number.isInteger(parsed) && parsed >= minimum ? parsed : fallback;
@@ -10,7 +12,7 @@ export const multiplayerConfig = {
   maxNameLength: positiveInteger(process.env.MULTIPLAYER_MAX_NAME_LENGTH, 24, 2),
   minNameLength: positiveInteger(process.env.MULTIPLAYER_MIN_NAME_LENGTH, 2, 1),
   // These broad bounds cover the campus and road while rejecting malformed teleport packets.
-  worldBounds: { minX: -120, maxX: 120, minY: -3, maxY: 30, minZ: -120, maxZ: 120 },
+  worldBounds: campusWorldBounds,
   maximumRunSpeed: 6.4,
   movementTolerance: 2.25,
   maxMoveEventsPerSecond: positiveInteger(process.env.MULTIPLAYER_MAX_MOVE_EVENTS_PER_SECOND, 30),

@@ -9,6 +9,8 @@ import { getCameraHeading } from "@/game/camera/CameraController";
 import { useGameStore } from "@/game/store/useGameStore";
 import { PlayerCharacter } from "@/game/character/PlayerCharacter";
 import { campusConfig } from "@/game/config/campus.config";
+import { campusSeatsById } from "@/game/config/campusGameplay";
+import { leaveClassroomSeat } from "@/game/interactions/campusActionClient";
 import { stoneBenchConfig } from "@/game/world/stoneBench.config";
 import { leaveStoneBenchSeat } from "@/game/world/benchSeatClient";
 import { useMultiplayer } from "@/game/multiplayer/MultiplayerProvider";
@@ -27,7 +29,7 @@ export function PlayerController({ bodyRef, enabled = true, spawn }: { bodyRef: 
   const { localPlayer, chatBubbles } = useMultiplayer();
   const { speaking } = useVoice();
   const controller = useRef<CharacterController | null>(null); const velocity = useRef(new THREE.Vector3()); const direction = useRef(new THREE.Vector3()); const verticalVelocity = useRef(0); const grounded = useRef(false); const lastReport = useRef(0);
-  const motion = useRef<PlayerMotionState>("idle"); const visualSpeed = useRef(0); const reportedGrounded = useRef(false); const appliedSpawn = useRef(""); const wasSitting = useRef(false); const cameraMode = useGameStore((s) => s.cameraMode); const physicsDebug = useGameStore((s) => s.physicsDebug);
+  const motion = useRef<PlayerMotionState>("idle"); const visualSpeed = useRef(0); const reportedGrounded = useRef(false); const appliedSpawn = useRef(""); const lastSeatExit = useRef<Vec3 | null>(null); const appliedTeleport = useRef(0); const cameraMode = useGameStore((s) => s.cameraMode); const physicsDebug = useGameStore((s) => s.physicsDebug); const activeSeatId = useGameStore((s) => s.activeSeatId); const activeSeat = activeSeatId ? campusSeatsById.get(activeSeatId) : undefined;
   useEffect(() => {
     const next = world.createCharacterController(.035);
     // V75's authored walk boxes include every tread, so use the documented
@@ -36,32 +38,39 @@ export function PlayerController({ bodyRef, enabled = true, spawn }: { bodyRef: 
     controller.current = next;
     return () => { world.removeCharacterController(next); controller.current = null; };
   }, [world]);
+  useEffect(() => {
+    if (!spawn) { appliedSpawn.current = ""; lastSeatExit.current = null; collider.current?.setEnabled(true); appliedTeleport.current = useGameStore.getState().teleportRequest?.sequence ?? 0; }
+  }, [spawn]);
   useFrame((state, delta) => {
     const body = bodyRef.current; const shape = collider.current; const control = controller.current; if (!body || !shape || !control) return;
     if (spawn) { const key = spawn.join(","); if (key !== appliedSpawn.current) { body.setTranslation({ x: spawn[0], y: spawn[1], z: spawn[2] }, true); velocity.current.set(0, 0, 0); verticalVelocity.current = 0; appliedSpawn.current = key; } }
     const dt = Math.min(delta, 1 / 30); const store = useGameStore.getState(); const mobile = store.mobileMove;
     const forwardInput = enabled ? input.current.forward + mobile.forward : 0; const rightInput = enabled ? input.current.right + mobile.right : 0;
-    const seatedPosition = store.benchSeatIndex === null ? null : stoneBenchConfig.seatedBodyPositions[store.benchSeatIndex];
-    if (seatedPosition) {
-      wasSitting.current = true;
-      // Any attempt to move, jump or use the mobile joystick stands the player
-      // up at the clear side of the bench before normal movement resumes.
-      if (forwardInput || rightInput || input.current.jump || store.mobileJump) {
-        leaveStoneBenchSeat();
-        body.setTranslation({ x: stoneBenchConfig.standingBodyPosition[0], y: stoneBenchConfig.standingBodyPosition[1], z: stoneBenchConfig.standingBodyPosition[2] }, true);
-      } else {
-        velocity.current.set(0, 0, 0); verticalVelocity.current = 0; grounded.current = true;
-        body.setNextKinematicTranslation({ x: seatedPosition[0], y: seatedPosition[1], z: seatedPosition[2] });
-        motion.current = "sit"; useGameStore.getState().setPlayerMotion("sit");
-        if (state.clock.elapsedTime - lastReport.current > 1 / 15) { useGameStore.getState().setPlayerPosition([...seatedPosition]); lastReport.current = state.clock.elapsedTime; }
-        return;
-      }
+    if (store.teleportRequest && store.teleportRequest.sequence !== appliedTeleport.current) {
+      const p = store.teleportRequest.position;
+      body.setTranslation({ x: p[0], y: p[1], z: p[2] }, true); body.setNextKinematicTranslation({ x: p[0], y: p[1], z: p[2] });
+      shape.setEnabled(true); verticalVelocity.current = 0; velocity.current.set(0, 0, 0); grounded.current = false;
+      lastSeatExit.current = null; appliedTeleport.current = store.teleportRequest.sequence;
     }
-    if (wasSitting.current) {
-      // G explicitly ends the sit state. Put the capsule at the clear front
-      // anchor, rather than leaving a standing collider inside the bench.
-      body.setTranslation({ x: stoneBenchConfig.standingBodyPosition[0], y: stoneBenchConfig.standingBodyPosition[1], z: stoneBenchConfig.standingBodyPosition[2] }, true);
-      velocity.current.set(0, 0, 0); verticalVelocity.current = 0; wasSitting.current = false;
+    const classroomSeat = store.activeSeatId ? campusSeatsById.get(store.activeSeatId) : undefined;
+    const seatedPosition = classroomSeat?.position ?? (store.benchSeatIndex === null ? null : stoneBenchConfig.seatedBodyPositions[store.benchSeatIndex]);
+    if (seatedPosition) {
+      lastSeatExit.current = classroomSeat?.exitPositions[0] ?? stoneBenchConfig.standingBodyPosition;
+      shape.setEnabled(false);
+      if (enabled && (forwardInput || rightInput || input.current.jump || store.mobileJump) && !store.interactionPending) {
+        if (classroomSeat) leaveClassroomSeat(); else leaveStoneBenchSeat();
+        input.current.jump = false; store.setMobileJump(false);
+      }
+      velocity.current.set(0, 0, 0); verticalVelocity.current = 0; grounded.current = true;
+      body.setNextKinematicTranslation({ x: seatedPosition[0], y: seatedPosition[1], z: seatedPosition[2] });
+      motion.current = "sit"; if (store.playerMotion !== "sit") store.setPlayerMotion("sit");
+      if (state.clock.elapsedTime - lastReport.current > 1 / 15) { store.setPlayerPosition([...seatedPosition]); lastReport.current = state.clock.elapsedTime; }
+      return;
+    }
+    if (lastSeatExit.current) {
+      const p = lastSeatExit.current;
+      body.setTranslation({ x: p[0], y: p[1], z: p[2] }, true); body.setNextKinematicTranslation({ x: p[0], y: p[1], z: p[2] });
+      shape.setEnabled(true); velocity.current.set(0, 0, 0); verticalVelocity.current = 0; grounded.current = false; lastSeatExit.current = null;
     }
     direction.current.set(rightInput, 0, -forwardInput); if (direction.current.lengthSq() > 1) direction.current.normalize(); direction.current.applyAxisAngle(UP, getCameraHeading());
     const running = enabled && (input.current.run || useGameStore.getState().run); const maxSpeed = running ? 6.4 : 4.1;
@@ -84,7 +93,7 @@ export function PlayerController({ bodyRef, enabled = true, spawn }: { bodyRef: 
   return <RigidBody ref={bodyRef} type="kinematicPosition" colliders={false} position={campusConfig.spawn} enabledRotations={[false, false, false]}>
     <CapsuleCollider ref={collider} args={[.6,.25]} />
     {physicsDebug && <mesh><capsuleGeometry args={[.25, 1.2, 8, 12]} /><meshBasicMaterial color="#22d3ee" wireframe transparent opacity={.8} depthTest={false} /></mesh>}
-    <PlayerCharacter gender={localPlayer?.gender ?? "male"} motion={motion} speed={visualSpeed} velocity={velocity} visible={cameraMode === "third"} seatedYaw={stoneBenchConfig.seatedYaw} />
+    <PlayerCharacter gender={localPlayer?.gender ?? "male"} motion={motion} speed={visualSpeed} velocity={velocity} visible={cameraMode === "third"} seatedYaw={activeSeat?.rotationY ?? stoneBenchConfig.seatedYaw} />
     <ChatBubble message={localPlayer ? chatBubbles[localPlayer.id] : undefined} />
     <VoiceIndicator speaking={localPlayer ? speaking[localPlayer.id] : false} />
   </RigidBody>;

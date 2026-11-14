@@ -14,7 +14,9 @@
     "campus:prepare": "node tools/prepare-campus-preview.mjs",
     "campus:preview": "npm run dev",
     "predev": "npm run campus:prepare",
-    "prebuild": "npm run campus:prepare"
+    "prebuild": "npm run campus:prepare",
+    "campus:validate:actions": "node tools/campus/validate_room_actions.mjs",
+    "campus:test:interactions": "tsx tools/tests/campus-actions.test.ts"
   },
   "dependencies": {
     "@next/env": "^15.3.0",

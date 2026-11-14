@@ -4,7 +4,18 @@ import type { CampusGateId } from "./campus.config";
 
 export type CampusLeaf = { node: string; pivot: Vec3; center: Vec3; halfExtents: Vec3; openAngle: number };
 export type CampusDoor = { id: string; gate?: CampusGateId; title: string; position: Vec3; radius: number; leaves: CampusLeaf[] };
+export type CampusSeat = { id: string; roomId: string; kind: "student" | "teacher"; label: string; position: Vec3; surfacePosition: Vec3; rotationY: number; approach: Vec3; exitPositions: Vec3[]; radius: number; reachDistance: number };
+export type StandingSurface = Omit<CampusSeat, "kind" | "rotationY">;
+export type CampusLight = { id: string; roomId: string; position: Vec3; tubeNode: string; renderNodes: string[]; defaultOn: boolean; switches: Array<{ id: string; roomId: string; position: Vec3; radius: number }> };
+const actions = manifest as unknown as { seats?: CampusSeat[]; standingSurfaces?: StandingSurface[]; lights?: CampusLight[] };
+export const campusSeats = actions.seats ?? [];
+export const campusStandingSurfaces = actions.standingSurfaces ?? [];
+export const campusLights = actions.lights ?? [];
+export const campusSeatsById = new Map(campusSeats.map(seat => [seat.id, seat]));
+export const campusSurfacesById = new Map(campusStandingSurfaces.map(surface => [surface.id, surface]));
+export const campusLightSwitches = campusLights.flatMap(light => light.switches);
 export const campusDoors = manifest.doors as CampusDoor[];
 export const campusRooms = manifest.rooms.map((room) => ({ ...room, position: room.position as Vec3 }));
 export const campusRevision = manifest.revision;
 export const campusSpawn = manifest.spawn as Vec3;
+export const campusWorldBounds = manifest.worldBounds;

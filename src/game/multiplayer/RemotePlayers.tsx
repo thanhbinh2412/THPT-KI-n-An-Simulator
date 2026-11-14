@@ -22,10 +22,8 @@ function interpolateAngle(from: number, to: number, amount: number) {
 }
 
 function RemotePlayer({ player, bubble, speaking }: { player: PlayerState; bubble?: import("@/shared/multiplayer-types").ChatMessage; speaking?: boolean }) {
-  const root = useRef<THREE.Group>(null); const motion = useRef<PlayerMotionState>(player.locomotion); const speed = useRef(0); const velocity = useRef(new THREE.Vector3()); const snapshots = useRef<Snapshot[]>([{ receivedAt: performance.now(), position: new THREE.Vector3(player.position.x, player.position.y, player.position.z), rotationY: player.rotationY, locomotion: player.locomotion }]); const lastSequence = useRef(player.sequence); const target = useRef(new THREE.Vector3()); const before = useRef(new THREE.Vector3());
+  const root = useRef<THREE.Group>(null); const motion = useRef<PlayerMotionState>(player.locomotion); const speed = useRef(0); const velocity = useRef(new THREE.Vector3()); const snapshots = useRef<Snapshot[]>([{ receivedAt: performance.now(), position: new THREE.Vector3(player.position.x, player.position.y, player.position.z), rotationY: player.rotationY, locomotion: player.locomotion }]); const target = useRef(new THREE.Vector3()); const before = useRef(new THREE.Vector3());
   useEffect(() => {
-    if (player.sequence <= lastSequence.current) return;
-    lastSequence.current = player.sequence;
     const buffer = snapshots.current;
     buffer.push({ receivedAt: performance.now(), position: new THREE.Vector3(player.position.x, player.position.y, player.position.z), rotationY: player.rotationY, locomotion: player.locomotion });
     if (buffer.length > MAX_SNAPSHOTS) buffer.splice(0, buffer.length - MAX_SNAPSHOTS);

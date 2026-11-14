@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { campusConfig } from "@/game/config/campus.config";
 import { CampusCollision } from "./CampusCollision";
 import { CampusDoors } from "./CampusDoors";
+import { ClassroomLights } from "./ClassroomLights";
 
 /** Visuals and navigation are exported together from the editable V02 scene. */
 export function CampusModel({ collisionsEnabled = true }: { collisionsEnabled?: boolean }) {
@@ -12,6 +13,7 @@ export function CampusModel({ collisionsEnabled = true }: { collisionsEnabled?: 
   return <group><primitive object={model} />
     {collisionsEnabled && <CampusCollision />}
     <CampusDoors scene={model} collisionsEnabled={collisionsEnabled} />
+    <ClassroomLights scene={model} />
   </group>;
 }
 useGLTF.preload(campusConfig.modelUrl);

@@ -4,6 +4,7 @@ import { multiplayerConfig } from "./config";
 import { PlayerManager } from "./player-manager";
 import { ChatManager } from "./chat-manager";
 import { nearbyVoicePeers } from "./voice-proximity";
+import { WorldInteractions } from "./world-interactions";
 
 const WORLD_ROOM = "shared-world";
 const locomotion = new Set(["idle", "walk", "run", "jump", "fall", "land", "stairs", "sit"]);
@@ -25,8 +26,9 @@ function validMove(value: unknown): value is PlayerMovePayload {
   return !!p && Number.isFinite(p.x) && Number.isFinite(p.y) && Number.isFinite(p.z) && p.x >= b.minX && p.x <= b.maxX && p.y >= b.minY && p.y <= b.maxY && p.z >= b.minZ && p.z <= b.maxZ && Number.isFinite(payload.rotationY) && Number.isInteger(payload.sequence) && payload.sequence >= 0 && locomotion.has(payload.locomotion);
 }
 
-export function initializeMultiplayer(io: Server<ClientToServerEvents, ServerToClientEvents>) {
-  const players = new PlayerManager();
+export function initializeMultiplayer(io: Server<ClientToServerEvents, ServerToClientEvents>, players = new PlayerManager()) {
+  const interactions = new WorldInteractions(players);
+  const broadcastInteractions = () => io.to(WORLD_ROOM).emit("world:interactions", interactions.snapshot());
   const chat = new ChatManager();
   const lastMoveAt = new Map<string, number>();
   const lastChatAt = new Map<string, number>();
@@ -34,7 +36,7 @@ export function initializeMultiplayer(io: Server<ClientToServerEvents, ServerToC
   let voicePeers = new Map<string, string[]>();
   const emitCount = () => io.emit("world:online-count", { count: players.getOnlineCount() });
   const emitVoiceState = (socketId: string) => { const player = players.getPlayer(socketId); const state = voice.get(socketId); if (player && state) io.to(WORLD_ROOM).emit("voice:state", { playerId: player.id, ...state }); };
-  const remove = (socketId: string) => { lastChatAt.delete(socketId); const player = players.removePlayer(socketId); voice.delete(socketId); if (player) { io.to(WORLD_ROOM).emit("player:left", { playerId: player.id }); io.to(WORLD_ROOM).emit("voice:peer-left", { playerId: player.id }); emitCount(); } };
+  const remove = (socketId: string) => { lastChatAt.delete(socketId); const player = players.removePlayer(socketId); voice.delete(socketId); if (player) { io.to(WORLD_ROOM).emit("player:left", { playerId: player.id }); io.to(WORLD_ROOM).emit("voice:peer-left", { playerId: player.id }); emitCount(); broadcastInteractions(); } };
   const canSignal = (socketId: string, targetPlayerId: string) => voicePeers.get(socketId)?.includes(targetPlayerId) ?? false;
   const targetSocket = (playerId: string) => [...voice.keys()].find((socketId) => players.getPlayer(socketId)?.id === playerId);
 
@@ -51,6 +53,7 @@ export function initializeMultiplayer(io: Server<ClientToServerEvents, ServerToC
       const existingPlayers = players.getAllPlayers().filter((item) => item.id !== player.id);
       socket.join(WORLD_ROOM);
       acknowledgement({ success: true, player, players: existingPlayers, onlineCount: players.getOnlineCount(), serverTime: Date.now() });
+      socket.emit("world:interactions", interactions.snapshot());
       socket.emit("chat:history", { messages: chat.getRecent() });
       socket.to(WORLD_ROOM).emit("player:joined", { player });
       emitCount();
@@ -65,6 +68,11 @@ export function initializeMultiplayer(io: Server<ClientToServerEvents, ServerToC
     });
     socket.on("bench:occupy", (acknowledgement) => acknowledgement(players.occupyBenchSeat(socket.id)));
     socket.on("bench:leave", (acknowledgement) => { players.leaveBenchSeat(socket.id); acknowledgement?.(); });
+    socket.on("seat:occupy", (payload, acknowledgement) => { if (typeof acknowledgement !== "function") return; const result = players.occupySeat(socket.id, typeof payload?.seatId === "string" ? payload.seatId : ""); acknowledgement(result); if (result.success) broadcastInteractions(); });
+    socket.on("seat:leave", (acknowledgement) => { if (typeof acknowledgement !== "function") return; const result = players.leaveSeat(socket.id); acknowledgement(result); if (result.success) broadcastInteractions(); });
+    socket.on("surface:stand", (payload, acknowledgement) => { if (typeof acknowledgement !== "function") return; acknowledgement(players.standOnSurface(socket.id, typeof payload?.surfaceId === "string" ? payload.surfaceId : "")); });
+    socket.on("light:toggle", (payload, acknowledgement) => { if (typeof acknowledgement !== "function") return; const result = interactions.toggleLight(socket.id, typeof payload?.roomId === "string" ? payload.roomId : ""); acknowledgement(result); if (result.success) broadcastInteractions(); });
+    socket.on("door:toggle", (payload, acknowledgement) => { if (typeof acknowledgement !== "function") return; const result = interactions.toggleDoor(socket.id, typeof payload?.doorId === "string" ? payload.doorId : ""); acknowledgement(result); if (result.success) broadcastInteractions(); });
     socket.on("voice:enable", (payload, acknowledgement) => {
       if (!players.getPlayer(socket.id) || !payload || typeof payload.enabled !== "boolean" || typeof payload.muted !== "boolean") return acknowledgement?.({ success: false, message: "Voice state không hợp lệ." });
       voice.set(socket.id, { enabled: payload.enabled, muted: payload.muted, speaking: false }); emitVoiceState(socket.id); acknowledgement?.({ success: true });
@@ -89,7 +97,8 @@ export function initializeMultiplayer(io: Server<ClientToServerEvents, ServerToC
   });
 
   const deltaTimer = setInterval(() => { const changed = players.getChangedPlayers(); if (changed.length) io.to(WORLD_ROOM).volatile.emit("world:snapshot", { type: "delta", serverTime: Date.now(), players: changed }); }, Math.round(1000 / multiplayerConfig.snapshotRate));
+  const interactionTimer = setInterval(() => { if (interactions.tick()) broadcastInteractions(); }, 150);
   const fullTimer = setInterval(() => io.to(WORLD_ROOM).emit("world:snapshot", { type: "full", serverTime: Date.now(), players: players.getAllPlayers() }), multiplayerConfig.fullSnapshotIntervalMs);
   const voiceTimer = setInterval(() => { const enabled = new Set([...voice].filter(([, state]) => state.enabled).map(([socketId]) => socketId)); const next = nearbyVoicePeers(players, enabled); voice.forEach((_, socketId) => { const nextPeers = next.get(socketId) ?? []; const previous = voicePeers.get(socketId) ?? []; if (process.env.NODE_ENV !== "production" && JSON.stringify(previous) !== JSON.stringify(nextPeers)) console.info("[voice] peers assigned", { playerId: players.getPlayer(socketId)?.id, peers: nextPeers }); previous.filter((id) => !nextPeers.includes(id)).forEach((playerId) => io.to(socketId).emit("voice:peer-left", { playerId })); io.to(socketId).emit("voice:peers", { playerIds: nextPeers }); }); voicePeers = next; }, 500);
-  return { close() { clearInterval(deltaTimer); clearInterval(fullTimer); clearInterval(voiceTimer); } };
+  return { close() { clearInterval(deltaTimer); clearInterval(fullTimer); clearInterval(voiceTimer); clearInterval(interactionTimer); } };
 }

@@ -35,21 +35,5 @@ function Leaf({ door, leaf, scene, collisionsEnabled }: { door: CampusDoor; leaf
 }
 
 export function CampusDoors({ scene, collisionsEnabled }: { scene: THREE.Group; collisionsEnabled: boolean }) {
-  useFrame(() => {
-    const store = useGameStore.getState();
-    for (const door of campusDoors) {
-      const requested = door.gate ? store.campusGateCloseRequested === door.gate : store.classroomDoorCloseRequested === door.id;
-      if (!requested) continue;
-      const occupied = door.leaves.some((leaf) => {
-        const radius = Math.hypot(leaf.center[0], leaf.center[2]) + Math.hypot(leaf.halfExtents[0], leaf.halfExtents[2]) + .55;
-        return Math.abs(store.playerPosition[1] - (leaf.pivot[1] + leaf.center[1])) < leaf.halfExtents[1] + 1 &&
-          Math.hypot(store.playerPosition[0] - leaf.pivot[0], store.playerPosition[2] - leaf.pivot[2]) < radius;
-      });
-      if (!occupied) {
-        if (door.gate) store.closeCampusGateWhenClear(door.gate);
-        else store.closeClassroomDoorWhenClear(door.id);
-      }
-    }
-  });
   return <>{campusDoors.flatMap((door) => door.leaves.map((leaf) => <Leaf key={leaf.node} door={door} leaf={leaf} scene={scene} collisionsEnabled={collisionsEnabled} />))}</>;
 }

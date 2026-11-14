@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "checks": 34,
+  "guarded_stair_edges": 6,
+  "bridge_floors": [
+    2,
+    3
+  ],
+  "player_capsule": {
+    "radius": 0.25,
+    "totalHeight": 1.7,
+    "offset": 0.035
+  },
+  "rear_roof_overrun_removed": true,
+  "empty_planter_removed": true
+}

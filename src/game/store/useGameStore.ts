@@ -3,6 +3,8 @@ import type { CameraMode, PlayerMotionState, Vec3 } from "@/game/types";
 import type { CampusGateId } from "@/game/config/campus.config";
 import { campusConfig } from "@/game/config/campus.config";
 import { classrooms, type ClassroomDoorId } from "@/game/classrooms/classroom.config";
+import { campusDoors, campusLights } from "@/game/config/campusGameplay";
+import type { WorldInteractionState } from "@/shared/multiplayer-types";
 
 const initialClassroomDoorState = Object.fromEntries(classrooms.map((classroom) => [classroom.id, false])) as Record<ClassroomDoorId, boolean>;
 
@@ -15,6 +17,12 @@ type GameState = {
   campusGates: Record<CampusGateId, boolean>; campusGateCloseRequested: CampusGateId | null;
   classroomDoors: Record<ClassroomDoorId, boolean>; classroomDoorCloseRequested: ClassroomDoorId | null;
   benchSeatIndex: number | null;
+  activeSeatId: string | null; occupiedSeats: Record<string, string>; roomLights: Record<string, boolean>;
+  pendingDoorIds: string[]; interactionPending: boolean; interactionMessage: string | null;
+  preferredInteractionId: string | null; interactionChoices: string[]; teleportRequest: { sequence: number; position: Vec3 } | null;
+  setActiveSeat: (id: string | null) => void; applyInteractionState: (state: WorldInteractionState) => void;
+  setInteractionPending: (pending: boolean) => void; setInteractionMessage: (message: string | null) => void;
+  setInteractionChoices: (ids: string[]) => void; cycleInteractionChoice: () => void; teleportPlayer: (position: Vec3) => void;
   /** Current visual-only NPC location, used by the shared interaction system. */
   teacherPosition: Vec3; teacherGreetingRequestedAt: number | null;
   setCameraMode: (mode: CameraMode) => void; toggleCamera: () => void; setPaused: (paused: boolean) => void;
@@ -38,6 +46,23 @@ export const useGameStore = create<GameState>((set) => ({
   campusGates: { main: true, left: false, right: false }, campusGateCloseRequested: null,
   classroomDoors: initialClassroomDoorState, classroomDoorCloseRequested: null,
   benchSeatIndex: null,
+  activeSeatId: null, occupiedSeats: {}, roomLights: Object.fromEntries(campusLights.map(light => [light.id, light.defaultOn])),
+  pendingDoorIds: [], interactionPending: false, interactionMessage: null, preferredInteractionId: null, interactionChoices: [], teleportRequest: null,
+  setActiveSeat: (activeSeatId) => set({ activeSeatId }),
+  applyInteractionState: (state) => set({
+    roomLights: state.lights, occupiedSeats: state.seats, pendingDoorIds: state.pendingDoors,
+    campusGates: Object.fromEntries(campusDoors.filter(door => door.gate).map(door => [door.gate!, state.doors[door.id] ?? false])) as Record<CampusGateId, boolean>,
+    classroomDoors: Object.fromEntries(campusDoors.filter(door => !door.gate).map(door => [door.id, state.doors[door.id] ?? false])),
+  }),
+  setInteractionPending: (interactionPending) => set({ interactionPending }),
+  setInteractionMessage: (interactionMessage) => set({ interactionMessage }),
+  setInteractionChoices: (interactionChoices) => set(state => ({ interactionChoices, preferredInteractionId: state.preferredInteractionId && interactionChoices.includes(state.preferredInteractionId) ? state.preferredInteractionId : null })),
+  cycleInteractionChoice: () => set(state => {
+    if (state.interactionChoices.length < 2) return {};
+    const index = state.interactionChoices.indexOf(state.nearbyId ?? "");
+    return { nearbyId: state.interactionChoices[(index+1) % state.interactionChoices.length], preferredInteractionId: state.interactionChoices[(index+1) % state.interactionChoices.length] };
+  }),
+  teleportPlayer: (position) => set(state => ({ teleportRequest: { position, sequence: (state.teleportRequest?.sequence ?? 0)+1 } })),
   teacherPosition: [0, 0, 0], teacherGreetingRequestedAt: null,
   setCameraMode: (cameraMode) => set({ cameraMode }), toggleCamera: () => set((s) => ({ cameraMode: s.cameraMode === "third" ? "first" : "third" })),
   setPaused: (paused) => set({ paused }), setPlayerPosition: (playerPosition) => set({ playerPosition }),

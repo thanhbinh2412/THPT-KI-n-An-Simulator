@@ -45,7 +45,7 @@ export function CameraController({ player }: { player: React.RefObject<RapierRig
   const { camera, gl, scene } = useThree();
   const mode = useGameStore((s) => s.cameraMode);
   const paused = useGameStore((s) => s.paused);
-  const sittingOnBench = useGameStore((s) => s.benchSeatIndex !== null);
+  const sittingOnBench = useGameStore((s) => s.benchSeatIndex !== null || s.activeSeatId !== null);
   const target = useRef(new THREE.Vector3());
   const desired = useRef(new THREE.Vector3());
   const arm = useRef(new THREE.Vector3());
