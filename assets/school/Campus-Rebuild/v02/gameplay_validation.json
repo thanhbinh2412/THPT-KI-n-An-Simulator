@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "checks": 256,
+  "rooms": 53,
+  "doors": 59,
+  "ramps": 16,
+  "revision": "672b57ad539d"
+}

@@ -1,12 +1,12 @@
+import { campusSpawn } from "../../src/game/config/campusGameplay";
 import { randomUUID } from "node:crypto";
 import type { BenchSeatResult, PlayerGender, PlayerMovePayload, PlayerState, Vector3State } from "../../src/shared/multiplayer-types";
 import { multiplayerConfig } from "./config";
 
 type Session = { player: PlayerState; lastAcceptedAt: number; changed: boolean };
-const spawnPositions: Vector3State[] = [
-  { x: 0, y: .86, z: 39.8 }, { x: 1.4, y: .86, z: 39.8 }, { x: -1.4, y: .86, z: 39.8 },
-  { x: 2.7, y: .86, z: 40.8 }, { x: -2.7, y: .86, z: 40.8 }, { x: 0, y: .86, z: 41.4 },
-];
+const spawnPositions: Vector3State[] = [0, 1.3, -1.3, 2.6, -2.6, .65].map((offset, index) => ({
+  x: campusSpawn[0] + offset, y: campusSpawn[1], z: campusSpawn[2] + (index > 2 ? 1.1 : 0),
+}));
 
 export class PlayerManager {
   private readonly sessions = new Map<string, Session>();

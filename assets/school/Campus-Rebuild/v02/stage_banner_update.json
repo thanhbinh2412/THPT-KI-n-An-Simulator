@@ -1,0 +1,25 @@
+{
+  "image": "assets/school/Kiến An School Reunion Banner.png",
+  "removed": [
+    "V02_Stage_Reunion_Banner"
+  ],
+  "banner": "V02_Stage_Reunion_Banner",
+  "dimensions_m": [
+    19.55399990081787,
+    2.9500001072883606
+  ],
+  "fill_bounds_blender": [
+    -9.08899974822998,
+    10.46500015258789,
+    0.9599999785423279,
+    3.9100000858306885
+  ],
+  "fit": "fill entire teal field; UV crop removes black padding and rounded corners",
+  "image_crop_pixels": [
+    70,
+    100,
+    2102,
+    624
+  ],
+  "backup": "assets/school/Campus-Rebuild/v02/backups/stage_banner_20261114_221751"
+}

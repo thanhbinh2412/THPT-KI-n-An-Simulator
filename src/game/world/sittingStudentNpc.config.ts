@@ -21,7 +21,7 @@ export const sittingStudentNpcConfig: {
   id: "badminton-sitting-student",
   modelUrl: "/models/characters/kien_an_student_crouching_face_uncovered.glb",
   // Centre of UMPIRE_CHAIR_SEAT, with the feet resting on its top surface.
-  position: [25.8, 2.06, .25],
+  position: [31.55, 2.0345, 27.6625],
   // The model's face is local +Z; -90° makes it face the courtyard (-X).
   rotationY: -Math.PI / 2,
   scale: 1,

@@ -26,13 +26,10 @@ export const teacherNpcConfig: {
   interactionRadius: 3.8,
   responseDurationMs: 5000,
   waypoints: [
-    // 12A1 is the first left-hand room of the right wing when facing its facade.
-    [classroom12A1.interactionPosition[0], .66, classroom12A1.interactionPosition[2]],
-    // Descend the raised porch steps before entering the open courtyard.
-    [27.7, .33, -12.15], [26.86, .11, -12.15], [24.5, .02, -12.15],
-    // A wide, obstacle-free loop around the courtyard.
-    [18, .02, -18], [5, .02, -20], [-10, .02, -18], [-19, .02, -10],
-    [-20, .02, 4], [-17, .02, 17], [-8, .02, 25], [4, .02, 27],
-    [15, .02, 22], [20, .02, 10], [18, .02, -2], [24.5, .02, -12.15],
+    [36.9, .33, classroom12A1.interactionPosition[2]],
+    [36.9, .33, 20.5], [35.35, .12, 20.5], [34.4, .02, 20.5],
+    [19, .02, 24], [14, .02, 33], [0, .02, 35], [-13, .02, 34],
+    [-26, .02, 29], [-27, .02, 23], [-16, .02, 21], [0, .02, 22],
+    [18, .02, 23], [34.4, .02, 20.5], [35.35, .12, 20.5], [36.9, .33, 20.5],
   ],
 };

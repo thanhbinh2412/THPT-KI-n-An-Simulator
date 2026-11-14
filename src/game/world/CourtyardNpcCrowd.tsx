@@ -27,6 +27,11 @@ const studentRoutes: Route[] = [
   { points: [[7, .72, -3], [14, .72, 1], [10, .72, 7], [4, .72, 3]], speed: 1.65, scale: .97 },
 ];
 
+// The front yard is Z=16..50; the old route band crossed V02 classrooms.
+for (const route of [teacherRoute, ...studentRoutes]) {
+  route.points = route.points.map(([x, , z]) => [x * .65 - 3, .02, 22 + z * .38]);
+}
+
 function WalkingModel({ url, motion, speed, velocity }: { url: string; motion: React.MutableRefObject<PlayerMotionState>; speed: React.MutableRefObject<number>; velocity: React.MutableRefObject<THREE.Vector3> }) {
   const { scene } = useGLTF(url);
   const model = useMemo(() => scene.clone(true), [scene]);

@@ -11,31 +11,41 @@ pnpm dev
 
 Open `http://localhost:3000`. Use WASD/arrows to walk, Shift to run, Space to jump, V to switch camera and E to interact. On a touch device, use the virtual pad and action buttons.
 
-## Preview the rebuilt V2 campus
+## V02 campus and gameplay
 
-From the repository root, run:
+Both the visible campus and navigation now come from
+`assets/school/Campus-Rebuild/v02/kien_an_campus_photo_v02.blend`.
+Open `http://localhost:3000/game` after `npm run dev`. The startup/build script
+copies the visual GLB, collision GLB and gameplay manifest into
+`public/models/campus-v02/`. URLs include the exported revision to refresh the
+browser cache after an export.
+
+To rebuild after editing Blender, run from the repository root:
 
 ```bash
-npm run campus:preview
+blender -b assets/school/Campus-Rebuild/v02/kien_an_campus_photo_v02.blend --python tools/campus/export_v02_gameplay.py
+npm run campus:validate
+npm run campus:prepare
 ```
 
-Open `http://localhost:3000/campus-preview`. This copies the latest V2 GLB from
-`assets/school/Campus-Rebuild/v02/` into the public model directory and starts
-the development server. If the server is already running, use
-`npm run campus:prepare` and refresh the preview after each new Blender export.
-The first model download is about 76 MB. Drag to orbit, scroll to zoom, and
-right-drag to pan; the view buttons jump to each courtyard or the stage.
+The exporter does not save or alter the editable Blender file. It backs up the
+previous exports under `v02/backups/`, batches repeated classroom geometry,
+and exports 53 rooms, 59 unique door/gate interactions, and independent static
+navigation with 16 stair ramps. The collision GLB contains simplified structural
+surfaces and furniture footprints; openings and stair voids remain open.
+Doors have separate measured hinges and moving cuboid colliders. A pending
+close waits until the local player clears the swing area.
 
-Both `/game` and `/campus-preview` now display V2 with its PBR materials.
-`npm run dev` and `npm run build` prepare the public model automatically.
-The standalone preview has orbit controls; `/game` retains the existing
-characters, NPC coordinates and routes, player spawns, multiplayer, and
-V63 collision/interaction geometry. The V63 visual scene is hidden.
-This is a visual replacement: V2 walls, floors and doors can differ from the
-old invisible colliders and interaction locations. Gate and classroom-door
-animations still affect the hidden V63 navigation scene, not V2's static mesh.
-Blender's world and lights are not exported in the GLB; the browser uses its
-own daylight.
+E, the HUD action and mobile USE share the same interaction handler. G also
+sits/stands at the interactive stone bench. Only reachable nearby targets on
+the same floor receive an E/G marker; physics rays prevent interaction through
+walls. Repeated key events, chat typing and paused gameplay do not trigger actions.
+The courtyard, stage, badminton court, rear yard and 12A1 photograph have
+separate memory interactions. The player spawn and NPC routes use V02 positions.
+
+Blender's world and lights are not exported; the browser supplies daylight.
+Gate/door state remains local to each browser, matching the existing gameplay
+state model. Multiplayer shares player movement and bench seat occupancy.
 
 ## Multiplayer
 
@@ -100,12 +110,20 @@ to the same Node.js port as normal HTTP requests.
 
 World coordinates are measured in metres; Y is up and terrain is at Y=0. Visual meshes must never be the only definition of gameplay geometry.
 
-## Campus asset
+## Campus assets
 
-The active campus is V43: `public/assets/school/kien_an_campus_v43_classroom_interiors.glb`.
-Its visible scene loads once per browser. The classroom interiors—192 desk-and-bench sets, teaching platforms, teacher furniture, fans, flags, slogans and low-cost ceiling-light meshes—are embedded in this GLB. Static collision boxes derive from structural meshes, V43's 48 platform/step boxes, and one simplified box per desk set or teacher desk. Classroom doors and school gates keep their own moving Rapier colliders.
+The active visual is `public/models/campus-v02/kien_an_campus_photo_v02.glb`.
+Navigation loads separately from `kien_an_campus_photo_v02_collision.glb`.
+`gameplay.json` records source hash, export revision, room IDs, door hinges,
+interaction positions and spawn. Structural collisions come from the exported
+navigation asset, not from legacy V58/V78 manifests or whole-building bounds.
+The .blend retains editable classroom collection instances; the GLB reuses
+per-preset meshes and keeps door leaves separate for runtime animation.
 
-The 24 classroom signs are part of the V43 GLB. Their IDs, floors, building assignments and sign-node names come from the V43 scene configuration: 12A on floor 1, 11B on floor 2, and 10C on floor 3. No runtime text labels or standalone desk GLBs are rendered.
+`npm run campus:validate` uses Rapier to check ground support, all 59 door/gate
+openings with closed/open doors, and a player capsule ascending every ramp.
+It writes `gameplay_validation.json` beside the exports. In development, the
+HUD **Colliders** button or `/game?debugPhysics=true` displays actual Rapier shapes.
 
 ## Replacing a placeholder with GLB
 

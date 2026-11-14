@@ -1,78 +1,29 @@
-import v58SceneConfig from "../../../assets/school/kien_an_campus_v58_scene_config.json";
+import { campusDoors, campusRooms } from "@/game/config/campusGameplay";
 import type { Vec3 } from "@/game/types";
 
-type Grade = 10 | 11 | 12;
-type RightSection = 1 | 2 | 3 | 4;
-export type ClassroomDoorId = `${Grade}${"A" | "B" | "C"}${RightSection}`;
+export type ClassroomDoorId = string;
 export type ClassroomId = string;
-
 export type ClassroomRegistryEntry = {
-  id: ClassroomId;
-  grade: Grade;
-  section: number;
-  building: "right" | "center";
-  floor: 1 | 2 | 3;
-  signNodeName: string;
-  position: Vec3;
+  id: string; grade: 10 | 11 | 12; section: number; building: string; floor: number; signNodeName: string; position: Vec3;
 };
-
 export type ClassroomConfig = ClassroomRegistryEntry & {
-  id: ClassroomDoorId;
-  doorNodeName: string;
-  handleNodeName: string;
-  /** V35 has no hinge node. This is the measured lower, leading edge of the leaf. */
-  hingePosition: Vec3;
-  interactionPosition: Vec3;
+  doorNodeName: string; handleNodeName: string; hingePosition: Vec3; interactionPosition: Vec3;
   furniture: { rows: number; columns: number; frontX: number; rowSpacing: number; columnSpacing: number; orientationY: number; floorY: number };
 };
-
-const signRecords = v58SceneConfig.classroomSigns.meshSigns;
-export const classroomRegistry: ClassroomRegistryEntry[] = signRecords.map((sign) => ({
-  id: sign.label,
-  grade: sign.grade as Grade,
-  section: sign.roomSequence,
-  building: sign.building as "right" | "center",
-  floor: sign.floor as 1 | 2 | 3,
-  signNodeName: sign.mesh,
-  position: [...sign.worldPosition] as Vec3,
+export const classroomRegistry: ClassroomRegistryEntry[] = campusRooms.map((room) => ({
+  ...room, grade: Number(room.id.slice(0, 2)) as 10 | 11 | 12, section: Number(room.id.slice(3)),
+  signNodeName: `V02_Class_Sign_${room.building}_${room.id}`,
 }));
-
-if (classroomRegistry.length !== 24 || new Set(classroomRegistry.map((classroom) => classroom.id)).size !== 24) {
-  throw new Error("V58 classroom registry must contain 24 uniquely named classrooms.");
-}
-
-const roomSlots = [
-  { slot: 0, z: 25.908, section: 4 },
-  { slot: 1, z: 15.608, section: 3 },
-  { slot: 3, z: -2.192, section: 2 },
-  { slot: 4, z: -12.492, section: 1 },
-] as const;
-const floors = [
-  { floor: 1, grade: 12, lowerY: 1.781566, surfaceY: .66 },
-  { floor: 2, grade: 11, lowerY: 6.681566, surfaceY: 5.1834 },
-  { floor: 3, grade: 10, lowerY: 11.581566, surfaceY: 10.0834 },
-] as const;
-
-/** Runtime door metadata: V58 preserves the V35 right-wing door leaf nodes. */
-export const classrooms: ClassroomConfig[] = floors.flatMap((floor) => roomSlots.map((room) => {
-  const registry = classroomRegistry.find((classroom) => classroom.floor === floor.floor && classroom.section === room.section && classroom.building === "right");
-  if (!registry) throw new Error(`Missing V58 sign metadata for right floor ${floor.floor}, section ${room.section}.`);
-  const id = registry.id as ClassroomDoorId;
-  const suffix = `${floor.floor - 1}_${room.slot}`;
-  return {
-    ...registry,
-    id,
-    doorNodeName: `V35_RIGHT_DOOR_LEAF_${suffix}`,
-    handleNodeName: `V35_RIGHT_DOOR_HANDLE_${suffix}`,
-    hingePosition: [31.92, floor.lowerY, room.z],
-    interactionPosition: [31.2, floor.lowerY + .86, room.z + .34],
-    furniture: { rows: 4, columns: 3, frontX: 38.35, rowSpacing: 1.55, columnSpacing: 2.25, orientationY: Math.PI / 2, floorY: floor.surfaceY },
-  };
+export const classrooms: ClassroomConfig[] = campusDoors.filter((door) => !door.gate).map((door) => ({
+  ...(classroomRegistry.find((room) => room.id === door.id) ?? {
+    id: door.id, grade: 12 as const, section: 0, building: "service", floor: 1, signNodeName: "", position: door.position,
+  }),
+  doorNodeName: door.leaves[0].node, handleNodeName: "", hingePosition: door.leaves[0].pivot, interactionPosition: door.position,
+  // Interiors are embedded in the GLB; this adapter keeps legacy consumers typed.
+  furniture: { rows: 0, columns: 0, frontX: 0, rowSpacing: 0, columnSpacing: 0, orientationY: 0, floorY: door.leaves[0].pivot[1] },
 }));
-
-export const classroomById = new Map(classrooms.map((classroom) => [classroom.id, classroom]));
-export const classroomRegistryById = new Map(classroomRegistry.map((classroom) => [classroom.id, classroom]));
-
+export const classroomById = new Map(classrooms.map((room) => [room.id, room]));
+export const classroomRegistryById = new Map(classroomRegistry.map((room) => [room.id, room]));
 export function isClassroomDoorId(value: string | null): value is ClassroomDoorId {
-  return value !== null && classroomById.has(value as ClassroomDoorId);
+  return value !== null && classroomById.has(value);
 }

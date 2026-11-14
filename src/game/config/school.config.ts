@@ -1,14 +1,11 @@
 import type { Interaction, WorldAssetConfig } from "@/game/types";
 
-/** World convention: 1 unit = 1 metre; Y points up; all asset origins use ground centre. */
-export const worldAssets: WorldAssetConfig[] = [
-  { id: "building-main", type: "building", source: "procedural", position: [15, 0, -7], rotation: [0, 0, 0], scale: [1, 1, 1], colliderType: "compound" },
-  { id: "building-left", type: "building", source: "procedural", position: [-12, 0, -7], rotation: [0, 0, 0], scale: [1, 1, 1], colliderType: "compound" },
-];
-
+export const worldAssets: WorldAssetConfig[] = [];
+/** Accessible viewpoints measured in the V02 Y-up game coordinate system. */
 export const interactions: Interaction[] = [
-  { id: "campus-gate-main", label: "Nhấn E để mở cổng", title: "Cổng chính", body: "Cổng chính THPT Kiến An.", position: [0, 1.5, 39.8], radius: 2.5 },
-  { id: "campus-gate-left", label: "Nhấn E để mở cổng", title: "Cổng phụ trái", body: "Cổng đi bộ phía trái.", position: [-7.4, 1.5, 39.8], radius: 2.5 },
-  { id: "campus-gate-right", label: "Nhấn E để mở cổng", title: "Cổng phụ phải", body: "Cổng đi bộ phía phải.", position: [7.4, 1.5, 39.8], radius: 2.5 },
-  { id: "memory-courtyard", label: "Remember", title: "Sân trường", body: "Một khoảng sân đầy nắng và những kỷ niệm tuổi học trò.", position: [0, 1.2, -12], radius: 3 },
+  { id: "memory-courtyard", label: "Ngắm sân trường", title: "Sân trường", body: "Khoảng sân trước, nơi gặp nhau mỗi sáng và lưu giữ những kỷ niệm tuổi học trò.", position: [-3, .86, 28], radius: 3 },
+  { id: "memory-stage", label: "Ghé sân khấu", title: "Sân khấu chào cờ", body: "Sân khấu dưới mặt tiền tòa lớp chính, hướng về sân tập trung và cột cờ.", position: [0, .86, 16.8], radius: 2.6 },
+  { id: "memory-badminton", label: "Khám phá sân cầu lông", title: "Sân cầu lông", body: "Sân cầu lông phía bên phải sân trước. Đi vòng hai đầu lưới để sang phần sân bên kia.", position: [26.2, .86, 32], radius: 2.4 },
+  { id: "memory-rear-yard", label: "Khám phá sân sau", title: "Sân sau có mái che", body: "Khoảng sân phía sau tòa lớp chính, có mái che và những dãy bàn sinh hoạt chung.", position: [-5, .86, -18], radius: 3 },
+  { id: "memory-class-photo", label: "Xem ảnh lớp 12A1", title: "Kỷ niệm 12A1", body: "Góc ảnh và bảng kỷ niệm riêng của lớp 12A1. Những gương mặt quen thuộc, những ngày tháng khó quên.", position: [42.7, 1.2, 5.2], radius: 1.8 },
 ];

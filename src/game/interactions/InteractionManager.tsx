@@ -1,36 +1,70 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import { useRapier } from "@react-three/rapier";
 import { interactions } from "@/game/config/school.config";
+import { campusDoors } from "@/game/config/campusGameplay";
 import { useGameStore } from "@/game/store/useGameStore";
-import { classrooms, isClassroomDoorId } from "@/game/classrooms/classroom.config";
 import { useMultiplayer } from "@/game/multiplayer/MultiplayerProvider";
 import { teacherNpcConfig } from "@/game/world/teacherNpc.config";
 import { stoneBenchConfig } from "@/game/world/stoneBench.config";
-import { leaveStoneBenchSeat, requestStoneBenchSeat } from "@/game/world/benchSeatClient";
+import { activateNearby } from "./activateNearby";
+import { InteractionBeacon } from "./InteractionBeacon";
 
 export function InteractionManager() {
-  const position = useGameStore((s) => s.playerPosition); const nearbyId = useGameStore((s) => s.nearbyId); const teacherPosition = useGameStore((s) => s.teacherPosition);
+  const { world, rapier } = useRapier();
   const { localPlayer } = useMultiplayer();
-  useEffect(() => {
-    const nearby = [
-      ...interactions.map((item) => ({ id: item.id, position: item.position, radius: item.radius })),
-      ...classrooms.map((classroom) => ({ id: classroom.id, position: classroom.interactionPosition, radius: 2.05 })),
-      { id: "teacher-tam", position: teacherPosition, radius: teacherNpcConfig.interactionRadius },
+  const lastCheck = useRef(0);
+  useFrame(({ clock }) => {
+    if (clock.elapsedTime - lastCheck.current < .09) return;
+    lastCheck.current = clock.elapsedTime;
+    const store = useGameStore.getState();
+    if (!localPlayer || store.paused || store.activeDialog) {
+      if (store.nearbyId) store.setNearbyId(null);
+      return;
+    }
+    const position = store.playerPosition;
+    const candidates = [
+      ...campusDoors,
+      ...interactions,
+      { id: "teacher-tam", position: store.teacherPosition, radius: teacherNpcConfig.interactionRadius },
       { id: stoneBenchConfig.id, position: stoneBenchConfig.interactionPosition, radius: stoneBenchConfig.interactionRadius },
-    ].map((item) => ({ ...item, distance: Math.hypot(position[0] - item.position[0], position[1] - item.position[1], position[2] - item.position[2]) }))
-      .filter((item) => item.distance <= item.radius)
-      .sort((left, right) => left.distance - right.distance)[0]?.id ?? null;
-    if (nearby !== nearbyId) useGameStore.getState().setNearbyId(nearby);
-  }, [position, nearbyId, teacherPosition]);
+    ].map((item) => ({ ...item, distance: Math.hypot(position[0]-item.position[0], position[2]-item.position[2]) }))
+      .filter((item) => item.distance <= item.radius && Math.abs(position[1]-item.position[1]) < 1.35)
+      .sort((a,b) => a.distance-b.distance);
+    const nearest = candidates.find((item) => {
+      if (item.distance < .25) return true;
+      // A horizontal chest-height ray prevents use through walls and floors.
+      const origin = { x: position[0], y: position[1]+.35, z: position[2] };
+      const direction = { x: (item.position[0]-position[0])/item.distance, y: 0, z: (item.position[2]-position[2])/item.distance };
+      const hit = world.castRay(new rapier.Ray(origin, direction), Math.max(0, item.distance-.35), true,
+        undefined, undefined, undefined, undefined,
+        (collider) => {
+          const body = collider.parent();
+          const data = body?.userData as { doorId?: string; navigation?: boolean } | undefined;
+          return Boolean(data?.navigation || (data?.doorId && data.doorId !== item.id));
+        });
+      return !hit;
+    });
+    const id = nearest?.id ?? null;
+    if (id !== store.nearbyId) store.setNearbyId(id);
+  });
   useEffect(() => {
-    // A real button is shown for this interaction, so free the cursor once
-    // when it becomes available. Clicking the canvas later restores normal
-    // pointer-lock camera control.
-    if (nearbyId === "teacher-tam" && document.pointerLockElement) void document.exitPointerLock();
-  }, [nearbyId]);
-  useEffect(() => {
-    const handler = (event: KeyboardEvent) => { if (!localPlayer || event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return; if (event.code === "KeyG" && !event.repeat) { const store = useGameStore.getState(); if (store.benchSeatIndex !== null) leaveStoneBenchSeat(); else if (store.nearbyId === stoneBenchConfig.id) requestStoneBenchSeat(); } if (event.code === "KeyE") { const id = useGameStore.getState().nearbyId; if (id === "teacher-tam") useGameStore.getState().requestTeacherGreeting(); else if (id === "campus-gate-main") useGameStore.getState().requestCampusGateToggle("main"); else if (id === "campus-gate-left") useGameStore.getState().requestCampusGateToggle("left"); else if (id === "campus-gate-right") useGameStore.getState().requestCampusGateToggle("right"); else if (isClassroomDoorId(id)) useGameStore.getState().requestClassroomDoorToggle(id); else if (id) useGameStore.getState().setDialog(id); } if (event.code === "KeyV") useGameStore.getState().toggleCamera(); if (event.code === "Escape") useGameStore.getState().setPaused(true); };
-    window.addEventListener("keydown", handler); return () => window.removeEventListener("keydown", handler);
+    const handler = (event: KeyboardEvent) => {
+      const target = event.target;
+      if (!localPlayer || event.repeat || target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement ||
+          (target instanceof HTMLElement && target.isContentEditable)) return;
+      const store = useGameStore.getState();
+      if (event.code === "Escape") {
+        if (store.activeDialog) store.setDialog(null); else store.setPaused(!store.paused);
+        return;
+      }
+      if (store.paused || store.activeDialog) return;
+      if (event.code === "KeyE" || (event.code === "KeyG" && (store.nearbyId === stoneBenchConfig.id || store.benchSeatIndex !== null))) activateNearby();
+      if (event.code === "KeyV") store.toggleCamera();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
   }, [localPlayer]);
-  return null;
+  return <InteractionBeacon />;
 }

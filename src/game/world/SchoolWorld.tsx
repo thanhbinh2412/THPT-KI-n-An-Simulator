@@ -6,10 +6,9 @@ import { GateGreeter } from "./GateGreeter";
 import { SkyEnvironment } from "./SkyEnvironment";
 import { SittingStudentNpc } from "./SittingStudentNpc";
 import { TeacherNpc } from "./TeacherNpc";
-import { StoneBench } from "./StoneBench";
 import { CourtyardNpcCrowd } from "./CourtyardNpcCrowd";
 
-/** The V61 GLB is the complete campus visual; its navigation layer is separate. */
+/** V02 visuals and an independently exported navigation layer. */
 export function SchoolWorld({ collisionsEnabled = true }: { collisionsEnabled?: boolean }) {
   return <>
     <SkyEnvironment />
@@ -34,7 +33,6 @@ export function SchoolWorld({ collisionsEnabled = true }: { collisionsEnabled?: 
     <GateGreeter />
     <TeacherNpc />
     <SittingStudentNpc />
-    <StoneBench />
     <CourtyardNpcCrowd />
   </>;
 }

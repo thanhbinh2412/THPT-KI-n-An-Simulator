@@ -9,6 +9,8 @@
     "start": "tsx server.ts --production",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "campus:validate": "node tools/campus/validate_v02_gameplay.mjs",
+    "campus:export": "blender -b assets/school/Campus-Rebuild/v02/kien_an_campus_photo_v02.blend --python tools/campus/export_v02_gameplay.py",
     "campus:prepare": "node tools/prepare-campus-preview.mjs",
     "campus:preview": "npm run dev",
     "predev": "npm run campus:prepare",

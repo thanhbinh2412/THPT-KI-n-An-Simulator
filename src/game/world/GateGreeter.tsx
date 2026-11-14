@@ -53,7 +53,7 @@ export function GateGreeter() {
     const position = useGameStore.getState().playerPosition;
     // Leaving the central opening disarms the trigger. Passing a pedestrian
     // gate or walking alongside the fence does not count as a red-line crossing.
-    if (Math.abs(position[0]) > gateGreeterConfig.mainGate.halfWidth) {
+    if (Math.abs(position[0] - gateGreeterConfig.mainGate.centerX) > gateGreeterConfig.mainGate.halfWidth) {
       previousSide.current = null;
       return;
     }

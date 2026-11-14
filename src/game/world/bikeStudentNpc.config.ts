@@ -21,7 +21,7 @@ export const bikeStudentNpcConfig: {
   modelUrl: "/models/characters/kien_an_student_lowpoly.glb",
   // The final rear block spans X=-17.8..17.8 and its courtyard-facing facade
   // is Z=-64.5. This is the marked front-right open-courtyard location.
-  position: [12.5, .025, -60.0],
+  position: [33.5, .025, 15.0],
   // The character source faces local +Z, toward the courtyard.
   rotationY: 0,
   scale: .9,
@@ -36,12 +36,11 @@ export const bikeStudentNpcConfig: {
     "Ơ sao Xe đạp mày lại treo lên tầng 3 kìa :))",
   ],
   runSpeed: 3.7,
-  // Measured from REAR_STAIR_2 (the central stairwell of the rearmost block).
-  // Points alternate between the two flights and their intermediate landings.
+  // V02 right-wing stairs: courtyard approach, two switchbacks, upper corridor.
   thirdFloorRoute: [
-    [-1.22, .025, -60.2], [-1.22, .235, -65.66],
-    [-1.22, 2.495, -71.53], [1.22, 2.685, -71.53], [1.22, 4.945, -65.66],
-    [-1.22, 5.135, -65.66], [-1.22, 7.395, -71.53], [1.22, 7.585, -71.53],
-    [1.22, 9.845, -65.66], [5.2, 9.845, -63.45],
+    [34.8, .025, 20.5], [36.9, .33, 20.5], [39, .33, 19.25],
+    [46.8, 2.15, 19.25], [46.8, 2.15, 21.8], [39, 3.98, 21.8],
+    [39, 3.98, 19.25], [46.8, 5.8, 19.25], [46.8, 5.8, 21.8],
+    [39, 7.63, 21.8], [36.9, 7.63, 21.8],
   ],
 };

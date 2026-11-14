@@ -40,11 +40,13 @@ function Scene({ onReady }: { onReady: () => void }) {
   const player = useRef<RapierRigidBody | null>(null);
   const { localPlayer } = useMultiplayer();
   const paused = useGameStore((s) => s.paused);
+  const activeDialog = useGameStore((s) => s.activeDialog);
+  const physicsDebug = useGameStore((s) => s.physicsDebug);
   const spawn: Vec3 | undefined = localPlayer ? [localPlayer.position.x, localPlayer.position.y, localPlayer.position.z] : undefined;
   const graphics = useGraphicsSettings();
   return <>
-    <Physics gravity={[0, -9.81, 0]}>{graphics.campusVisible && <SchoolWorld collisionsEnabled={graphics.collisionsEnabled} />}<PlayerController bodyRef={player} enabled={!!localPlayer && !paused} spawn={spawn} /><RemotePlayers /></Physics>
-    <CameraController player={player} /><InteractionManager /><PerformanceMonitor /><PhysicsDebugQuery /><SceneReady onReady={onReady} />
+    <Physics gravity={[0, -9.81, 0]} debug={physicsDebug}>{graphics.campusVisible && <SchoolWorld collisionsEnabled={graphics.collisionsEnabled} />}<PlayerController bodyRef={player} enabled={!!localPlayer && !paused && !activeDialog} spawn={spawn} /><RemotePlayers /><InteractionManager /></Physics>
+    <CameraController player={player} /><PerformanceMonitor /><PhysicsDebugQuery /><SceneReady onReady={onReady} />
   </>;
 }
 
