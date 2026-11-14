@@ -1,0 +1,903 @@
+{
+  "version": 2,
+  "unit": "metre",
+  "up_axis": "Z",
+  "front_axis": "-Y",
+  "assets": [
+    {
+      "id": "teacher_desk",
+      "category": "Teacher",
+      "label": "Bàn giáo viên rộng",
+      "description": "Bàn gỗ rộng 1,80 m, sâu 0,90 m; yếm pano có khung, hai vách kín và hai ngăn kéo phía giáo viên.",
+      "anchor": "floor_center",
+      "collection": "KAClass_teacher_desk",
+      "scene": "Class_teacher_desk",
+      "root": "KAClass_teacher_desk_Root",
+      "blend": "Teacher/teacher_desk.blend",
+      "glb": "Teacher/teacher_desk.glb",
+      "version": "v04",
+      "dimensions_m": [
+        1.8,
+        0.9,
+        0.84
+      ],
+      "bounds_min": [
+        -0.8999999761581421,
+        -0.44999998807907104,
+        0.0
+      ],
+      "bounds_max": [
+        0.8999999761581421,
+        0.44999998807907104,
+        0.8399999737739563
+      ],
+      "object_count": 26,
+      "glb_bytes": 728620
+    },
+    {
+      "id": "teacher_chair",
+      "category": "Teacher",
+      "label": "Ghế giáo viên",
+      "description": "Ghế gỗ giáo viên: mặt ghế, chân, thanh tựa và lưng ghế tách riêng.",
+      "anchor": "floor_center",
+      "collection": "KAClass_teacher_chair",
+      "scene": "Class_teacher_chair",
+      "root": "KAClass_teacher_chair_Root",
+      "blend": "Teacher/teacher_chair.blend",
+      "glb": "Teacher/teacher_chair.glb",
+      "dimensions_m": [
+        0.44,
+        0.44,
+        1.005
+      ],
+      "bounds_min": [
+        -0.2199999988079071,
+        -0.2199999988079071,
+        0.0
+      ],
+      "bounds_max": [
+        0.2199999988079071,
+        0.2199999988079071,
+        1.0049999952316284
+      ],
+      "object_count": 11,
+      "glb_bytes": 1068856
+    },
+    {
+      "id": "teacher_set",
+      "category": "Teacher",
+      "label": "Bộ bàn ghế giáo viên",
+      "description": "Bàn rộng 1,80 × 0,90 m và ghế liên kết riêng; ghế lùi 0,86 m so với tâm bàn.",
+      "anchor": "floor_center",
+      "collection": "KAClass_teacher_set",
+      "scene": "Class_teacher_set",
+      "root": "KAClass_teacher_set_Root",
+      "blend": "Teacher/teacher_set.blend",
+      "glb": "Teacher/teacher_set.glb",
+      "dimensions_m": [
+        1.8,
+        1.53,
+        1.005
+      ],
+      "bounds_min": [
+        -0.8999999761581421,
+        -0.44999998807907104,
+        0.0
+      ],
+      "bounds_max": [
+        0.8999999761581421,
+        1.0800000429153442,
+        1.0049999952316284
+      ],
+      "object_count": 3,
+      "glb_bytes": 1796092,
+      "chair_offset_m": 0.86,
+      "version": "v04"
+    },
+    {
+      "id": "wall_solid_1m",
+      "category": "Walls",
+      "label": "Tường đặc 1 m",
+      "description": "Đoạn tường rộng 1 m, dày 18 cm, cao 3,45 m; kéo Scale X để đổi chiều dài.",
+      "anchor": "floor_center",
+      "collection": "KAClass_wall_solid_1m",
+      "scene": "Class_wall_solid_1m",
+      "root": "KAClass_wall_solid_1m_Root",
+      "blend": "Walls/wall_solid_1m.blend",
+      "glb": "Walls/wall_solid_1m.glb",
+      "dimensions_m": [
+        1.0,
+        0.194,
+        3.45
+      ],
+      "bounds_min": [
+        -0.5,
+        -0.10400000214576721,
+        0.0
+      ],
+      "bounds_max": [
+        0.5,
+        0.09000000357627869,
+        3.450000047683716
+      ],
+      "object_count": 3,
+      "glb_bytes": 17724
+    },
+    {
+      "id": "wall_window_bay",
+      "category": "Walls",
+      "label": "Tường chừa cửa sổ",
+      "description": "Khoang rộng 1,8 m. Lỗ trống 1,6 × 1,9 m, bậu cao 0,95 m; bốn mảnh độc lập.",
+      "anchor": "floor_center",
+      "collection": "KAClass_wall_window_bay",
+      "scene": "Class_wall_window_bay",
+      "root": "KAClass_wall_window_bay_Root",
+      "blend": "Walls/wall_window_bay.blend",
+      "glb": "Walls/wall_window_bay.glb",
+      "dimensions_m": [
+        1.8,
+        0.18,
+        3.45
+      ],
+      "bounds_min": [
+        -0.9000000357627869,
+        -0.09000000357627869,
+        0.0
+      ],
+      "bounds_max": [
+        0.9000000357627869,
+        0.09000000357627869,
+        3.450000047683716
+      ],
+      "object_count": 5,
+      "glb_bytes": 33004
+    },
+    {
+      "id": "wall_door_bay",
+      "category": "Walls",
+      "label": "Tường chừa cửa đôi",
+      "description": "Khoang rộng 1,95 m. Lỗ cửa 1,65 × 2,65 m, không có mặt tường bịt lỗ.",
+      "anchor": "floor_center",
+      "collection": "KAClass_wall_door_bay",
+      "scene": "Class_wall_door_bay",
+      "root": "KAClass_wall_door_bay_Root",
+      "blend": "Walls/wall_door_bay.blend",
+      "glb": "Walls/wall_door_bay.glb",
+      "dimensions_m": [
+        1.95,
+        0.18,
+        3.45
+      ],
+      "bounds_min": [
+        -0.9749999642372131,
+        -0.09000000357627869,
+        0.0
+      ],
+      "bounds_max": [
+        0.9749999642372131,
+        0.09000000357627869,
+        3.450000047683716
+      ],
+      "object_count": 4,
+      "glb_bytes": 24512
+    },
+    {
+      "id": "classroom_double_door",
+      "category": "Doors",
+      "label": "Cửa lớp hai cánh",
+      "description": "Cửa gỗ nâu theo ảnh: hai bản lề Z độc lập, ô kính, pano dưới và tay nắm.",
+      "anchor": "floor_center",
+      "collection": "KAClass_classroom_double_door",
+      "scene": "Class_classroom_double_door",
+      "root": "KAClass_classroom_double_door_Root",
+      "blend": "Doors/classroom_double_door.blend",
+      "glb": "Doors/classroom_double_door.glb",
+      "dimensions_m": [
+        1.79,
+        0.202,
+        2.72
+      ],
+      "bounds_min": [
+        -0.8950000405311584,
+        -0.12200000137090683,
+        0.0
+      ],
+      "bounds_max": [
+        0.8950000405311584,
+        0.07999999821186066,
+        2.7200000286102295
+      ],
+      "object_count": 64,
+      "glb_bytes": 1320312
+    },
+    {
+      "id": "classroom_window",
+      "category": "Windows",
+      "label": "Cửa sổ gỗ và song hoa",
+      "description": "Cửa sổ rời 1,6 × 1,9 m theo ảnh: khung gỗ nâu, song vàng và hai cánh có bản lề.",
+      "anchor": "opening_bottom_center",
+      "collection": "KAClass_classroom_window",
+      "scene": "Class_classroom_window",
+      "root": "KAClass_classroom_window_Root",
+      "blend": "Windows/classroom_window.blend",
+      "glb": "Windows/classroom_window.glb",
+      "dimensions_m": [
+        1.6,
+        0.1745,
+        1.9
+      ],
+      "bounds_min": [
+        -0.800000011920929,
+        -0.08750000596046448,
+        0.0
+      ],
+      "bounds_max": [
+        0.800000011920929,
+        0.08700000494718552,
+        1.899999976158142
+      ],
+      "object_count": 49,
+      "glb_bytes": 237080
+    },
+    {
+      "id": "wall_fan",
+      "category": "Fans",
+      "label": "Quạt treo tường",
+      "description": "Tách quạt đã duyệt: lồng, cánh đỏ, tâm và đế là các mesh riêng. Mốc gắn tường phía sau.",
+      "anchor": "wall_back_bottom",
+      "collection": "KAClass_wall_fan",
+      "scene": "Class_wall_fan",
+      "root": "KAClass_wall_fan_Root",
+      "blend": "Fans/wall_fan.blend",
+      "glb": "Fans/wall_fan.glb",
+      "dimensions_m": [
+        0.53,
+        0.233,
+        0.585
+      ],
+      "bounds_min": [
+        -0.2650001049041748,
+        -0.2329998016357422,
+        0.0
+      ],
+      "bounds_max": [
+        0.2650001049041748,
+        0.0,
+        0.5850000381469727
+      ],
+      "object_count": 21,
+      "glb_bytes": 63968
+    },
+    {
+      "id": "ceiling_fan",
+      "category": "Fans",
+      "label": "Quạt trần",
+      "description": "Quạt trần đã duyệt, tách ty, mô tơ và ba cánh. Gốc đặt tại điểm treo trần.",
+      "anchor": "ceiling_mount",
+      "collection": "KAClass_ceiling_fan",
+      "scene": "Class_ceiling_fan",
+      "root": "KAClass_ceiling_fan_Root",
+      "blend": "Fans/ceiling_fan.blend",
+      "glb": "Fans/ceiling_fan.glb",
+      "dimensions_m": [
+        1.0445,
+        1.20371,
+        0.63
+      ],
+      "bounds_min": [
+        -0.5208475589752197,
+        -0.6018561720848083,
+        -0.630000114440918
+      ],
+      "bounds_max": [
+        0.523648202419281,
+        0.6018561124801636,
+        0.0
+      ],
+      "object_count": 6,
+      "glb_bytes": 34904
+    },
+    {
+      "id": "chalkboard",
+      "category": "Boards",
+      "label": "Bảng xanh khung nhôm",
+      "description": "Bảng trống dùng chung, khung nhôm mảnh, góc nối, máng phấn và đồ dùng tách riêng.",
+      "anchor": "wall_back_bottom",
+      "collection": "KAClass_chalkboard",
+      "scene": "Class_chalkboard",
+      "root": "KAClass_chalkboard_Root",
+      "blend": "Boards/chalkboard.blend",
+      "glb": "Boards/chalkboard.glb",
+      "version": "v03",
+      "dimensions_m": [
+        4.5,
+        0.15,
+        1.45
+      ],
+      "bounds_min": [
+        -2.25,
+        -0.15000000596046448,
+        0.0
+      ],
+      "bounds_max": [
+        2.25,
+        0.0,
+        1.4500000476837158
+      ],
+      "object_count": 17,
+      "glb_bytes": 128684
+    },
+    {
+      "id": "bookcase",
+      "category": "Storage",
+      "label": "Tủ sách lớp",
+      "description": "Tủ kính xanh xám: nóc, đáy, lưng, hai bên, ba đợt, sách và hai cánh tủ tách riêng.",
+      "anchor": "floor_center",
+      "collection": "KAClass_bookcase",
+      "scene": "Class_bookcase",
+      "root": "KAClass_bookcase_Root",
+      "blend": "Storage/bookcase.blend",
+      "glb": "Storage/bookcase.glb",
+      "dimensions_m": [
+        1.34,
+        0.62276,
+        2.015
+      ],
+      "bounds_min": [
+        -0.6700000166893005,
+        -0.33776113390922546,
+        0.0
+      ],
+      "bounds_max": [
+        0.6700000166893005,
+        0.2849999964237213,
+        2.015000104904175
+      ],
+      "object_count": 41,
+      "glb_bytes": 247972
+    },
+    {
+      "id": "student_desk_bench",
+      "category": "Student",
+      "label": "Bàn và ghế băng học sinh",
+      "description": "Một bộ bàn ghế học sinh từ bản v01, giữ nguyên hình đã duyệt.",
+      "anchor": "floor_center",
+      "collection": "KAClass_student_desk_bench",
+      "scene": "Class_student_desk_bench",
+      "root": "KAClass_student_desk_bench_Root",
+      "blend": "Student/student_desk_bench.blend",
+      "glb": "Student/student_desk_bench.glb",
+      "dimensions_m": [
+        1.62,
+        0.895,
+        0.7975
+      ],
+      "bounds_min": [
+        -0.8100000619888306,
+        -0.44749999046325684,
+        0.0
+      ],
+      "bounds_max": [
+        0.809999942779541,
+        0.4475000500679016,
+        0.7975000143051147
+      ],
+      "object_count": 3,
+      "glb_bytes": 1128460
+    },
+    {
+      "id": "ho_chi_minh_portrait",
+      "category": "Decor",
+      "label": "Ảnh Bác Hồ có khung",
+      "description": "Ảnh Bác Hồ từ tệp người dùng cung cấp; khung 3D và mặt ảnh riêng, dùng chung các phòng.",
+      "anchor": "wall_back_bottom",
+      "collection": "KAClass_ho_chi_minh_portrait",
+      "scene": "Class_ho_chi_minh_portrait",
+      "root": "KAClass_ho_chi_minh_portrait_Root",
+      "blend": "Decor/ho_chi_minh_portrait.blend",
+      "glb": "Decor/ho_chi_minh_portrait.glb",
+      "version": "v03",
+      "dimensions_m": [
+        0.46,
+        0.058,
+        0.6
+      ],
+      "bounds_min": [
+        -0.23000000417232513,
+        -0.057999998331069946,
+        0.0
+      ],
+      "bounds_max": [
+        0.23000000417232513,
+        0.0,
+        0.6000000238418579
+      ],
+      "object_count": 11,
+      "glb_bytes": 127420
+    },
+    {
+      "id": "slogan_study_well",
+      "category": "Decor",
+      "label": "Biển HỌC TỐT",
+      "description": "Biển xanh chữ trắng, viền nhôm và mặt biển là các phần riêng; có thể sửa chữ.",
+      "anchor": "wall_back_bottom",
+      "collection": "KAClass_slogan_study_well",
+      "scene": "Class_slogan_study_well",
+      "root": "KAClass_slogan_study_well_Root",
+      "blend": "Decor/slogan_study_well.blend",
+      "glb": "Decor/slogan_study_well.glb",
+      "version": "v03",
+      "dimensions_m": [
+        1.02,
+        0.04107,
+        0.27
+      ],
+      "bounds_min": [
+        -0.5099999904632568,
+        -0.041072871536016464,
+        0.0
+      ],
+      "bounds_max": [
+        0.5099999904632568,
+        0.0,
+        0.27000001072883606
+      ],
+      "object_count": 7,
+      "glb_bytes": 190512
+    },
+    {
+      "id": "slogan_teach_well",
+      "category": "Decor",
+      "label": "Biển DẠY TỐT",
+      "description": "Biển xanh chữ trắng, viền nhôm và mặt biển là các phần riêng; có thể sửa chữ.",
+      "anchor": "wall_back_bottom",
+      "collection": "KAClass_slogan_teach_well",
+      "scene": "Class_slogan_teach_well",
+      "root": "KAClass_slogan_teach_well_Root",
+      "blend": "Decor/slogan_teach_well.blend",
+      "glb": "Decor/slogan_teach_well.glb",
+      "version": "v03",
+      "dimensions_m": [
+        1.02,
+        0.04108,
+        0.27
+      ],
+      "bounds_min": [
+        -0.5099999904632568,
+        -0.04107539728283882,
+        0.0
+      ],
+      "bounds_max": [
+        0.5099999904632568,
+        0.0,
+        0.27000001072883606
+      ],
+      "object_count": 7,
+      "glb_bytes": 148644
+    },
+    {
+      "id": "classroom_rules_board",
+      "category": "Boards",
+      "label": "Bảng nội quy dạng đứng",
+      "description": "Khung nhôm, lưng, mặt in và các dòng minh họa tách riêng; phần thân chưa chép nội dung nội quy.",
+      "anchor": "wall_back_bottom",
+      "collection": "KAClass_classroom_rules_board",
+      "scene": "Class_classroom_rules_board",
+      "root": "KAClass_classroom_rules_board_Root",
+      "blend": "Boards/classroom_rules_board.blend",
+      "glb": "Boards/classroom_rules_board.glb",
+      "version": "v03",
+      "dimensions_m": [
+        0.84,
+        0.04103,
+        1.38
+      ],
+      "bounds_min": [
+        -0.42000001668930054,
+        -0.04102689027786255,
+        0.0
+      ],
+      "bounds_max": [
+        0.42000001668930054,
+        0.0,
+        1.3799999952316284
+      ],
+      "object_count": 32,
+      "glb_bytes": 372356
+    },
+    {
+      "id": "electrical_switch_panel",
+      "category": "Electrical",
+      "label": "Cụm công tắc và aptomat",
+      "description": "Hộp nổi, aptomat, cần gạt, công tắc, ổ cắm và ốc riêng; chi tiết hình học trang trí.",
+      "anchor": "wall_back_bottom",
+      "collection": "KAClass_electrical_switch_panel",
+      "scene": "Class_electrical_switch_panel",
+      "root": "KAClass_electrical_switch_panel_Root",
+      "blend": "Electrical/electrical_switch_panel.blend",
+      "glb": "Electrical/electrical_switch_panel.glb",
+      "version": "v03",
+      "dimensions_m": [
+        0.18,
+        0.0935,
+        0.46
+      ],
+      "bounds_min": [
+        -0.09000000357627869,
+        -0.09349999576807022,
+        0.0
+      ],
+      "bounds_max": [
+        0.09000000357627869,
+        0.0,
+        0.46000000834465027
+      ],
+      "object_count": 16,
+      "glb_bytes": 117972
+    },
+    {
+      "id": "electrical_conduit_1m",
+      "category": "Electrical",
+      "label": "Nẹp điện nổi 1 m",
+      "description": "Nẹp PVC trắng có đế và nắp riêng; kéo Scale X để đổi chiều dài.",
+      "anchor": "wall_back_bottom",
+      "collection": "KAClass_electrical_conduit_1m",
+      "scene": "Class_electrical_conduit_1m",
+      "root": "KAClass_electrical_conduit_1m_Root",
+      "blend": "Electrical/electrical_conduit_1m.blend",
+      "glb": "Electrical/electrical_conduit_1m.glb",
+      "version": "v03",
+      "dimensions_m": [
+        1.0,
+        0.024,
+        0.025
+      ],
+      "bounds_min": [
+        -0.5,
+        -0.024000000208616257,
+        0.0
+      ],
+      "bounds_max": [
+        0.5,
+        0.0,
+        0.02500000037252903
+      ],
+      "object_count": 3,
+      "glb_bytes": 17608
+    },
+    {
+      "id": "ceiling_trim_1m",
+      "category": "Walls",
+      "label": "Gờ tường trần 1 m",
+      "description": "Gờ trắng mỏng, hai lớp; gốc tại cao độ trần, toàn bộ gờ nằm bên dưới gốc.",
+      "anchor": "ceiling_mount",
+      "collection": "KAClass_ceiling_trim_1m",
+      "scene": "Class_ceiling_trim_1m",
+      "root": "KAClass_ceiling_trim_1m_Root",
+      "blend": "Walls/ceiling_trim_1m.blend",
+      "glb": "Walls/ceiling_trim_1m.glb",
+      "version": "v03",
+      "dimensions_m": [
+        1.0,
+        0.05,
+        0.061
+      ],
+      "bounds_min": [
+        -0.5,
+        -0.05000000074505806,
+        -0.061000000685453415
+      ],
+      "bounds_max": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "object_count": 3,
+      "glb_bytes": 16828
+    },
+    {
+      "id": "classroom_front_wall_set",
+      "category": "Boards",
+      "label": "Cụm đầu lớp dùng chung",
+      "description": "Bảng nhôm trống, ảnh Bác Hồ, hai biển xanh, bảng nội quy, cụm điện và nẹp điện; mỗi phần liên kết tới asset riêng.",
+      "anchor": "wall_floor_center",
+      "collection": "KAClass_classroom_front_wall_set",
+      "scene": "Class_classroom_front_wall_set",
+      "root": "KAClass_classroom_front_wall_set_Root",
+      "blend": "Boards/classroom_front_wall_set.blend",
+      "glb": "Boards/classroom_front_wall_set.glb",
+      "version": "v03",
+      "dimensions_m": [
+        7.7,
+        0.15,
+        2.25
+      ],
+      "bounds_min": [
+        -3.8499999046325684,
+        -0.15000000596046448,
+        1.149999976158142
+      ],
+      "bounds_max": [
+        3.8499999046325684,
+        0.0,
+        3.4000000953674316
+      ],
+      "object_count": 11,
+      "glb_bytes": 1115368
+    },
+    {
+      "id": "projector_screen",
+      "category": "AV",
+      "label": "Màn chiếu kéo tay",
+      "description": "Màn trắng viền đen, hộp cuốn, thanh đáy và vòng kéo riêng; extension 0–1 trong Blender.",
+      "anchor": "top_mount_center",
+      "collection": "KAClass_projector_screen",
+      "scene": "Class_projector_screen",
+      "root": "KAClass_projector_screen_Root",
+      "blend": "AV/projector_screen.blend",
+      "glb": "AV/projector_screen.glb",
+      "version": "v03",
+      "dimensions_m": [
+        2.14,
+        0.1065,
+        1.6655
+      ],
+      "bounds_min": [
+        -1.0700000524520874,
+        -0.04399999976158142,
+        -1.6630001068115234
+      ],
+      "bounds_max": [
+        1.0700000524520874,
+        0.0625,
+        0.002499997615814209
+      ],
+      "object_count": 12,
+      "glb_bytes": 65892
+    },
+    {
+      "id": "projector",
+      "category": "AV",
+      "label": "Máy chiếu",
+      "description": "Thân trắng, ống kính, khe tản nhiệt, cổng tín hiệu và phím riêng. Hướng chiếu -Y.",
+      "anchor": "top_mount_center",
+      "collection": "KAClass_projector",
+      "scene": "Class_projector",
+      "root": "KAClass_projector_Root",
+      "blend": "AV/projector.blend",
+      "glb": "AV/projector.glb",
+      "version": "v03",
+      "dimensions_m": [
+        0.3435,
+        0.3365,
+        0.1235
+      ],
+      "bounds_min": [
+        -0.1717499941587448,
+        -0.18400000035762787,
+        -0.12099999934434891
+      ],
+      "bounds_max": [
+        0.1717499941587448,
+        0.1525000035762787,
+        0.0024999999441206455
+      ],
+      "object_count": 57,
+      "glb_bytes": 372760
+    },
+    {
+      "id": "projector_ceiling_mount",
+      "category": "AV",
+      "label": "Giá treo máy chiếu",
+      "description": "Đế trần, thanh vuông lồng, khớp và tay đỡ riêng; dây đen theo ảnh tham khảo.",
+      "anchor": "ceiling_mount",
+      "collection": "KAClass_projector_ceiling_mount",
+      "scene": "Class_projector_ceiling_mount",
+      "root": "KAClass_projector_ceiling_mount_Root",
+      "blend": "AV/projector_ceiling_mount.blend",
+      "glb": "AV/projector_ceiling_mount.glb",
+      "version": "v03",
+      "dimensions_m": [
+        0.24,
+        0.249,
+        0.84
+      ],
+      "bounds_min": [
+        -0.11999999731779099,
+        -0.0949999988079071,
+        -0.8399999737739563
+      ],
+      "bounds_max": [
+        0.11999999731779099,
+        0.15400001406669617,
+        0.0
+      ],
+      "object_count": 19,
+      "glb_bytes": 89468
+    },
+    {
+      "id": "pc_tower",
+      "category": "Computers",
+      "label": "Thùng máy tính",
+      "description": "Thùng máy văn phòng đứng, mặt nóc phẳng, khe ổ đĩa, nút nguồn, cổng và quạt sau; không có màn hình.",
+      "anchor": "wall_back_bottom",
+      "collection": "KAClass_pc_tower",
+      "scene": "Class_pc_tower",
+      "root": "KAClass_pc_tower_Root",
+      "blend": "Computers/pc_tower.blend",
+      "glb": "Computers/pc_tower.glb",
+      "version": "v03",
+      "dimensions_m": [
+        0.28248,
+        0.5505,
+        0.6
+      ],
+      "bounds_min": [
+        -0.14124000072479248,
+        -0.2800000011920929,
+        0.0
+      ],
+      "bounds_max": [
+        0.14124000072479248,
+        0.2705000042915344,
+        0.6000000238418579
+      ],
+      "object_count": 68,
+      "glb_bytes": 400992
+    },
+    {
+      "id": "keyboard",
+      "category": "Computers",
+      "label": "Bàn phím",
+      "description": "Bàn phím đủ cụm chữ, chức năng, điều hướng và phím số; từng phím có thể sửa riêng.",
+      "anchor": "bottom_center",
+      "collection": "KAClass_keyboard",
+      "scene": "Class_keyboard",
+      "root": "KAClass_keyboard_Root",
+      "blend": "Computers/keyboard.blend",
+      "glb": "Computers/keyboard.glb",
+      "version": "v03",
+      "dimensions_m": [
+        0.452,
+        0.15,
+        0.0313
+      ],
+      "bounds_min": [
+        -0.22599999606609344,
+        -0.07500000298023224,
+        0.0
+      ],
+      "bounds_max": [
+        0.22599999606609344,
+        0.07500000298023224,
+        0.031300000846385956
+      ],
+      "object_count": 201,
+      "glb_bytes": 1175728
+    },
+    {
+      "id": "mouse",
+      "category": "Computers",
+      "label": "Chuột máy tính",
+      "description": "Chuột có thân bo, hai nút, bánh cuộn và đáy riêng.",
+      "anchor": "bottom_center",
+      "collection": "KAClass_mouse",
+      "scene": "Class_mouse",
+      "root": "KAClass_mouse_Root",
+      "blend": "Computers/mouse.blend",
+      "glb": "Computers/mouse.glb",
+      "version": "v03",
+      "dimensions_m": [
+        0.063,
+        0.1095,
+        0.043
+      ],
+      "bounds_min": [
+        -0.03150000050663948,
+        -0.05450000241398811,
+        0.0
+      ],
+      "bounds_max": [
+        0.03150000050663948,
+        0.054999999701976776,
+        0.0430000014603138
+      ],
+      "object_count": 8,
+      "glb_bytes": 57252
+    },
+    {
+      "id": "teacher_computer_set",
+      "category": "Computers",
+      "label": "Bộ máy tính góc giáo viên",
+      "description": "Chỉ thùng máy với bàn phím và chuột trên nóc; liên kết từng asset riêng, không có màn hình.",
+      "anchor": "wall_back_bottom",
+      "collection": "KAClass_teacher_computer_set",
+      "scene": "Class_teacher_computer_set",
+      "root": "KAClass_teacher_computer_set_Root",
+      "blend": "Computers/teacher_computer_set.blend",
+      "glb": "Computers/teacher_computer_set.glb",
+      "version": "v03",
+      "dimensions_m": [
+        0.28804,
+        0.5618,
+        0.644
+      ],
+      "bounds_min": [
+        -0.14124000072479248,
+        -0.2800000011920929,
+        0.0
+      ],
+      "bounds_max": [
+        0.14679953455924988,
+        0.2818000018596649,
+        0.6439999938011169
+      ],
+      "object_count": 6,
+      "glb_bytes": 1637448
+    },
+    {
+      "id": "teacher_platform",
+      "category": "Teacher",
+      "label": "Bục giảng một nền thấp",
+      "description": "Một nền cao 16 cm, mặt gạch cùng lớp học; cạnh đứng, không cầu thang, bậc trung gian hay dốc.",
+      "anchor": "bottom_center",
+      "collection": "KAClass_teacher_platform",
+      "scene": "Class_teacher_platform",
+      "root": "KAClass_teacher_platform_Root",
+      "blend": "Teacher/teacher_platform.blend",
+      "glb": "Teacher/teacher_platform.glb",
+      "version": "v01",
+      "dimensions_m": [
+        9.138,
+        1.884,
+        0.16
+      ],
+      "bounds_min": [
+        -4.568999767303467,
+        -0.9440000057220459,
+        0.0
+      ],
+      "bounds_max": [
+        4.568999767303467,
+        0.9399999976158142,
+        0.1599999964237213
+      ],
+      "object_count": 90,
+      "glb_bytes": 1497076
+    },
+    {
+      "id": "speaker_pair",
+      "category": "Computers",
+      "label": "Bộ hai loa lớp học",
+      "description": "Hai loa đen theo Speaker.jpeg: vỏ, ê căng lỗ lục giác, củ loa, họng treble, tay xách và cổng riêng.",
+      "anchor": "bottom_center",
+      "collection": "KAClass_speaker_pair",
+      "scene": "Class_speaker_pair",
+      "root": "KAClass_speaker_pair_Root",
+      "blend": "Computers/speaker_pair.blend",
+      "glb": "Computers/speaker_pair.glb",
+      "version": "v01",
+      "dimensions_m": [
+        0.6,
+        0.278,
+        0.4385
+      ],
+      "bounds_min": [
+        -0.30000001192092896,
+        -0.14249999821186066,
+        0.0
+      ],
+      "bounds_max": [
+        0.30000001192092896,
+        0.1354999989271164,
+        0.4385000169277191
+      ],
+      "object_count": 53,
+      "glb_bytes": 1158020
+    }
+  ],
+  "front_wall_revision": "v03",
+  "front_wall_backup": "assets/school/Class/backups/front_wall_20261114_163603",
+  "av_revision": "v01",
+  "teacher_revision": "v04"
+}
