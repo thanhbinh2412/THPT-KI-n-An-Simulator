@@ -35,7 +35,11 @@ export function applyUnlitMaterials(root: THREE.Object3D) {
     object.castShadow = false;
     object.receiveShadow = false;
     const flagSurface = /flag/i.test(object.name);
+    const isV75Decal = object.name.startsWith("V75_DECALS") || object.parent?.name === "V75_DECALS" || object.parent?.parent?.name === "V75_DECALS";
     const convert = (source: THREE.Material) => {
+      // V75 carries authored PBR surfaces and decal vertex alpha. Converting
+      // these to BasicMaterial discards normal maps and visual fidelity.
+      if (isV75Decal || source.name.startsWith("KA75_") || source.name.startsWith("KA76_")) return source;
       if ((source as THREE.ShaderMaterial).isShaderMaterial || (source as THREE.MeshBasicMaterial).isMeshBasicMaterial) return source;
       const key = `${source.uuid}:${flagSurface ? "double-sided" : "front-sided"}`;
       let material = converted.get(key);

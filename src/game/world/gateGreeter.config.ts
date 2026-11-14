@@ -26,6 +26,6 @@ export const gateGreeterConfig: {
 };
 
 export const gateGreeterMessages = {
-  entering: "Này, đi đâu đấy. Chào chưa",
-  leaving: "Đi đâu đấy, trốn học à. Đi vào nhanh",
+  entering: "Tớ chào cậu",
+  leaving: "Cậu về nhé",
 } as const;

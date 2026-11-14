@@ -1,7 +1,6 @@
 "use client";
 
 import { useFrame } from "@react-three/fiber";
-import { CuboidCollider, RigidBody, type RapierRigidBody } from "@react-three/rapier";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { classrooms, type ClassroomConfig, type ClassroomDoorId } from "./classroom.config";
@@ -24,7 +23,6 @@ function isDoorSwingOccupied(config: ClassroomConfig) {
 
 /** V51 retains the V35 classroom leaf names, measured runtime hinges and kinematic colliders. */
 export function ClassroomDoors({ scene }: { scene: THREE.Group }) {
-  const bodies = useRef<Partial<Record<ClassroomDoorId, RapierRigidBody | null>>>({});
   const runtimes = useRef<DoorRuntime[]>([]);
   const angles = useRef<Partial<Record<ClassroomDoorId, number>>>({});
 
@@ -70,26 +68,9 @@ export function ClassroomDoors({ scene }: { scene: THREE.Group }) {
       const next = THREE.MathUtils.damp(angles.current[config.id] ?? 0, open ? OPEN_ANGLE : 0, 9, delta);
       angles.current[config.id] = next;
       pivot.rotation.y = next;
-      const body = bodies.current[config.id];
-      if (!body) return;
-      const hinge = new THREE.Vector3().fromArray(config.hingePosition);
-      const centerOffset = new THREE.Vector3(0, DOOR_HEIGHT / 2, DOOR_LENGTH / 2).applyAxisAngle(UP, next);
-      const position = hinge.add(centerOffset);
-      const rotation = new THREE.Quaternion().setFromAxisAngle(UP, next);
-      body.setNextKinematicTranslation(position);
-      body.setNextKinematicRotation(rotation);
     });
   });
 
-  return <>
-    {classrooms.map((config) => <RigidBody
-      key={config.id}
-      ref={(body) => { bodies.current[config.id] = body; }}
-      type="kinematicPosition"
-      colliders={false}
-      position={[config.hingePosition[0], config.hingePosition[1] + DOOR_HEIGHT / 2, config.hingePosition[2] + DOOR_LENGTH / 2]}
-    >
-      <CuboidCollider args={[.055, DOOR_HEIGHT / 2, DOOR_LENGTH / 2]} />
-    </RigidBody>)}
-  </>;
+  // V75's manifest owns physical door collision; this component is visual only.
+  return null;
 }

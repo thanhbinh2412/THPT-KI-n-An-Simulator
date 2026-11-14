@@ -18,6 +18,7 @@ import { useVoice } from "@/game/voice/VoiceProvider";
 
 const GRAVITY = 9.81;
 const JUMP_SPEED = Math.sqrt(2 * GRAVITY * .7);
+const UP = new THREE.Vector3(0, 1, 0);
 type CharacterController = ReturnType<ReturnType<typeof useRapier>["world"]["createCharacterController"]>;
 
 /** Physics-first player: a kinematic Rapier character controller, never visual-only movement. */
@@ -29,9 +30,9 @@ export function PlayerController({ bodyRef, enabled = true, spawn }: { bodyRef: 
   const motion = useRef<PlayerMotionState>("idle"); const visualSpeed = useRef(0); const reportedGrounded = useRef(false); const appliedSpawn = useRef(""); const wasSitting = useRef(false); const cameraMode = useGameStore((s) => s.cameraMode); const physicsDebug = useGameStore((s) => s.physicsDebug);
   useEffect(() => {
     const next = world.createCharacterController(.035);
-    // V43 retains the right-wing entrance's three 0.22 m treads. Keep autostep above
-    // that height and snap over the porch seam without adding a competing ramp.
-    next.enableAutostep(.28, .18, true); next.enableSnapToGround(.3); next.setMaxSlopeClimbAngle(Math.PI * .3); next.setMinSlopeSlideAngle(Math.PI * .42);
+    // V75's authored walk boxes include every tread, so use the documented
+    // step/snap values and let Rapier resolve only manifest geometry.
+    next.enableAutostep(.22, .18, true); next.enableSnapToGround(.25); next.setMaxSlopeClimbAngle(Math.PI * .3); next.setMinSlopeSlideAngle(Math.PI * .42);
     controller.current = next;
     return () => { world.removeCharacterController(next); controller.current = null; };
   }, [world]);
@@ -62,7 +63,7 @@ export function PlayerController({ bodyRef, enabled = true, spawn }: { bodyRef: 
       body.setTranslation({ x: stoneBenchConfig.standingBodyPosition[0], y: stoneBenchConfig.standingBodyPosition[1], z: stoneBenchConfig.standingBodyPosition[2] }, true);
       velocity.current.set(0, 0, 0); verticalVelocity.current = 0; wasSitting.current = false;
     }
-    direction.current.set(rightInput, 0, -forwardInput); if (direction.current.lengthSq() > 1) direction.current.normalize(); direction.current.applyAxisAngle(new THREE.Vector3(0, 1, 0), getCameraHeading());
+    direction.current.set(rightInput, 0, -forwardInput); if (direction.current.lengthSq() > 1) direction.current.normalize(); direction.current.applyAxisAngle(UP, getCameraHeading());
     const running = enabled && (input.current.run || useGameStore.getState().run); const maxSpeed = running ? 6.4 : 4.1;
     velocity.current.x = THREE.MathUtils.damp(velocity.current.x, direction.current.x * maxSpeed, 18, dt); velocity.current.z = THREE.MathUtils.damp(velocity.current.z, direction.current.z * maxSpeed, 18, dt);
     const askedJump = enabled && (input.current.jump || useGameStore.getState().mobileJump);
@@ -81,8 +82,8 @@ export function PlayerController({ bodyRef, enabled = true, spawn }: { bodyRef: 
     if (state.clock.elapsedTime - lastReport.current > 1 / 15) { const pos = body.translation(); useGameStore.getState().setPlayerPosition([pos.x, pos.y, pos.z]); lastReport.current = state.clock.elapsedTime; }
   });
   return <RigidBody ref={bodyRef} type="kinematicPosition" colliders={false} position={campusConfig.spawn} enabledRotations={[false, false, false]}>
-    <CapsuleCollider ref={collider} args={[.53,.32]} />
-    {physicsDebug && <mesh><capsuleGeometry args={[.32, 1.06, 8, 12]} /><meshBasicMaterial color="#22d3ee" wireframe transparent opacity={.8} depthTest={false} /></mesh>}
+    <CapsuleCollider ref={collider} args={[.6,.25]} />
+    {physicsDebug && <mesh><capsuleGeometry args={[.25, 1.2, 8, 12]} /><meshBasicMaterial color="#22d3ee" wireframe transparent opacity={.8} depthTest={false} /></mesh>}
     <PlayerCharacter gender={localPlayer?.gender ?? "male"} motion={motion} speed={visualSpeed} velocity={velocity} visible={cameraMode === "third"} seatedYaw={stoneBenchConfig.seatedYaw} />
     <ChatBubble message={localPlayer ? chatBubbles[localPlayer.id] : undefined} />
     <VoiceIndicator speaking={localPlayer ? speaking[localPlayer.id] : false} />
